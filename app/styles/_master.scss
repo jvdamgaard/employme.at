@@ -1,0 +1,8 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    @include font;
+    margin-top: 100px;
+}

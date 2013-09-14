@@ -1,0 +1,13 @@
+@font-face {
+    font-weight: normal;
+    font-style: normal;
+    font-family: 'sketchetiklight';
+    src: url('/fonts/sketchetik-webfont.eot');
+    src: url('/fonts/sketchetik-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/fonts/sketchetik-webfont.woff') format('woff'),
+         url('/fonts/sketchetik-webfont.ttf') format('truetype');
+}
+
+@mixin font {
+    font-family: 'sketchetiklight';
+}

@@ -1,0 +1,16 @@
+@import 'compass';
+@import 'normalize-scss/_normalize';
+
+@import 'vars';
+
+@import 'master';
+
+@import 'header';
+@import 'home';
+
+.browsehappy {
+    margin: 0.2em 0;
+    padding: 0.2em 0;
+    background: #ccc;
+    color: #000;
+}
