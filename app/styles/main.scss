@@ -1,11 +1,17 @@
+// Third party
 @import 'compass';
 @import 'normalize-scss/_normalize';
 
+// Resuable
 @import 'vars';
 
+// Scaffolding
 @import 'master';
 
+// Navigation
 @import 'header';
+
+// Pages
 @import 'home';
 
 .browsehappy {
