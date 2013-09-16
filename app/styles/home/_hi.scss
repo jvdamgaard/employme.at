@@ -1,0 +1,9 @@
+#home-hi {
+    background-color: $color-green;
+    h2 {
+        color: $color-white;
+        &:after {
+            color: $color-black;
+        }
+    }
+}
