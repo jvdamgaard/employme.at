@@ -1,7 +1,9 @@
 #home {
     display: table;
     article {
+        @include transition(background-color);
         display: table-row;
+        color: $color-white;
         div {
             display: table-cell;
             height: 600px;
@@ -9,15 +11,19 @@
             text-align: center;
         }
         h2 {
+            @include transition();
             margin: 0;
+            font-weight: bold;
             font-size: 120px;
             &:after {
                 display: block;
                 margin-top: -60px;
                 content: '...';
+                font-weight: normal;
             }
         }
         p {
+            @include transition();
             margin: 0;
             font-size: 40px;
         }

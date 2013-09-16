@@ -2,10 +2,20 @@ header {
     nav {
         float: right;
         padding-top: 50px;
+        font-size: 20px;
         a {
             line-height: 50px;
             color: $color-black;
             text-decoration: none;
+            padding: 5px 10px;
+            &.active {
+                color: $color-white;
+                background: $color-black;
+                @include border-radius(5px);
+            }
+            &:hover {
+                text-decoration: underline;
+            }
         }
     }
 }

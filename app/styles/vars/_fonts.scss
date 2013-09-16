@@ -1,51 +1,32 @@
 @font-face {
-  font-family: 'Sketchetik';
-  src: url('/styles/fonts/sketchetik.eot'); /* IE9 Compat Modes */
-  src: url('/styles/fonts/sketchetik.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('/styles/fonts/sketchetik.woff') format('woff'), /* Modern Browsers */
-       url('/styles/fonts/sketchetik.ttf')  format('truetype'), /* Safari, Android, iOS */
-       url('/styles/fonts/sketchetik.svg#c606e0fdb470c59ab7fde2af7927ddb0') format('svg'); /* Legacy iOS */
-       
-  font-style:   normal;
-  font-weight:  200;
+    font-weight:  400;
+
+    font-style:   normal;
+    font-family: 'Josefin Sans';
+    src: url('/styles/fonts/JosefinSans-Regular.eot'); /* IE9 Compat Modes */
+    src: url('/styles/fonts/JosefinSans-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('/styles/fonts/JosefinSans-Regular.woff') format('woff'), /* Modern Browsers */
+         url('/styles/fonts/JosefinSans-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+         url('/styles/fonts/JosefinSans-Regular.svg#ef57ba94b48177a2b784e1f373ff52ae') format('svg'); /* Legacy iOS */
 }
 
 @font-face {
-  font-family: 'Sketch Block';
-  src: url('/styles/fonts/Sketch_Block.eot'); /* IE9 Compat Modes */
-  src: url('/styles/fonts/Sketch_Block.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('/styles/fonts/Sketch_Block.woff') format('woff'), /* Modern Browsers */
-       url('/styles/fonts/Sketch_Block.ttf')  format('truetype'), /* Safari, Android, iOS */
-       url('/styles/fonts/Sketch_Block.svg#7af6876ef3068026cca76e94a3e40a7b') format('svg'); /* Legacy iOS */
-       
-  font-style:   normal;
-  font-weight:  700;
-}
+    font-weight:  700;
 
-@font-face {
-  font-family: 'DecoNeue';
-  src: url('/styles/fonts/DecoNeue-Light.eot'); /* IE9 Compat Modes */
-  src: url('/styles/fonts/DecoNeue-Light.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('/styles/fonts/DecoNeue-Light.woff') format('woff'), /* Modern Browsers */
-       url('/styles/fonts/DecoNeue-Light.ttf')  format('truetype'), /* Safari, Android, iOS */
-       url('/styles/fonts/DecoNeue-Light.svg#01cabdc32404b04b9dcae5baaf1f76c4') format('svg'); /* Legacy iOS */
-       
-  font-style:   normal;
-  font-weight:  200;
-}
-
-@font-face {
-  font-family: 'Nexa Light';
-  src: url('/styles/fonts/Nexa-Light.eot'); /* IE9 Compat Modes */
-  src: url('/styles/fonts/Nexa-Light.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('/styles/fonts/Nexa-Light.woff') format('woff'), /* Modern Browsers */
-       url('/styles/fonts/Nexa-Light.ttf')  format('truetype'), /* Safari, Android, iOS */
-       url('/styles/fonts/Nexa-Light.svg#8daeb39b16ba4fbde275db0ba71a5206') format('svg'); /* Legacy iOS */
-       
-  font-style:   normal;
-  font-weight:  200;
+    font-style:   bold;
+    font-family: 'Josefin Sans';
+    src: url('/styles/fonts/JosefinSans-Bold.eot'); /* IE9 Compat Modes */
+    src: url('/styles/fonts/JosefinSans-Bold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('/styles/fonts/JosefinSans-Bold.woff') format('woff'), /* Modern Browsers */
+         url('/styles/fonts/JosefinSans-Bold.ttf')  format('truetype'), /* Safari, Android, iOS */
+         url('/styles/fonts/JosefinSans-Bold.svg#2fc267daae788c3eaddeaf8ca2c759e4') format('svg'); /* Legacy iOS */
 }
 
 @mixin font {
-    font-family: 'Nexa Light';
+    font-family: 'Josefin Sans';
+}
+
+@mixin font-bold {
+    font-weight: bold;
+    font-family: 'Josefin Sans';
 }
