@@ -12,20 +12,21 @@
         }
         h2 {
             @include transition();
-            margin: 0;
-            font-weight: bold;
-            font-size: 120px;
+            margin: 0 0 20px 0;
+            font-family: $font-bold;
+                font-size: $size-bigger;
             &:after {
                 display: block;
-                margin-top: -60px;
+                margin-top: 0px;
                 content: '...';
-                font-weight: normal;
+                font-family: $font-normal;
+                font-size: $size-normal;
             }
         }
         p {
             @include transition();
             margin: 0;
-            font-size: 40px;
+            font-size: $size-normal;
         }
     }
 }

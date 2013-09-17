@@ -1,0 +1,9 @@
+$golden-ratio : 1.618;
+
+$size-normal  : 32px;
+
+$size-small   : $size-normal / $golden-ratio;
+$size-smaller : $size-small / $golden-ratio;
+
+$size-big     : $size-normal * $golden-ratio;
+$size-bigger  : $size-big * $golden-ratio;

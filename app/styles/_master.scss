@@ -4,5 +4,7 @@
 }
 
 body {
-    @include font;
+    font-family: $font-normal;
+    color: $color-black;
+    padding-bottom: 1000px;
 }

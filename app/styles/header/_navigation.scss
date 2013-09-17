@@ -1,20 +1,27 @@
 header {
     nav {
         float: right;
-        padding-top: 50px;
-        font-size: 20px;
+        font-size: $size-small;
         a {
-            line-height: 50px;
+            line-height: 20px;
+            height: 20px;
+            position: relative;
             color: $color-black;
             text-decoration: none;
-            padding: 5px 10px;
-            &.active {
-                color: $color-white;
-                background: $color-black;
-                @include border-radius(5px);
+            margin: 25px 10px;
+            display: inline-block;
+            overflow: hidden;
+            span {
+                position: relative;
+                height: 20px;
+                top: 0%;
+                text-shadow: 0px 20px 0px $color-red;
+                @include single-transition(top);
             }
-            &:hover {
-                text-decoration: underline;
+            &.active, &:hover {
+                span {
+                    top: -20px;
+                }
             }
         }
     }

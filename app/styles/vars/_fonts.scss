@@ -1,32 +1,7 @@
-@font-face {
-    font-weight:  400;
+$font-normal : 'HelveticaNeueW01-45Ligh';
+$font-bold   : 'HelveticaNeueW01-75Bold';
 
-    font-style:   normal;
-    font-family: 'Josefin Sans';
-    src: url('/styles/fonts/JosefinSans-Regular.eot'); /* IE9 Compat Modes */
-    src: url('/styles/fonts/JosefinSans-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-         url('/styles/fonts/JosefinSans-Regular.woff') format('woff'), /* Modern Browsers */
-         url('/styles/fonts/JosefinSans-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
-         url('/styles/fonts/JosefinSans-Regular.svg#ef57ba94b48177a2b784e1f373ff52ae') format('svg'); /* Legacy iOS */
-}
-
-@font-face {
-    font-weight:  700;
-
-    font-style:   bold;
-    font-family: 'Josefin Sans';
-    src: url('/styles/fonts/JosefinSans-Bold.eot'); /* IE9 Compat Modes */
-    src: url('/styles/fonts/JosefinSans-Bold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-         url('/styles/fonts/JosefinSans-Bold.woff') format('woff'), /* Modern Browsers */
-         url('/styles/fonts/JosefinSans-Bold.ttf')  format('truetype'), /* Safari, Android, iOS */
-         url('/styles/fonts/JosefinSans-Bold.svg#2fc267daae788c3eaddeaf8ca2c759e4') format('svg'); /* Legacy iOS */
-}
-
-@mixin font {
-    font-family: 'Josefin Sans';
-}
-
-@mixin font-bold {
-    font-weight: bold;
-    font-family: 'Josefin Sans';
+// fonts.com logo
+#mti_wfs_colophon {
+    display: none !important;
 }
