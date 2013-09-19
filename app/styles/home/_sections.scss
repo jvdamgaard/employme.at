@@ -3,7 +3,7 @@
     article {
         @include transition(background-color);
         display: table-row;
-        color: $color-white;
+        color: $color-light;
         div {
             display: table-cell;
             height: 600px;
@@ -13,13 +13,13 @@
         h2 {
             @include transition();
             margin: 0 0 20px 0;
-            font-family: $font-bold;
+            font-weight: bold;
                 font-size: $size-bigger;
             &:after {
                 display: block;
                 margin-top: 0px;
                 content: '...';
-                font-family: $font-normal;
+                font-weight: normal;
                 font-size: $size-normal;
             }
         }

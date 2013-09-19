@@ -4,14 +4,7 @@ define([], function () {
 
     var sectionHeight = $(window).height();
 
-    $(function () {
-        initialize();
-    });
-
     var initialize = function () {
-
-        // Loading finished
-        $('body').addClass('loaded');
 
         // Adjust based on window height
         $('#home article').height(sectionHeight);
@@ -34,5 +27,10 @@ define([], function () {
             $('#home-exploring').toggleClass('active', pos > 0.5 * sectionHeight && pos <= 1.5 * sectionHeight);
 
         });
+
+        // Loading and initilazition finished
+        $('body').addClass('loaded');
     };
+
+    initialize();
 });

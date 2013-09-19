@@ -3,17 +3,17 @@
 @import 'normalize-scss/_normalize';
 
 // Resuable
-@import 'vars';
+@import 'vars/vars';
 
 // Scaffolding
-@import 'helpers';
+@import 'helpers/helpers';
 @import 'master';
 
 // Navigation
-@import 'header';
+@import 'header/header';
 
 // Pages
-@import 'home';
+@import 'home/home';
 
 .browsehappy {
     margin: 0.2em 0;
