@@ -1,32 +1,32 @@
 #home {
     display: table;
     article {
-        @include transition(background-color);
+        @include single-transition(opacity);
+        @include opacity(0);
         display: table-row;
-        color: $color-light;
+        &.active {
+            @include opacity(1);
+        }
         div {
             display: table-cell;
-            height: 600px;
             vertical-align: middle;
             text-align: center;
+            padding: 0 $size-baseline*2;
         }
-        h2 {
-            @include transition();
-            margin: 0 0 20px 0;
-            font-weight: bold;
-                font-size: $size-bigger;
+        h1 {
+            padding: 0;
+            margin-top: $size-baseline;
+            margin-bottom: -$size-baseline/2;
             &:after {
                 display: block;
-                margin-top: 0px;
                 content: '...';
                 font-weight: normal;
                 font-size: $size-normal;
+                margin-top: -$size-baseline;
             }
         }
         p {
-            @include transition();
-            margin: 0;
-            font-size: $size-normal;
+            padding: 0;
         }
     }
 }

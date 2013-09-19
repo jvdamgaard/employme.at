@@ -1,6 +1,7 @@
-$golden-ratio : 1.618;
+$size-baseline  : 32px;
 
-$size-normal  : 32px;
+// Font sizes
+$size-normal  : $size-baseline;
 
 $size-small   : $size-normal / $golden-ratio;
 $size-smaller : $size-small / $golden-ratio;

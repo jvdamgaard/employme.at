@@ -2,27 +2,28 @@ header {
     nav {
         float: right;
         a {
-            line-height: 20px;
-            height: 20px;
             position: relative;
-            color: $color-dark;
-            text-decoration: none;
-            margin: 25px 10px;
             display: inline-block;
             overflow: hidden;
+            margin: $size-baseline+3 $size-baseline*0.5 0;
+            height: $size-small;
+            color: $color-dark;
+            text-decoration: none;
             text-transform: lowercase;
-            font-size: $size-small;
             font-weight: bold;
+            font-size: $size-small;
+            line-height: $size-small;
             span {
-                position: relative;
-                height: 20px;
-                top: 0%;
-                text-shadow: 0px 20px 0px $color-highlight;
                 @include single-transition(top);
+                position: relative;
+                top: 0%;
+                height: $size-small;
+                text-shadow: 0px $size-small 0px $color-highlight;
             }
             &.active, &:hover {
+                text-decoration: none;
                 span {
-                    top: -20px;
+                    top: -$size-small;
                 }
             }
         }
