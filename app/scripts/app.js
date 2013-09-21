@@ -12,6 +12,16 @@ define(['jquery'], function ($) {
 
         setSectionsHeight();
 
+        $(window).on('resize orientationchange', function () {
+            windowHeight = $(window).height();
+            setSectionsHeight();
+            addjustControllers();
+        });
+
+        $(document).on('scroll', function () {
+            addjustControllers();
+        });
+
         // Loading and initilazition finished
         $('body').addClass('loaded');
 
@@ -23,16 +33,6 @@ define(['jquery'], function ($) {
     /**
      * Global events
      */
-
-    $(window).on('resize orientationchange', function () {
-        windowHeight = $(window).height();
-        setSectionsHeight();
-        addjustControllers();
-    });
-
-    $(document).on('scroll', function () {
-        addjustControllers();
-    });
 
     /**
      * Adjust sections based on scroll position
@@ -97,5 +97,7 @@ define(['jquery'], function ($) {
         });
     };
 
-    initialize();
+    return {
+        initialize: initialize
+    };
 });
