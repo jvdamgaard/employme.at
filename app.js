@@ -20,7 +20,11 @@ app.configure(function () {
 	}));
 
 	app.use(express.compress());
-	app.use(express.static(path.join(__dirname, 'dist')));
+	app.use('/', express.static(path.join(__dirname, 'dist')));
+});
+
+app.get('/designit', function (req, res) {
+	res.sendfile('dist/index.html');
 });
 
 app.configure('development', function () {
