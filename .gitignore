@@ -38,8 +38,8 @@ Thumbs.db
 
 # Yeoman #
 ###################
-dist
 node_modules
 .tmp
 .sass-cache
 app/bower_components
+dist/.htaccess
