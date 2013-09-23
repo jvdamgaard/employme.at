@@ -20,11 +20,26 @@ app.configure(function () {
 	}));
 
 	app.use(express.compress());
-	app.use('/', express.static(path.join(__dirname, 'dist')));
+	app.use('/styles/', express.static(path.join(__dirname, 'dist/styles')));
+	app.use('/scripts/', express.static(path.join(__dirname, 'dist/scripts')));
+	app.use('/images/', express.static(path.join(__dirname, 'dist/images')));
+	app.use('/bower_components/', express.static(path.join(__dirname, 'dist/bower_components')));
+});
+
+app.get('/favicon.ico', function (req, res) {
+	res.sendfile('dist/favicon.ico');
+});
+
+app.get('/robots.txt', function (req, res) {
+	res.sendfile('dist/robots.txt');
 });
 
 app.get('/designit', function (req, res) {
 	res.sendfile('dist/index.html');
+});
+
+app.get('*', function (req, res) {
+	res.sendfile('dist/404.html');
 });
 
 app.configure('development', function () {
