@@ -38,11 +38,11 @@ Thumbs.db
 
 # Yeoman #
 ###################
-node_modules
-.tmp
-.sass-cache
-app/bower_components
-dist/.htaccess
+*/node_modules
+*/.tmp
+*/.sass-cache
+*/app/bower_components
+*/dist/.htaccess
 
 # Sublime Text #
 *.sublime-*
