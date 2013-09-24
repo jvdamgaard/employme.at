@@ -20,11 +20,28 @@ app.configure(function () {
 	}));
 
 	app.use(express.compress());
-	app.use('/', express.static(path.join(__dirname, 'dist')));
+
+	app.use(function (req, res, next) {
+		if (req.path === '/designit') {
+			res.redirect('/designit/');
+		}
+		next();
+	});
+	app.use('/designit/', express.static(path.join(__dirname, 'designit/dist')));
 });
 
-app.get('/designit', function (req, res) {
-	res.sendfile('dist/index.html');
+app.get('/favicon.ico', function (req, res) {
+	res.sendfile('dist/favicon.ico');
+});
+
+app.get('/robots.txt', function (req, res) {
+	res.sendfile('dist/robots.txt');
+});
+
+
+
+app.get('*', function (req, res) {
+	res.sendfile('master/404.html');
 });
 
 app.configure('development', function () {

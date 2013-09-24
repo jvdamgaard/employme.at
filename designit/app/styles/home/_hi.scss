@@ -1,0 +1,20 @@
+#home-hi {
+    display: block !important;
+    div {
+        display: block !important;
+        height: 50%;
+        padding: 0 !important;
+    }
+}
+#portrait-image {
+    position: relative;
+    .image {
+        @include single-transition(height, 10ms, linear);
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        background: url(../images/portrait2.jpg) center center no-repeat;
+        background-size: cover;  
+    }
+}
