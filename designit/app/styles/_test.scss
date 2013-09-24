@@ -1,8 +1,0 @@
-#test {
-    @include single-transition(opacity);
-    @include opacity(0);
-    padding: 0 $size-baseline*2;
-    &.active {
-        @include opacity(1);
-    }
-}
