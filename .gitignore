@@ -36,10 +36,11 @@
 ehthumbs.db
 Thumbs.db
 
-# Subfolder #
-###################
-*/*
-!*/dist
+# NodeJS #
+######################
+node_modules
 
+# Sublime Text #
+######################
 # Sublime Text #
 *.sublime-*

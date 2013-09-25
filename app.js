@@ -24,24 +24,15 @@ app.configure(function () {
 	app.use(function (req, res, next) {
 		if (req.path === '/designit') {
 			res.redirect('/designit/');
+		} else {
+			next();
 		}
-		next();
 	});
-	app.use('/designit/', express.static(path.join(__dirname, 'designit/dist')));
+	app.use('/designit/', express.static(path.join(__dirname, 'designit')));
 });
 
-app.get('/favicon.ico', function (req, res) {
-	res.sendfile('dist/favicon.ico');
-});
-
-app.get('/robots.txt', function (req, res) {
-	res.sendfile('dist/robots.txt');
-});
-
-
-
-app.get('*', function (req, res) {
-	res.sendfile('master/404.html');
+app.get('/designit/*', function (req, res) {
+	res.sendfile('designit/404.html');
 });
 
 app.configure('development', function () {
