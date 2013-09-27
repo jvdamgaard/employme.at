@@ -1,7 +1,7 @@
 {
 	"name": "employme.at",
 	"author": "Jakob Viskum Damgaard <jakob_damgaard@hotmail.com>",
-	"version": "0.0.3",
+	"version": "0.0.5",
 	"subdomain": "employme.at",
 	"scripts": {
 		"start": "app.js"

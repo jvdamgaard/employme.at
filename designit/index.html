@@ -3,18 +3,81 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>employme at</title>
+        <title>employme.at / designit</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
-        <link rel="stylesheet" href="styles/214181fa.main.css">
-        <script src="scripts/vendor/f7f27360.modernizr.js"></script>
+		<style>
+			/* Above the fold css */
+			@font-face {
+			  font-family: 'Helvetica Neue Webfont';
+			  src: url("fonts/HelveticaNeue-Light-Optimized.eot");
+			  src: url("fonts/HelveticaNeue-Light-Optimized.eot?#iefix") format("embedded-opentype"), url("fonts/HelveticaNeue-Light-Optimized.woff") format("woff"), url("fonts/HelveticaNeue-Light-Optimized.ttf") format("truetype"), url("fonts/HelveticaNeue-Light-Optimized.svg#7384ecabcada72f0e077cd45d8e1c705") format("svg");
+			  font-style: normal;
+			  font-weight: 200;
+			}
+
+			@font-face {
+			  font-family: 'Helvetica Neue Webfont';
+			  src: url("fonts/HelveticaNeue-Bold-Optimized.eot");
+			  src: url("fonts/HelveticaNeue-Bold-Optimized.eot?#iefix") format("embedded-opentype"), url("fonts/HelveticaNeue-Bold-Optimized.woff") format("woff"), url("fonts/HelveticaNeue-Bold-Optimized.ttf") format("truetype"), url("fonts/HelveticaNeue-Bold-Optimized.svg#b0b230b12ba14b2f0690df366df880c5") format("svg");
+			  font-style: bold;
+			  font-weight: 700;
+			}
+			* {
+			  margin: 0;
+			  padding: 0;
+			}
+			body {
+			  font-family: "Helvetica Neue", "Helvetica Neue Webfont", Helvetica, Arial, "Lucida Grande", sans-serif;
+			  font-weight: 200;
+			  font-size: 32px;
+			  color: #333333;
+			  line-height: 48px;
+			}
+			.loading header {
+				display: none;
+			}
+			#home-hi {
+			  text-align: center;
+			  padding: 0 64px;
+			}
+			#home-hi .floater {
+			  height: 50%;
+			  width: 100%;
+			  margin-bottom: -128px;
+			}
+			#home-hi h1 {
+			  margin-bottom: -16px;
+			  font-size: 84px;
+			  line-height: 96px;
+			  font-weight: 700;
+			}
+			#home-hi h1:after {
+			  display: block;
+			  content: '...';
+			  font-size: 32px;
+			  margin-top: -32px;
+			  font-weight: 200;
+			}
+		</style>
+		<script>
+			/*
+			 HTML5 Shiv v3.6.2 | @afarkas @jdalton @jon_neal @rem | MIT/GPL2 Licensed
+			*/
+			(function(l,f){function m(){var a=e.elements;return"string"==typeof a?a.split(" "):a}function i(a){var b=n[a[o]];b||(b={},h++,a[o]=h,n[h]=b);return b}function p(a,b,c){b||(b=f);if(g)return b.createElement(a);c||(c=i(b));b=c.cache[a]?c.cache[a].cloneNode():r.test(a)?(c.cache[a]=c.createElem(a)).cloneNode():c.createElem(a);return b.canHaveChildren&&!s.test(a)?c.frag.appendChild(b):b}function t(a,b){if(!b.cache)b.cache={},b.createElem=a.createElement,b.createFrag=a.createDocumentFragment,b.frag=b.createFrag();
+			a.createElement=function(c){return!e.shivMethods?b.createElem(c):p(c,a,b)};a.createDocumentFragment=Function("h,f","return function(){var n=f.cloneNode(),c=n.createElement;h.shivMethods&&("+m().join().replace(/\w+/g,function(a){b.createElem(a);b.frag.createElement(a);return'c("'+a+'")'})+");return n}")(e,b.frag)}function q(a){a||(a=f);var b=i(a);if(e.shivCSS&&!j&&!b.hasCSS){var c,d=a;c=d.createElement("p");d=d.getElementsByTagName("head")[0]||d.documentElement;c.innerHTML="x<style>article,aside,figcaption,figure,footer,header,hgroup,main,nav,section{display:block}mark{background:#FF0;color:#000}</style>";
+			c=d.insertBefore(c.lastChild,d.firstChild);b.hasCSS=!!c}g||t(a,b);return a}var k=l.html5||{},s=/^<|^(?:button|map|select|textarea|object|iframe|option|optgroup)$/i,r=/^(?:a|b|code|div|fieldset|h1|h2|h3|h4|h5|h6|i|label|li|ol|p|q|span|strong|style|table|tbody|td|th|tr|ul)$/i,j,o="_html5shiv",h=0,n={},g;(function(){try{var a=f.createElement("a");a.innerHTML="<xyz></xyz>";j="hidden"in a;var b;if(!(b=1==a.childNodes.length)){f.createElement("a");var c=f.createDocumentFragment();b="undefined"==typeof c.cloneNode||
+			"undefined"==typeof c.createDocumentFragment||"undefined"==typeof c.createElement}g=b}catch(d){g=j=!0}})();var e={elements:k.elements||"abbr article aside audio bdi canvas data datalist details figcaption figure footer header hgroup main mark meter nav output progress section summary time video",version:"3.6.2",shivCSS:!1!==k.shivCSS,supportsUnknownElements:g,shivMethods:!1!==k.shivMethods,type:"default",shivDocument:q,createElement:p,createDocumentFragment:function(a,b){a||(a=f);if(g)return a.createDocumentFragment();
+			for(var b=b||i(a),c=b.frag.cloneNode(),d=0,e=m(),h=e.length;d<h;d++)c.createElement(e[d]);return c}};l.html5=e;q(f)})(this,document);
+
+
+		</script>
     </head>
-    <body>
+    <body id="body" class="loading">
+
         <!--[if lt IE 10]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-
-        <div id="loading-container" class="loading"></div>
 
         <header>
             <h1>employme.at / <span>designit</span></h1>
@@ -36,6 +99,12 @@
                 <p>and a friendly Frontend Developer</p>
             </article>
 
+			<script>
+				// Set height of first slide to height of window
+				(function() {var j=document,o=window.innerHeight||j.documentElement.clientHeight||j.getElementById('body').clientHeight,b=j.getElementById('home-hi');b.setAttribute('style','height:'+o+'px');b.style.height='height:'+o+'px';}())
+			</script>
+            <!-- Fold --> 
+
             <article id="home-exploring">
             	<div class="image-container">
 					<div id="image-portrait"></div>
@@ -52,6 +121,12 @@
             
         </section>
 
+        <link rel="stylesheet" href="styles/a1d9c73d.main.css">
+
+		<script src="scripts/vendor/f7f27360.modernizr.js"></script>
+
+        <script data-main="scripts/36f3e5d3.main" src="bower_components/requirejs/require.js"></script>
+
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
             (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
@@ -61,7 +136,5 @@
             r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
             ga('create','UA-XXXXX-X');ga('send','pageview');
         </script>
-
-        <script data-main="scripts/67b63df5.main" src="bower_components/requirejs/require.js"></script>
 </body>
 </html>
