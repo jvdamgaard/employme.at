@@ -7,11 +7,12 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 		<style>
-			/* Above the fold css */
 			@font-face {
 			  font-family: 'Helvetica Neue Webfont';
 			  src: url("fonts/HelveticaNeue-Light-Optimized.eot");
+			  /* IE9 Compat Modes */
 			  src: url("fonts/HelveticaNeue-Light-Optimized.eot?#iefix") format("embedded-opentype"), url("fonts/HelveticaNeue-Light-Optimized.woff") format("woff"), url("fonts/HelveticaNeue-Light-Optimized.ttf") format("truetype"), url("fonts/HelveticaNeue-Light-Optimized.svg#7384ecabcada72f0e077cd45d8e1c705") format("svg");
+			  /* Legacy iOS */
 			  font-style: normal;
 			  font-weight: 200;
 			}
@@ -19,45 +20,56 @@
 			@font-face {
 			  font-family: 'Helvetica Neue Webfont';
 			  src: url("fonts/HelveticaNeue-Bold-Optimized.eot");
+			  /* IE9 Compat Modes */
 			  src: url("fonts/HelveticaNeue-Bold-Optimized.eot?#iefix") format("embedded-opentype"), url("fonts/HelveticaNeue-Bold-Optimized.woff") format("woff"), url("fonts/HelveticaNeue-Bold-Optimized.ttf") format("truetype"), url("fonts/HelveticaNeue-Bold-Optimized.svg#b0b230b12ba14b2f0690df366df880c5") format("svg");
+			  /* Legacy iOS */
 			  font-style: bold;
 			  font-weight: 700;
 			}
+
 			* {
-			  margin: 0;
-			  padding: 0;
+				-moz-box-sizing: border-box;
+				box-sizing: border-box;
+				padding: 0;
+				margin: 0;
+				-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 			}
+
 			body {
-			  font-family: "Helvetica Neue", "Helvetica Neue Webfont", Helvetica, Arial, "Lucida Grande", sans-serif;
-			  font-weight: 200;
-			  font-size: 32px;
-			  color: #333333;
-			  line-height: 48px;
+				font-family: "Helvetica Neue", "Helvetica Neue Webfont", Helvetica, Arial, "Lucida Grande", sans-serif;
+				font-weight: 200;
+				font-size: 19.7775px;
+				color: #333333;
+				line-height: 32px;
 			}
-			.loading header {
-				display: none;
+
+			header {
+				position: absolute;
+				top: -9999px;
 			}
-			#home-hi {
-			  text-align: center;
-			  padding: 0 64px;
+			#home article {
+				text-align: center;
+				padding: 0 16px;
 			}
-			#home-hi .floater {
-			  height: 50%;
-			  width: 100%;
-			  margin-bottom: -128px;
+			#home article .floater {
+				height: 50%;
+				width: 100%;
+				margin-bottom: -88px;
 			}
-			#home-hi h1 {
-			  margin-bottom: -16px;
-			  font-size: 84px;
-			  line-height: 96px;
-			  font-weight: 700;
+			h1 {
+				font-size: 32px;
+				line-height: 32px;
 			}
-			#home-hi h1:after {
-			  display: block;
-			  content: '...';
-			  font-size: 32px;
-			  margin-top: -32px;
-			  font-weight: 200;
+			h1, h2, h3 {
+				font-weight: 700;
+			}
+			#home article h1:after {
+				display: block;
+				content: '...';
+				font-weight: 200;
+			}
+			p {
+				padding-top: 16px;
 			}
 		</style>
 		<script>
@@ -73,7 +85,7 @@
 
 		</script>
     </head>
-    <body id="body" class="loading">
+    <body>
 
         <!--[if lt IE 10]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -81,12 +93,14 @@
 
         <header>
             <h1>employme.at / <span>designit</span></h1>
+            <a href="#" class="menu-icon"><span></span></a>
             <nav>
                 <a href="#/" class="active"><span>Home</span></a>
-                <a href="#/about/"><span>About</span></a>
-                <a href="#/skills/"><span>Skills</span></a>
-                <a href="#/work/"><span>Work</span></a>
-                <a href="#/contact/"><span>Contact</span></a>
+                <a href="#/about"><span>About</span></a>
+                <a href="#/skills"><span>Skills</span></a>
+                <a href="#/work"><span>Work</span></a>
+                <a href="#/contact"><span>Contact</span></a>
+                <a href="#/this-site"><span>This site</span></a>
             </nav>
         </header>
 
@@ -95,15 +109,13 @@
             <article id="home-hi">
             	<div class="floater"></div>
                 <h1>Hi, I'm Jakob</h1>
-                <p>I'm a passionated Digital Designer</p>
-                <p>and a friendly Frontend Developer</p>
+                <p>I'm a passionated Digital Designer and a friendly Frontend Developer</p>
             </article>
 
 			<script>
 				// Set height of first slide to height of window
-				(function() {var j=document,o=window.innerHeight||j.documentElement.clientHeight||j.getElementById('body').clientHeight,b=j.getElementById('home-hi');b.setAttribute('style','height:'+o+'px');b.style.height='height:'+o+'px';}())
+				(function() {var j=document,o=window.innerHeight||j.documentElement.clientHeight||j.getElementsByTagName('body')[0].clientHeight,b=j.getElementById('home-hi');b.setAttribute('style','height:'+o+'px');b.style.height='height:'+o+'px';}())
 			</script>
-            <!-- Fold --> 
 
             <article id="home-exploring">
             	<div class="image-container">
@@ -112,17 +124,22 @@
                 <h1>I love exploring</h1>
                 <p>new digital trends and make them become</p>
                 <p>costumers friends</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit, distinctio itaque voluptas a soluta dolore modi eaque cumque laboriosam quibusdam consequatur quisquam inventore. Dicta, necessitatibus, soluta deserunt recusandae nostrum sed. <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, repellendus, illo, modi, quidem ullam asperiores sequi dolorem voluptatum accusamus laboriosam optio eius ut alias molestiae officiis enim voluptas beatae quas.</span>
-                <span>Fugit, natus similique repellat veniam eius at voluptas nisi eaque ut incidunt. Vero, tempora, voluptatum, beatae totam minus blanditiis reiciendis quae exercitationem provident cum libero laboriosam optio cumque itaque illo.</span>
-                <span>Magni natus exercitationem iusto itaque fugit labore illo necessitatibus totam obcaecati sunt. Porro, impedit, quo, est error molestiae placeat pariatur dolore odit voluptatem ducimus recusandae harum reiciendis fugiat voluptatibus culpa?</span>
-                <span>Alias, commodi suscipit aperiam rerum debitis accusamus sequi blanditiis delectus culpa laudantium impedit assumenda in fugit nisi eius necessitatibus dicta ut possimus quas temporibus? Odit, voluptatum corporis officiis soluta sed.</span>
-                <span>Ut, porro, iusto, suscipit, repellat eligendi inventore nesciunt aliquam ad nemo rem eius perspiciatis autem provident nulla cumque adipisci error illum voluptate accusamus veritatis corporis quas possimus itaque! Molestias, repudiandae?</span></p>
             </article>
             
         </section>
 
-        <link rel="stylesheet" href="styles/a1d9c73d.main.css">
+        <section>
+        	<h1>Header 1</h1>
+        	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, velit ducimus possimus maiores aspernatur expedita aperiam! Minus, corporis, accusamus, animi quae est ratione quisquam eum quasi earum eos nisi atque?</p>
+        	<h2>Header 2</h2>
+        	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore, voluptate, quasi veniam aperiam quis doloribus voluptas! Odio, quas ut qui voluptas consectetur ipsa laborum deserunt reiciendis neque laudantium debitis error.</p>
+        	<h3>Header 3</h3>
+        	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero, labore, iste nisi veritatis ipsum saepe nihil commodi blanditiis rem assumenda ex exercitationem dicta aut totam deleniti deserunt reprehenderit enim praesentium!</p>
+        	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur, laudantium, reprehenderit, cumque, repudiandae ad ipsam nemo culpa quibusdam eveniet voluptatem adipisci officiis tenetur dolores. Eius ullam architecto quo facilis magnam!</p>
+        </section>
 
-        <script data-main="scripts/41733665.main" src="bower_components/requirejs/require.js"></script>
+        <link rel="stylesheet" href="styles/0a47159f.main.css">
+
+        <script data-main="scripts/ec144808.main" src="bower_components/requirejs/require.js"></script>
 </body>
 </html>
