@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js">
+<html class="no-js loading">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -114,7 +114,13 @@
 
 			<script>
 				// Set height of first slide to height of window
-				(function() {var j=document,o=window.innerHeight||j.documentElement.clientHeight||j.getElementsByTagName('body')[0].clientHeight,b=j.getElementById('home-hi');b.setAttribute('style','height:'+o+'px');b.style.height='height:'+o+'px';}())
+				(function() {
+					var j=document,
+						o=window.innerHeight||j.documentElement.clientHeight||j.getElementsByTagName('body')[0].clientHeight,
+						b=j.getElementById('home-hi');
+
+					b.style.height=(o-30)+'px';
+				}())
 			</script>
 
             <article id="home-exploring">
@@ -140,6 +146,6 @@
 
         <link rel="stylesheet" href="styles/0a47159f.main.css">
 
-        <script data-main="scripts/ec144808.main" src="bower_components/requirejs/require.js"></script>
+        <script data-main="scripts/765ee151.main" src="bower_components/requirejs/require.js"></script>
 </body>
 </html>
