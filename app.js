@@ -14,7 +14,7 @@ app.configure(function () {
 	app.use(express.methodOverride());
 
 	app.use(h5bp({
-		root: path.join(__dirname, 'dist'),
+		root: __dirname,
 		www: false,
 		cors: true
 	}));

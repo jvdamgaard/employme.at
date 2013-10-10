@@ -1,7 +1,7 @@
 {
 	"name": "employme.at",
 	"author": "Jakob Viskum Damgaard <jakob_damgaard@hotmail.com>",
-	"version": "0.0.6",
+	"version": "0.0.7",
 	"subdomain": "employme.at",
 	"scripts": {
 		"start": "app.js"
@@ -10,7 +10,8 @@
 		"node": "0.10.x"
 	},
 	"domains": [
-		"employme.at"
+		"employme.at",
+		"www.employme.at"
 	],
 	"dependencies": {
 		"express": "3.4.x",
