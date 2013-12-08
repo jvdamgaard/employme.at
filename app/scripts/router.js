@@ -1,3 +1,0 @@
-EmploymeAt.Router.map(function () {
-  
-});
