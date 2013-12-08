@@ -55,7 +55,8 @@
 		"glob": "3.2.7",
 		"browserify": "2.36.1",
 		"grunt-browserify": "1.2.11",
-		"grunt-combine-media-queries": "1.0.9"
+		"grunt-combine-media-queries": "1.0.9",
+		"css-parse": "1.5.3"
 	},
 	"engines": {
 		"node": "0.10.x"
