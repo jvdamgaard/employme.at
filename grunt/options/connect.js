@@ -8,18 +8,6 @@ module.exports = {
 	},
 
 	// Local server for displaying javascript test coverage
-	server: {
-		options: {
-			port: 9000,
-			livereload: 35729,
-			open: true,
-			base: [
-				'<%= app.dist %>'
-			]
-		}
-	},
-
-	// Local server for displaying javascript test coverage
 	coverage: {
 		options: {
 			port: 9001,

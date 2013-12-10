@@ -99,12 +99,15 @@ module.exports = {
 			'sass:local'
 		]
 	},
-	livereload: {
-		options: {
-			livereload: '<%= connect.server.options.livereload %>'
-		},
+	express: {
 		files: [
-			'<%= app.dist %>/**/*.*'
-		]
+			'<%= app.dist %>/**/*.{png,jpg,jpeg,gif,webp,svg,eot,woff,js,css}',
+			'views/**/*.hbs'
+		],
+		//tasks: ['express:server'],
+		options: {
+			livereload: true,
+			spawn: false
+		}
 	}
 };

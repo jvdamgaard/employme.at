@@ -47,6 +47,8 @@ module.exports = function (grunt) {
 			'concurrent:localConcat',
 			'mochaTest:coverage',
 			'connect',
+			'express',
+			'open',
 			'continueOn',
 			'todos:all',
 			'jshint:all',

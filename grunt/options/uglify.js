@@ -14,7 +14,10 @@ module.exports = {
 	},
 	local: {
 		options: {
-			sourceMap: '<%= app.dist %>/scripts/head.js.map'
+			sourceMap: '<%= app.dist %>/scripts/head.js.map',
+			sourceMappingURL: function (path) {
+				return path.replace('dist/scripts/', '') + '.map';
+			}
 		},
 		files: {
 			'<%= app.dist %>/scripts/head.js': [
