@@ -71,6 +71,6 @@
 		"url": "https://github.com/jvdamgaard/employme.at/raw/master/LICENSE"
 	}],
 	"analyze": false,
-	"readmeFilename": "ReadMe.md",
+	"readmeFilename": "README.md",
 	"subdomain": "employme.at"
 }
