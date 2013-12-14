@@ -39,7 +39,7 @@ module.exports = function (grunt) {
 	/**
 	 * Default task to use when developing local
 	 */
-	grunt.registerTask('server', function () {
+	grunt.registerTask('app', function () {
 		grunt.task.run([
 			'shell:bowerInstall',
 			'concurrent:localMake',

@@ -1,2 +1,55 @@
 @import 'scut/dist/scut',
 		'inuit.css/inuit';
+
+.hexagon {
+	background-size: auto 220px;
+	height: 110px;
+	line-height: 220px;
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+	display: block;
+	width: 190px;
+	position: relative;
+}
+
+.hexagon__inner1, .hexagon__inner2 {
+	z-index: -1;
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	left: 0;
+	overflow: hidden;
+	background: inherit;
+
+	&:before {
+		height: 220px;
+		width: 220px;
+		transform-origin: 0 0;
+		content: '';
+		position: absolute;
+		background: inherit;
+		left: 0;
+		z-index: -1;
+	}
+
+}
+
+.hexagon__inner1 {
+	transform: rotate(60deg);
+
+	&:before {
+		transform: rotate(-60deg) translate(-110px, 0);
+		top: 0;
+	}
+
+}
+
+.hexagon__inner2 {
+	transform: rotate(-60deg);
+
+	&:before {
+		transform: rotate(60deg);
+		bottom: 0;
+	}
+
+}

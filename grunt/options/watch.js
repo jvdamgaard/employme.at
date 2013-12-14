@@ -74,7 +74,10 @@ module.exports = {
 			'<%= app.source %>/styles/**/*.scss',
 			'!<%= app.source %>/styles/modules/index.scss'
 		],
-		tasks: ['sass:local']
+		tasks: [
+			'sass:local',
+			'autoprefixer'
+		]
 	},
 
 	// Changes to app.json file (with active/deactive modules settings) recompiles the main app.js file
@@ -83,7 +86,8 @@ module.exports = {
 		tasks: [
 			'modules',
 			'browserify:sources',
-			'sass:local'
+			'sass:local',
+			'autoprefixer'
 		]
 	},
 
@@ -96,7 +100,8 @@ module.exports = {
 		tasks: [
 			'shell:bowerInstall',
 			'browserify:sources',
-			'sass:local'
+			'sass:local',
+			'autoprefixer'
 		]
 	},
 	express: {

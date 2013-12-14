@@ -46,6 +46,8 @@
 - Believer in designs as the glue between content and usability, that gives the user an experience
 - Believer in fun
 
+- Im really not an ...
+
 ## 3. Work
 
 - J. Boye 2009 - 2012
@@ -60,6 +62,11 @@
 -- føtex reinvention
 
 ## 4. Why DesignIt
+
+- Creative environment
+- Projects
+- Repetation
+- Products
 
 
 
