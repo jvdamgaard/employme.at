@@ -1,55 +1,56 @@
-@import 'scut/dist/scut',
+@import 'scut/dist/scut', 
 		'inuit.css/inuit';
 
+/*
+# Modules
+
+A hexagon container
+
+	<div class="hexagon" style="background-image:url(http://placehold.it/200x200)">
+		<div class="hexagon__inner1"></div>
+		<div class="hexagon__inner2"></div>
+	</div>
+ */
 .hexagon {
-	background-size: auto 220px;
-	height: 110px;
-	line-height: 220px;
-	background-repeat: no-repeat;
-	background-position: 50% 50%;
-	display: block;
-	width: 190px;
-	position: relative;
+    position: relative;
+    display: block;
+    width: 190px;
+    height: 110px;
+    background-position: 50% 50%;
+    background-size: auto 220px;
+    background-repeat: no-repeat;
+    line-height: 220px;
 }
-
 .hexagon__inner1, .hexagon__inner2 {
-	z-index: -1;
-	position: absolute;
-	height: 100%;
-	width: 100%;
-	left: 0;
-	overflow: hidden;
-	background: inherit;
-
-	&:before {
-		height: 220px;
-		width: 220px;
-		transform-origin: 0 0;
-		content: '';
-		position: absolute;
-		background: inherit;
-		left: 0;
-		z-index: -1;
-	}
-
+    position: absolute;
+    left: 0;
+    z-index: -1;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    background: inherit;
+    &:before {
+        position: absolute;
+        left: 0;
+        z-index: -1;
+        width: 220px;
+        height: 220px;
+        background: inherit;
+        content:'';
+        transform-origin: 0 0;
+    }
 }
-
 .hexagon__inner1 {
-	transform: rotate(60deg);
-
-	&:before {
-		transform: rotate(-60deg) translate(-110px, 0);
-		top: 0;
-	}
-
+    transform: rotate(60deg);
+    &:before {
+        top: 0;
+        transform: rotate(-60deg) translate(-110px, 0);
+    }
 }
-
 .hexagon__inner2 {
-	transform: rotate(-60deg);
-
-	&:before {
-		transform: rotate(60deg);
-		bottom: 0;
-	}
-
+    transform: rotate(-60deg);
+    &:before {
+        bottom: 0;
+        transform: rotate(60deg);
+    }
 }

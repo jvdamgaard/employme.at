@@ -5,14 +5,14 @@
 
 // Dependencies
 var _ = require('lodash'),
-	$ = require('jquery'),
-	moment = require('moment'),
-	app = require('app');
+    $ = require('jquery'),
+    moment = require('moment'),
+    app = require('app');
 
 
 var appVersion = ' ' + app.name;
 for (var i = 24 - app.name.length - 1; i >= 0; i--) {
-	appVersion += ' ';
+    appVersion += ' ';
 }
 appVersion += ': ' + app.version;
 
