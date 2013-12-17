@@ -1,81 +1,77 @@
 {
-  "name": "employme-at",
-  "version": "0.0.2",
-  "author": {
-    "name": "Jakob Viskum Damgaard",
-    "email": "jakob.viskum.damgaard@gmail.com"
-  },
-  "description": "A website for branding Jakob Viskum Damgaard",
-  "main": "app.js",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/jvdamgaard/employme.at.git"
-  },
-  "keywords": [
-    "Jakob Viskum Damgaard"
-  ],
-  "homepage": "http://employme.at",
-  "scripts": {
-    "start": "node app.js",
-    "test": "grunt test",
-    "predeploy": "grunt build"
-  },
-  "contributors": [
-    {
-      "name": "Jakob Viskum Damgaard",
-      "email": "jakob.viskum.damgaard@gmail.com"
-    }
-  ],
-  "dependencies": {
-    "h5bp": "0.0.9",
-    "express": "3.4.6",
-    "hbs": "2.4.0"
-  },
-  "devDependencies": {
-    "grunt": "0.4.2",
-    "grunt-contrib-jshint": "0.7.2",
-    "grunt-contrib-connect": "0.5.0",
-    "grunt-contrib-watch": "0.5.3",
-    "load-grunt-tasks": "0.2.0",
-    "chai": "1.8.1",
-    "blanket": "1.1.5",
-    "grunt-continue": "0.0.1",
-    "grunt-contrib-uglify": "0.2.7",
-    "grunt-concurrent": "0.4.2",
-    "grunt-modernizr": "0.4.1",
-    "grunt-autoprefixer": "0.4.1",
-    "grunt-contrib-copy": "0.4.1",
-    "grunt-contrib-imagemin": "0.4.0",
-    "lodash": "2.4.1",
-    "grunt-remove-logging": "0.1.1",
-    "grunt-shell": "0.6.1",
-    "grunt-contrib-cssmin": "0.7.0",
-    "grunt-todos": "0.2.0",
-    "grunt-newer": "0.6.0",
-    "grunt-contrib-sass": "0.5.1",
-    "grunt-mocha-test": "0.8.1",
-    "glob": "3.2.7",
-    "browserify": "2.36.1",
-    "grunt-browserify": "1.2.11",
-    "grunt-combine-media-queries": "1.0.9",
-    "css-parse": "1.5.3",
-    "grunt-express-server": "0.4.9",
-    "grunt-open": "0.2.2",
-    "grunt-styleguide": "~0.2.12"
-  },
-  "engines": {
-    "node": "0.10.x"
-  },
-  "bugs": {
-    "url": "https://github.com/jvdamgaard/employme.at/issues"
-  },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://github.com/jvdamgaard/employme.at/raw/master/LICENSE"
-    }
-  ],
-  "analyze": false,
-  "readmeFilename": "README.md",
-  "subdomain": "employme.at"
+	"name": "employme-at",
+	"version": "0.0.2",
+	"author": {
+		"name": "Jakob Viskum Damgaard",
+		"email": "jakob.viskum.damgaard@gmail.com"
+	},
+	"description": "A website for branding Jakob Viskum Damgaard",
+	"main": "app.js",
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/jvdamgaard/employme.at.git"
+	},
+	"keywords": [
+		"Jakob Viskum Damgaard"
+	],
+	"homepage": "http://employme.at",
+	"scripts": {
+		"start": "node app.js",
+		"test": "grunt test",
+		"predeploy": "grunt build"
+	},
+	"contributors": [{
+		"name": "Jakob Viskum Damgaard",
+		"email": "jakob.viskum.damgaard@gmail.com"
+	}],
+	"dependencies": {
+		"h5bp": "0.0.9",
+		"express": "3.4.6",
+		"hbs": "2.4.0"
+	},
+	"devDependencies": {
+		"grunt": "0.4.2",
+		"grunt-contrib-jshint": "0.7.2",
+		"grunt-contrib-connect": "0.5.0",
+		"grunt-contrib-watch": "0.5.3",
+		"load-grunt-tasks": "0.2.0",
+		"chai": "1.8.1",
+		"blanket": "1.1.5",
+		"grunt-continue": "0.0.1",
+		"grunt-contrib-uglify": "0.2.7",
+		"grunt-concurrent": "0.4.2",
+		"grunt-modernizr": "0.4.1",
+		"grunt-autoprefixer": "0.4.1",
+		"grunt-contrib-copy": "0.4.1",
+		"grunt-contrib-imagemin": "0.4.0",
+		"lodash": "2.4.1",
+		"grunt-remove-logging": "0.1.1",
+		"grunt-shell": "0.6.1",
+		"grunt-contrib-cssmin": "0.7.0",
+		"grunt-todos": "0.2.0",
+		"grunt-newer": "0.6.0",
+		"grunt-contrib-sass": "0.5.1",
+		"grunt-mocha-test": "0.8.1",
+		"glob": "3.2.7",
+		"browserify": "2.36.1",
+		"grunt-browserify": "1.2.11",
+		"grunt-combine-media-queries": "1.0.9",
+		"css-parse": "1.5.3",
+		"grunt-express-server": "0.4.9",
+		"grunt-open": "0.2.2",
+		"grunt-styleguide": "0.2.12"
+	},
+	"engines": {
+		"node": "0.10.x"
+	},
+	"bugs": {
+		"url": "https://github.com/jvdamgaard/employme.at/issues"
+	},
+	"licenses": [{
+		"type": "MIT",
+		"url": "https://github.com/jvdamgaard/employme.at/raw/master/LICENSE"
+	}],
+	"analyze": false,
+	"readmeFilename": "README.md",
+	"subdomain": "employme.at"
 }

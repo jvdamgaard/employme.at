@@ -18,5 +18,14 @@ module.exports = {
 				'index.html'
 			]
 		}]
+	},
+	styledocco: {
+		files: [{
+			expand: true,
+			dot: true,
+			cwd: '<%= app.docs %>/lib/styledocco-bootstrap-theme',
+			dest: 'node_modules/grunt-styleguide/node_modules/styledocco/share',
+			src: ['*']
+		}]
 	}
 };
