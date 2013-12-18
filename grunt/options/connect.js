@@ -38,7 +38,10 @@ module.exports = {
 			port: 9003,
 			open: true,
 			base: [
-				'<%= app.docs %>/styleguide'
+				'<%= app.docs %>/styleguide',
+				'<%= app.docs %>/lib',
+				'<%= app.source %>/bower_components/bootstrap/dist',
+				'<%= app.source %>/bower_components/jquery'
 			]
 		}
 	},
@@ -49,7 +52,10 @@ module.exports = {
 			port: 9004,
 			open: true,
 			base: [
-				'<%= app.docs %>/js'
+				'<%= app.docs %>/js',
+				'<%= app.docs %>/lib',
+				'<%= app.source %>/bower_components/bootstrap/dist',
+				'<%= app.source %>/bower_components/jquery'
 			]
 		}
 	}

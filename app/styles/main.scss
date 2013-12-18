@@ -1,5 +1,16 @@
 @import "scut/dist/scut";
+@import 'inuit-config';
 @import "inuit.css/inuit";
+
+body {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 24px;
+}
+
+.highlight {
+	background: #ff0000;
+}
 
 /*
 # Modules

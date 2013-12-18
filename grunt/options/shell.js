@@ -7,6 +7,6 @@ module.exports = {
 		command: 'bower install'
 	},
 	doxx: {
-		command: 'doxx --source <%= app.source %>/scripts --target <%= app.docs %>/js'
+		command: 'doxx --source <%= app.source %>/scripts --target <%= app.docs %>/js --template <%= app.docs %>/lib/doxx-template.jade'
 	}
 };
