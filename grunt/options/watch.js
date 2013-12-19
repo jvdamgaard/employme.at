@@ -68,6 +68,16 @@ module.exports = {
         ]
     },
 
+    // Reload the coverage site when changes to the coverage page happens
+    styleguide: {
+        options: {
+            livereload: 35732
+        },
+        files: [
+            '<%= app.docs %>/styleguide/**.*'
+        ]
+    },
+
     // Changes to scss files recompiles the main.css file
     sass: {
         files: [

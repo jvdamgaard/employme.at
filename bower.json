@@ -1,16 +1,16 @@
 {
-	"name": "fotex.dk",
-	"version": "0.0.1",
-	"dependencies": {},
-	"devDependencies": {
-		"chai": "1.8.1",
-		"jquery": "2.0.3",
-		"lodash": "2.4.1",
-		"mocha": "1.15.1",
-		"modernizr": "2.7.1",
-		"momentjs": "2.4.0",
-		"scut": "0.6.0",
-		"inuit.css": "5.0.0",
-		"bootstrap": "3.0.3"
-	}
+    "name": "employme-at",
+    "version": "0.0.1",
+    "dependencies": {},
+    "devDependencies": {
+        "bootstrap": "3.0.3",
+        "chai": "1.8.1",
+        "inuit.css": "5.0.0",
+        "jquery": "2.0.3",
+        "lodash": "2.4.1",
+        "mocha": "1.15.1",
+        "modernizr": "2.7.1",
+        "momentjs": "2.4.0",
+        "scut": "0.8.0"
+    }
 }

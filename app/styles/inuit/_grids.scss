@@ -1,0 +1,35 @@
+/*
+# Grids
+
+Fluid and nestable grid system, e.g.:
+
+	<style>.demo { background: #4a8ec2; padding: 1em; color: #fff; }</style>
+
+	<div class="grid">
+		<div class="grid__item  one-third">
+			<p class="demo">One third grid</p>
+		</div><div class="grid__item  two-thirds">
+			<p class="demo">Two thirds grid</p>
+		</div><div class="grid__item  one-half">
+			<p class="demo">One half grid</p>
+		</div><div class="grid__item  one-quarter">
+			<p class="demo">One quarter grid</p>
+		</div><div class="grid__item  one-quarter">
+			<p class="demo">One quarter grid</p>
+		</div><div class="grid__item  one-whole">
+			<p class="demo">One whole grid</p>
+		</div><div class="grid__item  one-quarter">
+			<p class="demo">One quarter grid</p>
+		</div><div class="grid__item  three-quarters">
+			<div class="grid">
+				<div class="grid__item one-third">
+					<p class="demo">One third nested grid</p>
+				</div><div class="grid__item two-thirds">
+					<p class="demo">Two thirds nested grid</p>
+				</div>
+			</div
+		</div>
+	</div>
+
+Demo: [jsfiddle.net/inuitcss/CLYUC](http://jsfiddle.net/inuitcss/CLYUC)
+*/
