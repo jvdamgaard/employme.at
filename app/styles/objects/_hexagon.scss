@@ -32,7 +32,7 @@ Background images should be at 431x431 for best look and performance.
     width: 190px;
     height: 110px;
     background-position: 50% 50%;
-    background-size: auto 220px;
+    background-size: auto 190px;
     background-repeat: no-repeat;
 }
 
@@ -77,7 +77,7 @@ Background images should be at 431x431 for best look and performance.
 .hexagon__content {
     position: absolute;
     margin: 0;
-    padding: 0 10px;
+    padding: 0 $half-spacing-unit;
     width: 100%;
     text-align: center;
     line-height: 110px;
@@ -149,83 +149,112 @@ or less.
 		</div>
 	</div>
 */
+
+@function hexagon-grid---grid-width($rows) {
+    @return $rows * 190 + $rows * $half-spacing-unit;
+}
+
+@function hexagon-grid---media-width($rows) {
+    @return hexagon-grid---grid-width($rows) + 2 * $base-spacing-unit;
+}
+
 .hexagon-grid {
     margin: 0 auto;
 }
 
-@media screen and (max-width: 431px) {
-	.hexagon-grid__item {
-		margin: 2px 0;
-		width: 100%;
-		height: 150px;
-		background-position: 50% 50%;
-		background-size: 100% auto;
+.hexagon-grid--left {
+    margin: 0;
+}
+
+@media screen 
+and (max-width: hexagon-grid---media-width(2) - 1) {
+    // One column
+    .hexagon-grid__item {
+        margin: 0;
+        width: 100%;
+        height: 5 * $base-spacing-unit;
+        background-position: 50% 50%;
+        background-size: 100% auto;
         .hexagon__inner1, .hexagon__inner2 {
             display: none;
         }
-	}
-
-	.hexagon-grid__item--hide-lt-five,
-	.hexagon-grid__item--hide-lt-four,
-	.hexagon-grid__item--hide-lt-three,
-	.hexagon-grid__item--hide-lt-two {
-		display: none;
-	}
+    }
+    .hexagon-grid__item--hide-lt-five,
+    .hexagon-grid__item--hide-lt-four,
+    .hexagon-grid__item--hide-lt-three,
+    .hexagon-grid__item--hide-lt-two {
+        display: none;
+    }
 }
 
-@media screen and (min-width: 432px) {
+@media screen 
+and (min-width: hexagon-grid---media-width(2)) {
+    // More than one column
     .hexagon-grid {
         margin-bottom: 57px;
     }
     .hexagon-grid__item {
-        margin-bottom: -3px;
+        margin-right: $half-spacing-unit / 2 - 4;
+        margin-bottom: $half-spacing-unit - 7;
+        margin-left: $half-spacing-unit / 2;
     }
 }
 
-@media screen and (min-width: 432px) and (max-width: 625px) {
+@media screen 
+and (min-width: hexagon-grid---media-width(2)) 
+and (max-width: hexagon-grid---media-width(3) - 1) {
+    // Two columns
     .hexagon-grid {
-        width: 432px - 2 * 24px;
+        width: hexagon-grid---grid-width(2);
     }
     .hexagon-grid__item--hide-lt-five,
     .hexagon-grid__item--hide-lt-four,
     .hexagon-grid__item--hide-lt-three {
-    	display: none;
+        display: none;
     }
     .hexagon-grid__item:nth-child(3n+1) {
-        margin-left: 97px;
+        margin-left: $half-spacing-unit + 95;
     }
 }
 
-@media screen and (min-width: 626px) and (max-width: 819px) {
+@media screen 
+and (min-width: hexagon-grid---media-width(3)) 
+and (max-width: hexagon-grid---media-width(4) - 1) {
+    // Three columns
     .hexagon-grid {
-        width: 626px - 2 * 24px;
+        width: hexagon-grid---grid-width(3);
     }
     .hexagon-grid__item--hide-lt-five,
     .hexagon-grid__item--hide-lt-four {
-    	display: none;
+        display: none;
     }
     .hexagon-grid__item:nth-child(5n+1) {
-        margin-left: 97px;
+        margin-left: $half-spacing-unit + 95;
     }
 }
 
-@media screen and (min-width: 820px) and (max-width: 1013px) {
+@media screen 
+and (min-width: hexagon-grid---media-width(4)) 
+and (max-width: hexagon-grid---media-width(5) - 1) {
+    // Four columns
     .hexagon-grid {
-        width: 820px - 2 * 24px;
+        width: hexagon-grid---grid-width(4);
     }
-    .hexagon-grid__item--hide-lt-five{
-    	display: none;
+    .hexagon-grid__item--hide-lt-five {
+        display: none;
     }
     .hexagon-grid__item:nth-child(7n+1) {
-        margin-left: 97px;
+        margin-left: $half-spacing-unit + 95;
     }
 }
 
-@media screen and (min-width: 1014px) {
+@media screen 
+and (min-width: hexagon-grid---media-width(5)) {
+    // Five columns
     .hexagon-grid {
-        width: 1014px - 2 * 24px;
+        width: hexagon-grid---grid-width(5);
     }
     .hexagon-grid__item:nth-child(9n+1) {
-        margin-left: 97px;
+        margin-left: $half-spacing-unit + 95;
     }
 }

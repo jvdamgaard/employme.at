@@ -20,7 +20,7 @@ Style is based on OOCSS and BEM.
 
 body {
     margin: 0 auto;
-    padding: 24px;
+    padding: $base-spacing-unit;
     max-width: 1200px;
 }
 
