@@ -1,0 +1,231 @@
+/*
+# Hexagon
+
+A hexagon container.
+
+Background images should be at 431x431 for best look and performance.
+
+	<style>
+		.hexagon--demo {
+			background: #4a8ec2;
+			color: #fff;
+		}
+		.hexagon--demo-image {
+			background-image: url(http://inspirationfeed.com/wp-content/uploads/2010/06/Evolution_by_will_yen-500x500.png);
+		}
+	</style>
+
+	<div class="hexagon hexagon--demo">
+		<div class="hexagon__inner1"></div>
+		<div class="hexagon__inner2"></div>
+		<p class="hexagon__content">431 x 431</p>
+	</div>
+	<div class="hexagon hexagon--demo-image">
+		<div class="hexagon__inner1"></div>
+		<div class="hexagon__inner2"></div>
+	</div>
+*/
+.hexagon {
+    position: relative;
+    display: inline-block;
+    margin: 54px 0 54px 0;
+    width: 190px;
+    height: 110px;
+    background-position: 50% 50%;
+    background-size: auto 220px;
+    background-repeat: no-repeat;
+}
+
+.hexagon__inner1, .hexagon__inner2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    background: inherit;
+    -webkit-backface-visibility: hidden;
+    &:before {
+        position: absolute;
+        left: 0;
+        z-index: -1;
+        width: 220px;
+        height: 220px;
+        background: inherit;
+        content: '';
+        transform-origin: 0 0;
+    }
+}
+
+.hexagon__inner1 {
+    transform: rotate(60deg);
+    &:before {
+        top: 0;
+        transform: rotate(-60deg) translate(-110px, 0);
+    }
+}
+
+.hexagon__inner2 {
+    transform: rotate(-60deg);
+    &:before {
+        bottom: 0;
+        transform: rotate(60deg) translate(80px, -110px);
+    }
+}
+
+.hexagon__content {
+    position: absolute;
+    margin: 0;
+    padding: 0 10px;
+    width: 100%;
+    text-align: center;
+    line-height: 110px;
+}
+
+/*
+## Multiple hexagons in a grid
+
+`.hexagon-grid` can be used as a container for multiple hexagon to display them inline.
+It should be used in a fullwidth container. It will center align the hexagons in the
+container.
+
+Convert `.hexagon-grid__item` to a fullwidth square when there is only one row.
+
+Classes `.hexagon-grid__item--hide-lt-five`, `.hexagon-grid__item--hide-lt-four`,
+`.hexagon-grid__item--hide-lt-three`, `.hexagon-grid__item--hide-lt-two` can be used to hide
+hexagons in different format of the grid.
+
+e.g. `.hexagon-grid__item--hide-lt-four` would hide the hexagon when the grid consists of three rows
+or less.
+
+	<style>
+		.hexagon-grid__item--demo {
+			background: #4a8ec2;
+			color: #fff;
+		}
+	</style>
+
+	<div class="hexagon-grid">
+		<div class="hexagon hexagon-grid__item hexagon-grid__item--demo">
+			<div class="hexagon__inner1"></div>
+			<div class="hexagon__inner2"></div>
+			<p class="hexagon__content">1</p>
+		</div>
+		<div class="hexagon hexagon-grid__item hexagon-grid__item--demo">
+			<div class="hexagon__inner1"></div>
+			<div class="hexagon__inner2"></div>
+			<p class="hexagon__content">2</p>
+		</div>
+		<div class="hexagon hexagon-grid__item hexagon-grid__item--demo">
+			<div class="hexagon__inner1"></div>
+			<div class="hexagon__inner2"></div>
+			<p class="hexagon__content">3</p>
+		</div>
+		<div class="hexagon hexagon-grid__item hexagon-grid__item--hide-lt-two hexagon-grid__item--demo">
+			<div class="hexagon__inner1"></div>
+			<div class="hexagon__inner2"></div>
+			<p class="hexagon__content">4</p>
+		</div>
+		<div class="hexagon hexagon-grid__item hexagon-grid__item--hide-lt-three hexagon-grid__item--demo">
+			<div class="hexagon__inner1"></div>
+			<div class="hexagon__inner2"></div>
+			<p class="hexagon__content">5</p>
+		</div>
+		<div class="hexagon hexagon-grid__item hexagon-grid__item--hide-lt-three hexagon-grid__item--demo">
+			<div class="hexagon__inner1"></div>
+			<div class="hexagon__inner2"></div>
+			<p class="hexagon__content">6</p>
+		</div>
+		<div class="hexagon hexagon-grid__item hexagon-grid__item--hide-lt-three hexagon-grid__item--demo">
+			<div class="hexagon__inner1"></div>
+			<div class="hexagon__inner2"></div>
+			<p class="hexagon__content">7</p>
+		</div>
+		<div class="hexagon hexagon-grid__item hexagon-grid__item--hide-lt-four hexagon-grid__item--demo">
+			<div class="hexagon__inner1"></div>
+			<div class="hexagon__inner2"></div>
+			<p class="hexagon__content">8</p>
+		</div>
+	</div>
+*/
+.hexagon-grid {
+    margin: 0 auto;
+}
+
+@media screen and (max-width: 431px) {
+	.hexagon-grid__item {
+		margin: 2px 0;
+		width: 100%;
+		height: 150px;
+		background-position: 50% 50%;
+		background-size: 100% auto;
+        .hexagon__inner1, .hexagon__inner2 {
+            display: none;
+        }
+	}
+
+	.hexagon-grid__item--hide-lt-five,
+	.hexagon-grid__item--hide-lt-four,
+	.hexagon-grid__item--hide-lt-three,
+	.hexagon-grid__item--hide-lt-two {
+		display: none;
+	}
+}
+
+@media screen and (min-width: 432px) {
+    .hexagon-grid {
+        margin-bottom: 57px;
+    }
+    .hexagon-grid__item {
+        margin-bottom: -3px;
+    }
+}
+
+@media screen and (min-width: 432px) and (max-width: 625px) {
+    .hexagon-grid {
+        width: 432px - 2 * 24px;
+    }
+    .hexagon-grid__item--hide-lt-five,
+    .hexagon-grid__item--hide-lt-four,
+    .hexagon-grid__item--hide-lt-three {
+    	display: none;
+    }
+    .hexagon-grid__item:nth-child(3n+1) {
+        margin-left: 97px;
+    }
+}
+
+@media screen and (min-width: 626px) and (max-width: 819px) {
+    .hexagon-grid {
+        width: 626px - 2 * 24px;
+    }
+    .hexagon-grid__item--hide-lt-five,
+    .hexagon-grid__item--hide-lt-four {
+    	display: none;
+    }
+    .hexagon-grid__item:nth-child(5n+1) {
+        margin-left: 97px;
+    }
+}
+
+@media screen and (min-width: 820px) and (max-width: 1013px) {
+    .hexagon-grid {
+        width: 820px - 2 * 24px;
+    }
+    .hexagon-grid__item--hide-lt-five{
+    	display: none;
+    }
+    .hexagon-grid__item:nth-child(7n+1) {
+        margin-left: 97px;
+    }
+}
+
+@media screen and (min-width: 1014px) {
+    .hexagon-grid {
+        width: 1014px - 2 * 24px;
+    }
+    .hexagon-grid__item:nth-child(9n+1) {
+        margin-left: 97px;
+    }
+}

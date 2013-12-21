@@ -21,18 +21,6 @@ Fluid and nestable grid system, e.g.:
 			<p class="demo">Two thirds grid</p>
 		</div><!--
 
-	 --><div class="grid__item  one-half">
-			<p class="demo">One half grid</p>
-		</div><!--
-
-	 --><div class="grid__item  one-quarter">
-			<p class="demo">One quarter grid</p>
-		</div><!--
-
-	 --><div class="grid__item  one-quarter">
-			<p class="demo">One quarter grid</p>
-		</div><!--
-
 	 --><div class="grid__item  one-whole">
 			<p class="demo">One whole grid</p>
 		</div><!--
@@ -43,14 +31,16 @@ Fluid and nestable grid system, e.g.:
 
 	 --><div class="grid__item  three-quarters">
 
+	 		<p class="demo">Three quarters grid</p>
+
 			<div class="grid">
 
-				<div class="grid__item one-third">
-					<p class="demo">One third nested grid</p>
+				<div class="grid__item one-half">
+					<p class="demo">One half nested grid</p>
 				</div><!--
 
-	         --><div class="grid__item two-thirds">
-					<p class="demo">Two thirds nested grid</p>
+	         --><div class="grid__item one-half">
+					<p class="demo">One half nested grid</p>
 				</div>
 
 			</div
