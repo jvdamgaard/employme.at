@@ -58,7 +58,7 @@
         "grunt-todos": "0.2.0",
         "load-grunt-tasks": "0.2.1",
         "lodash": "2.4.1",
-        "jshint-stylish": "~0.1.4"
+        "jshint-stylish": "0.1.4"
     },
     "engines": {
         "node": "0.10.x"
