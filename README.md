@@ -1,3 +1,3 @@
-[![Nodejitsu Deploy Status](https://webhooks.nodejitsu.com/jakob_damgaard/employme.at.png)](https://webops.nodejitsu.com#jakob_damgaard/employme.at)
+# employme.at
 
-## employme.at
+[![Codeship Status for jvdamgaard/employme.at](https://www.codeship.io/projects/1029efa0-3c90-0131-70e2-46214282368a/status?branch=master)](https://www.codeship.io/projects/10288)

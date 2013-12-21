@@ -1,0 +1,15 @@
+node_modules/
+.sass-cache/
+.tmp/
+app/
+test/
+
+!dist/
+
+.bowerrc
+.editorconfig
+.gitattributes
+.gitignore
+.jshintrc
+Gruntfile.js
+bower.json

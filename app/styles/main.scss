@@ -1,0 +1,29 @@
+/*
+# employme.at/designit
+
+This is the main entry for `scss` that ties all styles together.
+
+Style is based on OOCSS and BEM.
+ */
+
+/*
+## Base
+*/
+@import "scut/dist/scut";
+@import "base/vars";
+@import "inuit.css/inuit";
+
+/*
+## Objects
+ */
+@import "objects/hexagon";
+
+body {
+    margin: 0 auto;
+    padding: $base-spacing-unit;
+    max-width: 1200px;
+}
+
+.highlight {
+    background: #ff0000;
+}
