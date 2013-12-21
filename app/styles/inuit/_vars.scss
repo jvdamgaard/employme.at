@@ -9,8 +9,10 @@ in the inuit.css-web-template) to override them.
 Debug mode will visually highlight any potential markup/accessibility quirks
 in the browser. Set to `true` or `false`.
 
-`$debug-mode: false;`
-
+`$debug-mode: false`
+*/
+$debug-mode: false;
+/*
 # Border-box
 Do you want all elements to adopt `box-sizing:border-box;` as per
 [paulirish.com/2012/box-sizing-border-box-ftw](paulirish.com/2012/box-sizing-border-box-ftw)

@@ -1,43 +1,63 @@
 @import "scut/dist/scut";
-@import 'inuit/vars';
+@import "inuit/vars";
 @import "inuit.css/inuit";
 
 body {
-	max-width: 1200px;
-	margin: 0 auto;
-	padding: 24px;
+    margin: 0 auto;
+    padding: 24px;
+    max-width: 1200px;
 }
 
 .highlight {
-	background: #ff0000;
+    background: #ff0000;
 }
 
 /*
-# Modules
+# Hexagon
 
-A hexagon container
+A hexagon container.
 
-	<div class="hexagon" style="background-image:url(http://placehold.it/220x220)">
-		<div class="hexagon__inner1"></div>
-		<div class="hexagon__inner2"></div>
+Background images should be at 220x200 for best performance.
+
+`.hexagon-grid` can be used if multiple hexagon containers are in line.
+
+	<style>
+		.hexagon--demo {
+			background: #4a8ec2;
+			color: #fff;
+		}
+		.hexagon--demo-image {
+			background-image: url(http://qibla.com/uploads/2012/07/LMT102-220x220.jpg);
+		}
+	</style>
+
+	<div class="hexagon-grid">
+		<div class="hexagon hexagon-grid__item hexagon--demo">
+			<div class="hexagon__inner1"></div>
+			<div class="hexagon__inner2"></div>
+			<p class="hexagon__content">220 x 220</p>
+		</div>
+		<div class="hexagon hexagon-grid__item hexagon--demo-image">
+			<div class="hexagon__inner1"></div>
+			<div class="hexagon__inner2"></div>
+		</div>
 	</div>
 */
 .hexagon {
     position: relative;
-    display: block;
-    margin: 54px 0;
+    display: inline-block;
+    margin: 54px 0 54px 0;
     width: 190px;
     height: 110px;
     background-position: 50% 50%;
     background-size: auto 220px;
     background-repeat: no-repeat;
-    line-height: 220px;
 }
 
 .hexagon__inner1, .hexagon__inner2 {
     position: absolute;
-    left: 0;
     top: 0;
+    left: 0;
     z-index: -1;
     overflow: hidden;
     width: 100%;
@@ -70,4 +90,64 @@ A hexagon container
         bottom: 0;
         transform: rotate(60deg) translate(80px, -110px);
     }
+}
+
+.hexagon__content {
+    position: absolute;
+    margin: 0;
+    padding: 0 10px;
+    width: 100%;
+    text-align: center;
+    line-height: 110px;
+}
+
+
+
+@media screen and (min-width: 432px) {
+	.hexagon-grid {
+		margin-bottom: 57px;
+	}
+	.hexagon-grid__item {
+		margin-bottom: -3px;
+	}
+}
+@media screen and (min-width: 432px) and (max-width: 528px) {
+	.hexagon-grid__item:nth-child(3n) {
+		margin-left: 97px;
+	}
+}
+@media screen and (min-width: 529px) and (max-width: 625px) {
+	.hexagon-grid__item:nth-child(4n-1) {
+		margin-left: 97px;
+	}
+}
+@media screen and (min-width: 626px) and (max-width: 722px) {
+	.hexagon-grid__item:nth-child(5n-1) {
+		margin-left: 97px;
+	}
+}
+@media screen and (min-width: 723px) and (max-width: 819px) {
+	.hexagon-grid__item:nth-child(6n-2) {
+		margin-left: 97px;
+	}
+}
+@media screen and (min-width: 820px) and (max-width: 916px) {
+	.hexagon-grid__item:nth-child(7n-2) {
+		margin-left: 97px;
+	}
+}
+@media screen and (min-width: 917px) and (max-width: 1013px) {
+	.hexagon-grid__item:nth-child(8n-3) {
+		margin-left: 97px;
+	}
+}
+@media screen and (min-width: 1014px) and (max-width: 1110px) {
+	.hexagon-grid__item:nth-child(9n-3) {
+		margin-left: 97px;
+	}
+}
+@media screen and (min-width: 1111px) {
+	.hexagon-grid__item:nth-child(10n-4) {
+		margin-left: 97px;
+	}
 }
