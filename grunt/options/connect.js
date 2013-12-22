@@ -13,6 +13,7 @@ module.exports = {
             port: 9001,
             livereload: 35730,
             open: true,
+            keepalive: true,
             base: [
                 '<%= app.test %>/coverage'
             ]
@@ -25,6 +26,7 @@ module.exports = {
             port: 9002,
             livereload: 35731,
             open: true,
+            keepalive: true,
             base: [
                 '<%= app.test %>',
                 '<%= app.source %>'
@@ -37,6 +39,7 @@ module.exports = {
         options: {
             port: 9003,
             open: true,
+            keepalive: true,
             base: [
                 '<%= app.docs %>/styleguide',
                 '<%= app.docs %>/lib',
