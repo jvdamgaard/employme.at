@@ -20,7 +20,7 @@ var app = require('app');
  */
 var appVersion = ' ' + app.name;
 for (var i = 24 - app.name.length - 1; i >= 0; i--) {
-	appVersion += ' ';
+    appVersion += ' ';
 }
 appVersion += ': ' + app.version;
 
@@ -28,11 +28,11 @@ appVersion += ': ' + app.version;
 /**
  * Log versions of dependencies
  */
-console.log('------------------------------------------------------------------------');
+console.log('----------------------------------------------------------------');
 console.log(appVersion);
-console.log('------------------------------------------------------------------------');
+console.log('----------------------------------------------------------------');
 console.log(' - jQuery                : ' + $.fn.jquery);
 console.log(' - Modernizr             : ' + Modernizr._version);
 console.log(' - Lo-Dash               : ' + _.VERSION);
 console.log(' - Moment.js             : ' + moment.version);
-console.log('------------------------------------------------------------------------');
+console.log('-----------------------------------------------------------------');

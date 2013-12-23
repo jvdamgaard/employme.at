@@ -47,7 +47,8 @@ Fluid and nestable grid system, e.g.:
 		</div>
 	</div>
 
-Note: `grid__item` dom elements can not have spaces between because the grid system uses `inline-block`
+Note: `grid__item` dom elements can not have spaces between because the grid
+system uses `inline-block`
 
 Use html comments `<!--` `-->` if indention is required.
 
@@ -79,28 +80,33 @@ Grid demo: [jsfiddle.net/inuitcss/CLYUC](http://jsfiddle.net/inuitcss/CLYUC)
 
 ## Eighths
 
-`.one-eighth`, `.two-eighths`, `.three-eighths`, `.four-eighths`, `.five-eighths`, `.six-eighths`, `.seven-eighths`
+`.one-eighth`, `.two-eighths`, `.three-eighths`, `.four-eighths`,
+`.five-eighths`, `.six-eighths`, `.seven-eighths`
 
 ## Tenths
 
-`.one-tenth`, `.two-tenths`, `.three-tenths`, `.four-tenths`, `.five-tenths`, `.six-tenths`, `.seven-tenths`, `.eight-tenths`, `.nine-tenths`
+`.one-tenth`, `.two-tenths`, `.three-tenths`, `.four-tenths`, `.five-tenths`,
+`.six-tenths`, `.seven-tenths`, `.eight-tenths`, `.nine-tenths`
 
 ## Twelfths
 
-`.one-twelfth`, `.two-twelfths`, `.three-twelfths`, `.four-twelfths`, `.five-twelfths`, `.six-twelfths`, `.seven-twelfths`, `.eight-twelfths`, `.nine-twelfths`, `.ten-twelfths`, `.eleven-twelfths`
+`.one-twelfth`, `.two-twelfths`, `.three-twelfths`, `.four-twelfths`,
+`.five-twelfths`, `.six-twelfths`, `.seven-twelfths`, `.eight-twelfths`,
+`.nine-twelfths`, `.ten-twelfths`, `.eleven-twelfths`
 
 # Responsive
 
-All width can be prefixed with `palm-`. `lap-`, `lap-and-up-`, `portable-`, `desk-` or `desk-wide-`
+All width can be prefixed with `palm-`. `lap-`, `lap-and-up-`, `portable-`,
+`desk-` or `desk-wide-`
 
 	<style>
-		.demo { 
-			background: #4a8ec2; 
-			padding: 1em; 
-			color: #fff; 
+		.demo {
+			background: #4a8ec2;
+			padding: 1em;
+			color: #fff;
 		}
 	</style>
-	
+
 	<div class="grid">
 		<div class="grid__item one-whole">
 			<p class="demo">1:1</p>

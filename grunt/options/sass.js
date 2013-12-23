@@ -11,6 +11,7 @@ module.exports = {
     local: {
         options: {
             sourcemap: true,
+            trace: true,
             style: 'expanded'
         },
         files: {
