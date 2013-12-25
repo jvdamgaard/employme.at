@@ -11,11 +11,7 @@ module.exports = {
             '<%= app.source %>/scripts/**/*.js'
         ],
         tasks: [
-            'continueOn',
-            'jshint',
-            'todos',
-            'continueOff',
-            'mochaTest:build'
+            'build-test'
         ]
     },
 

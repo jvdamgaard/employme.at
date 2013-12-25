@@ -144,10 +144,15 @@ module.exports = function (grunt) {
     grunt.registerTask('test', function () {
 
         // Load required grunt tasks
+        grunt.loadNpmTasks('grunt-continue');
+        grunt.loadNpmTasks('grunt-todos');
+        grunt.loadNpmTasks('grunt-contrib-jshint');
+        grunt.loadNpmTasks('grunt-mocha-test');
         grunt.loadNpmTasks('grunt-contrib-watch');
 
         // Run grunt tasks
         grunt.task.run([
+            'continueOn',
             'build-test',
             'watch:test'
         ]);

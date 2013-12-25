@@ -20,7 +20,9 @@ module.exports = {
 			debug: true
 		},
 		files: {
-			'<%= app.test %>/compiled/specs.js': ['<%= app.test %>/spec/**/*.js']
+			'<%= app.test %>/compiled/specs.js': [
+				'<%= app.test %>/spec/**/*.js'
+			]
 		}
 	},
 
@@ -30,7 +32,9 @@ module.exports = {
 			debug: true
 		},
 		files: {
-			'<%= app.test %>/compiled/integrations.js': ['<%= app.test %>/integration/**/*.js']
+			'<%= app.test %>/compiled/integrations.js': [
+				'<%= app.test %>/integration/**/*.js'
+			]
 		}
 	},
 
@@ -40,7 +44,9 @@ module.exports = {
 			debug: true
 		},
 		files: {
-			'<%= app.dist %>/scripts/app.js': ['<%= app.source %>/scripts/app.js']
+			'<%= app.dist %>/scripts/app.js': [
+				'<%= app.source %>/scripts/app.js'
+			]
 		}
 	},
 
@@ -50,9 +56,15 @@ module.exports = {
 			debug: true
 		},
 		files: {
-			'<%= app.dist %>/scripts/app.js': ['<%= app.source %>/scripts/app.js'],
-			'<%= app.test %>/compiled/integrations.js': ['<%= app.test %>/integration/**/*.js'],
-			'<%= app.test %>/compiled/specs.js': ['<%= app.test %>/spec/**/*.js']
+			'<%= app.dist %>/scripts/app.js': [
+				'<%= app.source %>/scripts/app.js'
+			],
+			'<%= app.test %>/compiled/integrations.js': [
+				'<%= app.test %>/integration/**/*.js'
+			],
+			'<%= app.test %>/compiled/specs.js': [
+				'<%= app.test %>/spec/**/*.js'
+			]
 		}
 	}
 };
