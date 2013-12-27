@@ -21,7 +21,7 @@ module.exports = {
             '<%= app.source %>/scripts/**/*.js'
         ],
         tasks: [
-            'browserify:sources'
+            'js-source-build'
         ]
     },
 
@@ -31,8 +31,7 @@ module.exports = {
             '<%= app.source %>/styles/**/*.scss'
         ],
         tasks: [
-            'sass:local',
-            'autoprefixer'
+            'css-build'
         ]
     },
     server: {

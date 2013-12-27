@@ -98,18 +98,39 @@ module.exports = function (grunt) {
     });
 
     /**
+     * Build source javascript files
+     */
+    grunt.registerTask('js-source-build', function () {
+        grunt.loadNpmTasks('grunt-browserify');
+        grunt.task.run([
+            'browserify:sources'
+        ]);
+    });
+
+    /**
      * Build and watch javascript
      */
     grunt.registerTask('js', function () {
-        grunt.loadNpmTasks('grunt-browserify');
         grunt.loadNpmTasks('grunt-modernizr');
         grunt.loadNpmTasks('grunt-contrib-uglify');
         grunt.loadNpmTasks('grunt-contrib-watch');
         grunt.task.run([
-            'browserify:sources',
+            'js-source-build',
             'modernizr',
             'uglify:local',
             'watch:js'
+        ]);
+    });
+
+    /**
+     * Build styles
+     */
+    grunt.registerTask('css-build', function () {
+        grunt.loadNpmTasks('grunt-contrib-sass');
+        grunt.loadNpmTasks('grunt-autoprefixer');
+        grunt.task.run([
+            'sass:local',
+            'autoprefixer'
         ]);
     });
 
