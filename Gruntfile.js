@@ -50,7 +50,7 @@ module.exports = function (grunt) {
         grunt.loadNpmTasks('grunt-contrib-watch');
         grunt.task.run([
             'shell:bowerInstall',
-            'newer:copy',
+            'newer:copy:all',
             'express',
             'open',
             'watch:server'
@@ -74,10 +74,12 @@ module.exports = function (grunt) {
      * Build and open documentation for styles and javascript
      */
     grunt.registerTask('docs', function () {
+        grunt.loadNpmTasks('grunt-contrib-copy');
         grunt.loadNpmTasks('grunt-styleguide');
         grunt.loadNpmTasks('grunt-shell');
         grunt.loadNpmTasks('grunt-contrib-connect');
         grunt.task.run([
+            'copy:styledocco',
             'styleguide',
             'shell:doxx',
             'connect:jsdoc',
@@ -205,7 +207,7 @@ module.exports = function (grunt) {
             // Build files
             'browserify:sources',
             'sass:build',
-            'copy',
+            'copy:all',
             'imagemin',
             'modernizr',
 

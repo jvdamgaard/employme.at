@@ -43,8 +43,7 @@ module.exports = {
             base: [
                 '<%= app.docs %>/styleguide',
                 '<%= app.docs %>/lib',
-                '<%= app.source %>/bower_components/bootstrap/dist',
-                '<%= app.source %>/bower_components/jquery'
+                '<%= app.source %>/bower_components'
             ]
         }
     },

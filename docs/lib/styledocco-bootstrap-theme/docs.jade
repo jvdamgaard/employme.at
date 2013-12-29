@@ -9,7 +9,7 @@ html
       else if title
         #{title}
     meta(charset='utf-8')
-    link(rel='stylesheet', href='css/bootstrap.min.css')
+    link(rel='stylesheet', href='bootstrap/dist/css/bootstrap.min.css')
     link(rel='stylesheet', href='css/bootstrap-docs.css')
     if (resources.docs && resources.docs.css)
       style !{resources.docs.css}
@@ -54,7 +54,7 @@ html
                 !{section.docs}
     if (resources.docs && resources.docs.js)
       script !{resources.docs.js}
-    script(src='jquery.min.js')
-    script(src='js/bootstrap.min.js')
+    script(src='jquery/jquery.min.js')
+    script(src='bootstrap/dist/js/bootstrap.min.js')
     script.
       document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35732/livereload.js?snipver=1"></' + 'script>')
