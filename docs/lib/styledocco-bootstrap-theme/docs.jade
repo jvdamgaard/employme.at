@@ -17,7 +17,7 @@ html
       script(type="text/preview") !{resources.previews.js}
     if (resources.previews && resources.previews.css)
       style(type="text/preview") !{resources.previews.css}
-  body
+  body(data-spy='scroll', data-target='#sub-nav')
     header.navbar.navbar-inverse.navbar-fixed-top.bs-docs-nav(role='banner')
       .container
         .navbar-header
@@ -46,7 +46,7 @@ html
     .container.bs-docs-container
         .row
           .col-md-3
-            .bs-sidebar.hidden-print.affix(role='complementary')
+            .bs-sidebar.hidden-print.affix(role='complementary', id='sub-nav')
               ul.nav.bs-sidenav
           .col-md-9(role='main')
              each section, i in sections
