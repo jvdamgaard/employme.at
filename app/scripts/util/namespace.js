@@ -30,7 +30,7 @@
  * @return {object}      Object for namespace
  */
 var createNamespace = function (namespace, root) {
-    var namespaces = name.split('.');
+    var namespaces = namespace.split('.');
     var object = root || window;
 
     var i = 0;
@@ -39,7 +39,7 @@ var createNamespace = function (namespace, root) {
         var name = namespaces[i];
         object[name] = object[name] || {};
         object = object[name];
-    };
+    }
 
     return object;
 };
