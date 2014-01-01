@@ -1,3 +1,10 @@
+/**
+ * Make ajax get calls using promises A+
+ *
+ * - get
+ * - getJSON
+ */
+
 // Dependencies
 var Promise = require('es6-promise').Promise;
 
