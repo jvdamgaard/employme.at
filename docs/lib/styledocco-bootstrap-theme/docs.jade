@@ -1,3 +1,8 @@
+mixin parseDocs(docs)
+  - docs = docs.replace(/<textarea class="preview-code" spellcheck="false">/g,'<pre class="preview-code language-markup"><code>')
+  - docs = docs.replace(/<\/textarea>/g,'</code></pre>')
+  !{docs}
+
 !!! 5
 html
   head
@@ -9,10 +14,12 @@ html
       else if title
         #{title}
     meta(charset='utf-8')
-    link(rel='stylesheet', href='bootstrap/dist/css/bootstrap.min.css')
-    link(rel='stylesheet', href='css/bootstrap-docs.css')
+    link(rel='stylesheet', href='/bootstrap/dist/css/bootstrap.css')
+    link(rel='stylesheet', href='/css/bootstrap-docs.css')
+    link(rel='stylesheet', href='/prismjs/prism.css')
     if (resources.docs && resources.docs.css)
       style !{resources.docs.css}
+    script(src='/jquery/jquery.js')
     if (resources.previews && resources.previews.js)
       script(type="text/preview") !{resources.previews.js}
     if (resources.previews && resources.previews.css)
@@ -51,10 +58,8 @@ html
           .col-md-9(role='main')
              each section, i in sections
               .bs-docs-section
-                !{section.docs}
+                mixin parseDocs(section.docs)
     if (resources.docs && resources.docs.js)
       script !{resources.docs.js}
-    script(src='jquery/jquery.min.js')
-    script(src='bootstrap/dist/js/bootstrap.min.js')
-    script.
-      document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35732/livereload.js?snipver=1"></' + 'script>')
+    script(src='/bootstrap/dist/js/bootstrap.js')
+    script(src='/prismjs/prism.js')
