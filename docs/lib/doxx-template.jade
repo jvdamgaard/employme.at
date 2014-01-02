@@ -67,13 +67,15 @@ body(data-spy='scroll', data-target='#sub-nav')
                 li
                   a(href='##{symbol.ctx.name}')= symbol.ctx.name
       .col-md-9(role='main')
-
         if locals.readme
           section(id=name) !{readme}
+        else
+          - var header = locals.name.replace('.js', '')
+          h1 #{header}
         each symbol in dox
           if symbol.ctx.name
             section(id=symbol.ctx.name)
-              h1(id='#{symbol.ctx.name}')= symbol.ctx.name
+              h2(id='#{symbol.ctx.name}')= symbol.ctx.name
               h5.subheader
               if !symbol.gtype && symbol.type
                 p
