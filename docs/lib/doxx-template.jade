@@ -27,6 +27,64 @@ head
   link(rel='stylesheet', href='/bootstrap/dist/css/bootstrap.min.css')
   link(rel='stylesheet', href='/css/bootstrap-docs.css')
   link(rel='stylesheet', href='/prismjs/prism.css')
+  style(type='text/css')
+    .bs-docs-nav .navbar-nav > .dropdown > a:hover .caret {
+      border-top-color: #fff;
+      border-bottom-color: #fff;
+    }
+    .bs-docs-nav .navbar-nav > .dropdown > a .caret {
+      border-top-color: #999;
+      border-bottom-color: #999;
+    }
+    .bs-docs-nav .navbar-nav > li > .dropdown-menu {
+      text-shadow: none;
+    }
+    .bs-docs-nav .navbar-nav > .open > a, .bs-docs-nav .navbar-nav > .open > a:hover, .bs-docs-nav .navbar-nav > .open > a:focus {
+      background-color: #463265;
+    }
+    .row {
+      margin-bottom: 20px;
+    }
+    .row h1:first-of-type {
+      padding-top: 0;
+    }
+    .resizeable {
+      padding: 5px 15px 5px 0;
+      resize: vertical;
+      overflow: auto;
+    }
+    .bs-docs-section > h1 {
+      padding-bottom: 9px;
+      margin: 40px 0 20px;
+      border-bottom: 1px solid #eee;
+    }
+    .bs-example {
+      padding-right: 0;
+      background: #FFF;
+    }
+    .bs-example iframe {
+      display: block;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      border: 0;
+    }
+    .preview-code {
+      width: 100%;
+      line-height: 1.428571429;
+      color: #333;
+      font-size: 13px;
+      font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
+      resize: none;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+    .bs-sidebar .nav > li > a:not(.lv1) {
+      padding-top: 3px;
+      padding-bottom: 3px;
+      padding-left: 30px;
+      font-size: 90%;
+    }
 body(data-spy='scroll', data-target='#sub-nav')
   header.navbar.navbar-inverse.navbar-fixed-top.bs-docs-nav(role='banner')
     .container
@@ -67,44 +125,45 @@ body(data-spy='scroll', data-target='#sub-nav')
                 li
                   a(href='##{symbol.ctx.name}')= symbol.ctx.name
       .col-md-9(role='main')
-        if locals.readme
-          section(id=name) !{readme}
-        else
-          - var header = locals.name.replace('.js', '')
-          h1 #{header}
-        each symbol in dox
-          if symbol.ctx.name
-            section(id=symbol.ctx.name)
-              h2(id='#{symbol.ctx.name}')= symbol.ctx.name
-              h5.subheader
-              if !symbol.gtype && symbol.type
-                p
-                  div(class=["label", "label-inverse", "radius", "ctx-type"])= symbol.type
-              else
-                p
-                  mixin labelForSymbolType(symbol)
-                  if symbol.ctx.string
-                    span= symbol.ctx.string
-                  if symbol.return
-                    |  ->
-                    span= symbol.return
+        .bs-docs-section
+          if locals.readme
+            section(id=name) !{readme}
+          else
+            - var header = locals.name.replace('.js', '')
+            h1 #{header}
+          each symbol in dox
+            if symbol.ctx.name
+              section(id=symbol.ctx.name)
+                h2(id='#{symbol.ctx.name}')= symbol.ctx.name
+                h5.subheader
+                if !symbol.gtype && symbol.type
+                  p
+                    div(class=["label", "label-inverse", "radius", "ctx-type"])= symbol.type
+                else
+                  p
+                    mixin labelForSymbolType(symbol)
+                    if symbol.ctx.string
+                      span= symbol.ctx.string
+                    if symbol.return
+                      |  ->
+                      span= symbol.return
 
-          if symbol.hasParams
-            table.table.table-bordered.table-striped
-              thead
-                tr
-                  th(style="width:20%") Option name
-                  th(style="width:20%") Type
-                  th Description
-              tbody
-                each tag in symbol.tags
-                  if tag.type == 'param'
-                    tr
-                      td= tag.name
-                      td= tag.types
-                      td= tag.description
+            if symbol.hasParams
+              table.table.table-bordered.table-striped
+                thead
+                  tr
+                    th(style="width:20%") Option name
+                    th(style="width:20%") Type
+                    th Description
+                tbody
+                  each tag in symbol.tags
+                    if tag.type == 'param'
+                      tr
+                        td= tag.name
+                        td= tag.types
+                        td= tag.description
 
-          .description.language-javascript !{symbol.description.full} !{symbol.description.extra}
+            .description.language-javascript !{symbol.description.full} !{symbol.description.extra}
 
   script(src='/jquery/jquery.js')
   script(src='/bootstrap/dist/js/bootstrap.js')

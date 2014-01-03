@@ -1,6 +1,4 @@
 /**
- * # Namespace
- *
  * Create a namespace for public modules.
  */
 
