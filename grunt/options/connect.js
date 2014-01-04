@@ -59,5 +59,18 @@ module.exports = {
                 '<%= app.source %>/bower_components'
             ]
         }
+    },
+
+    // Local server for displaying styleguide
+    designProcess: {
+        options: {
+            port: 9005,
+            open: true,
+            base: [
+                '.tmp/docs/design-process',
+                '<%= app.docs %>/design-process',
+                '<%= app.source %>/bower_components'
+            ]
+        }
     }
 };

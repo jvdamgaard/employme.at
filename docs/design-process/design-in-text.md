@@ -1,5 +1,6 @@
 # Design In Text
 
+
 ## 1. About
 
 - Webdesign since 1996
@@ -22,6 +23,7 @@
 - All should have a reason
 - From the content and out
 - Design in the medium
+
 
 ## 2. Skills
 
@@ -48,6 +50,7 @@
 
 - Im really not an ...
 
+
 ## 3. Work
 
 - J. Boye 2009 - 2012
@@ -61,13 +64,13 @@
 -- netto shoppinglist
 -- føtex reinvention
 
+
 ## 4. Why DesignIt
 
 - Creative environment
 - Projects
 - Repetation
 - Products
-
 
 
 ## 5. Contact
