@@ -3,7 +3,7 @@
  */
 
 module.exports = {
-    devFile: '<%= app.source %>/bower_components/modernizr/modernizr.js',
+    devFile: '.tmp/bower_components/modernizr/modernizr.js',
     outputFile: '<%= app.dist %>/scripts/modernizr.js',
     extra: {
         'shiv': true,

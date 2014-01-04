@@ -11,11 +11,10 @@ module.exports = {
     coverage: {
         options: {
             port: 9001,
-            livereload: 35730,
             open: true,
             keepalive: true,
             base: [
-                '<%= app.test %>/coverage'
+                '.tmp/coverage'
             ]
         }
     },
@@ -24,12 +23,12 @@ module.exports = {
     test: {
         options: {
             port: 9002,
-            livereload: 35731,
             open: true,
             keepalive: true,
             base: [
                 '<%= app.test %>',
-                '<%= app.source %>'
+                '<%= app.source %>',
+                '.tmp/tests'
             ]
         }
     },
@@ -41,9 +40,9 @@ module.exports = {
             open: true,
             keepalive: true,
             base: [
-                '<%= app.docs %>/styleguide',
+                '.tmp/styleguide',
                 '<%= app.docs %>/lib',
-                '<%= app.source %>/bower_components'
+                '.tmp/bower_components'
             ]
         }
     },
@@ -54,9 +53,22 @@ module.exports = {
             port: 9004,
             open: true,
             base: [
-                '<%= app.docs %>/js',
+                '.tmp/js',
                 '<%= app.docs %>/lib',
-                '<%= app.source %>/bower_components'
+                '.tmp/bower_components'
+            ]
+        }
+    },
+
+    // Local server for displaying styleguide
+    designProcess: {
+        options: {
+            port: 9005,
+            open: true,
+            base: [
+                '.tmp/docs/design-process',
+                '<%= app.docs %>/design-process',
+                '.tmp/bower_components'
             ]
         }
     }

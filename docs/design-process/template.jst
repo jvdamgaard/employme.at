@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Design process</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Place favicon.ico and apple-touch-icon(s) in the root directory -->
+
+        <link rel="stylesheet" href="/template.css">
+        <link rel="stylesheet" href="/prismjs/prism.css">
+    </head>
+    <body>
+        <div class="header header-logged-in true" style="margin-bottom: 40px;">
+            <div class="container clearfix">
+                <ul class="top-nav" style="margin: 6px 0;">
+                    <li>
+                        <a href="/main-goal.html">Main Goal</a>
+                    </li>
+                    <li>
+                        <a href="/content-inventory.html">Content Inventory</a>
+                    </li>
+                    <li>
+                        <a href="/design-in-text.html">Design In Text</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="wrapper">
+            <div class="site">
+                <div class="container">
+                    <div class="repository-with-sidebar repo-container with-full-navigation">
+                        <div class="repository-content context-loader-container">
+                            <div class="clearfix announce instapaper_body md">
+                                <article class="markdown-body entry-content" itemprop="mainContentOfPage">
+                                    <%=content%>
+                                </article>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="/prismjs/prism.js"></script>
+    </body>
+</html>

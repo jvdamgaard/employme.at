@@ -24,7 +24,7 @@ module.exports = function (grunt) {
     var config = {
         app: {
             source: 'app',
-            dist: 'dist',
+            dist: '.tmp/dist',
             test: 'test',
             docs: 'docs'
         },
@@ -42,14 +42,12 @@ module.exports = function (grunt) {
      * Start node server and livereload on changes
      */
     grunt.registerTask('server', function () {
-        grunt.loadNpmTasks('grunt-shell');
         grunt.loadNpmTasks('grunt-newer');
         grunt.loadNpmTasks('grunt-contrib-copy');
         grunt.loadNpmTasks('grunt-express-server');
         grunt.loadNpmTasks('grunt-open');
         grunt.loadNpmTasks('grunt-contrib-watch');
         grunt.task.run([
-            'shell:bowerInstall',
             'newer:copy:all',
             'express',
             'open',
@@ -77,12 +75,15 @@ module.exports = function (grunt) {
         grunt.loadNpmTasks('grunt-contrib-copy');
         grunt.loadNpmTasks('grunt-styleguide');
         grunt.loadNpmTasks('grunt-shell');
+        grunt.loadNpmTasks('grunt-markdown');
         grunt.loadNpmTasks('grunt-contrib-connect');
         grunt.task.run([
             'copy:styledocco',
             'styleguide',
             'shell:doxx',
+            'markdown:docs',
             'connect:jsdoc',
+            'connect:designProcess',
             'connect:styleguide'
         ]);
     });
@@ -187,7 +188,6 @@ module.exports = function (grunt) {
     grunt.registerTask('build', function () {
 
         // Load required grunt tasks
-        grunt.loadNpmTasks('grunt-shell');
         grunt.loadNpmTasks('grunt-browserify');
         grunt.loadNpmTasks('grunt-contrib-sass');
         grunt.loadNpmTasks('grunt-contrib-copy');
@@ -201,8 +201,6 @@ module.exports = function (grunt) {
 
         // Run grunt tasks
         grunt.task.run([
-            // Install dependecies
-            'shell:bowerInstall',
 
             // Build files
             'browserify:sources',
