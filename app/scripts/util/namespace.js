@@ -5,6 +5,7 @@
  */
 
 // Dependencies
+var _ = require('lodash');
 
 /**
  * Make a namespace safely for modules
@@ -30,16 +31,23 @@
  * @return {object}      Object for namespace
  */
 var createNamespace = function (namespace, root) {
-    var namespaces = name.split('.');
-    var object = root || window;
 
-    var i = 0;
-    var max = namespaces.length;
-    for (; i < max; i += 1) {
-        var name = namespaces[i];
-        object[name] = object[name] || {};
+    // Split namespace by dot
+    if (!_.isString(namespace)) {
+        return;
+    }
+    var namespaces = namespace.split('.');
+
+    // Define root object for namespace
+    var object = root || window || this;
+
+    // Make sure each element in the namespace exists
+    _(namespaces).forEach(function(name) {
+        if (_.isUndefined(object[name])) {
+            object[name] = {};
+        }
         object = object[name];
-    };
+    });
 
     return object;
 };
