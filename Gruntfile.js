@@ -1,8 +1,11 @@
-// TODO: Clean up using https://github.com/gruntjs/grunt/issues/975#issuecomment-29058707
-
+// Dependencies
 var _ = require('lodash');
 
-/* Load grunt config files from path */
+/**
+ * Load configs from a folder
+ * @param  {string} path  path for grunt configs
+ * @return {object}      concat of all config files
+ */
 var loadConfig = function (path) {
     var glob = require('glob');
     var object = {};
@@ -19,7 +22,6 @@ var loadConfig = function (path) {
 };
 
 module.exports = function (grunt) {
-    // require('load-grunt-tasks')(grunt);
 
     var config = {
         app: {
@@ -34,9 +36,6 @@ module.exports = function (grunt) {
     // Load all config file in options folder
     config = _.assign(config, loadConfig('./grunt/options/'));
     grunt.initConfig(config);
-
-    // Load custom grunt tasks
-    //grunt.loadTasks('grunt');
 
     /**
      * Start node server and livereload on changes

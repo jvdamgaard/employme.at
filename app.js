@@ -1,13 +1,25 @@
+/**
+ * Main entry for server
+ *
+ * - Use express server
+ * - h5bp configs
+ */
+
+
+// Dependencies
 var h5bp = require('h5bp'),
     express = require('express');
 
+// Used for source maps
 var isDevelopment = (process.env.NODE_ENV === 'development');
 
 var app = express();
 
+// Views
 app.set('view engine', 'hbs');
 app.set('views', __dirname + '/views');
 
+// H5BP configs
 app.use(h5bp({
     root: __dirname + '/.tmp/dist',
     www: false,
@@ -21,6 +33,7 @@ if (isDevelopment) {
     app.use('/app', express.static(__dirname + '/app'));
 }
 
+// Frontpage
 app.get('/', function (req, res) {
     res.render('index', {
         title: 'employme.at/designit',
