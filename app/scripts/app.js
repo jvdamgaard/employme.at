@@ -1,5 +1,5 @@
 /**
- * # Main entry for the javascripts
+ * Main entry for the javascripts
  *
  * - logs version of dependencies
  */
