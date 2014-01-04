@@ -86,18 +86,19 @@ Background images should be at 431x431 for best look and performance.
 /*
 ## Multiple hexagons in a grid
 
-`.hexagon-grid` can be used as a container for multiple hexagon to display them inline.
-It should be used in a fullwidth container. It will center align the hexagons in the
-container.
+`.hexagon-grid` can be used as a container for multiple hexagon to display them
+inline. It should be used in a fullwidth container. It will center align the
+hexagons in the container.
 
 Convert `.hexagon-grid__item` to a fullwidth square when there is only one row.
 
-Classes `.hexagon-grid__item--hide-lt-five`, `.hexagon-grid__item--hide-lt-four`,
-`.hexagon-grid__item--hide-lt-three`, `.hexagon-grid__item--hide-lt-two` can be used to hide
-hexagons in different format of the grid.
+Classes `.hexagon-grid__item--hide-lt-five`,
+`.hexagon-grid__item--hide-lt-four`, `.hexagon-grid__item--hide-lt-three`,
+`.hexagon-grid__item--hide-lt-two` can be used to hide hexagons in different
+format of the grid.
 
-e.g. `.hexagon-grid__item--hide-lt-four` would hide the hexagon when the grid consists of three rows
-or less.
+e.g. `.hexagon-grid__item--hide-lt-four` would hide the hexagon when the grid
+consists of three rows or less.
 
 	<style>
 		.hexagon-grid__item--demo {
@@ -122,27 +123,32 @@ or less.
 			<div class="hexagon__inner2"></div>
 			<p class="hexagon__content">3</p>
 		</div>
-		<div class="hexagon hexagon-grid__item hexagon-grid__item--hide-lt-two hexagon-grid__item--demo">
+		<div class="hexagon hexagon-grid__item hexagon-grid__item--hide-lt-two
+        hexagon-grid__item--demo">
 			<div class="hexagon__inner1"></div>
 			<div class="hexagon__inner2"></div>
 			<p class="hexagon__content">4</p>
 		</div>
-		<div class="hexagon hexagon-grid__item hexagon-grid__item--hide-lt-three hexagon-grid__item--demo">
+		<div class="hexagon hexagon-grid__item hexagon-grid__item--hide-lt-three
+        hexagon-grid__item--demo">
 			<div class="hexagon__inner1"></div>
 			<div class="hexagon__inner2"></div>
 			<p class="hexagon__content">5</p>
 		</div>
-		<div class="hexagon hexagon-grid__item hexagon-grid__item--hide-lt-three hexagon-grid__item--demo">
+		<div class="hexagon hexagon-grid__item hexagon-grid__item--hide-lt-three
+        hexagon-grid__item--demo">
 			<div class="hexagon__inner1"></div>
 			<div class="hexagon__inner2"></div>
 			<p class="hexagon__content">6</p>
 		</div>
-		<div class="hexagon hexagon-grid__item hexagon-grid__item--hide-lt-three hexagon-grid__item--demo">
+		<div class="hexagon hexagon-grid__item hexagon-grid__item--hide-lt-three
+        hexagon-grid__item--demo">
 			<div class="hexagon__inner1"></div>
 			<div class="hexagon__inner2"></div>
 			<p class="hexagon__content">7</p>
 		</div>
-		<div class="hexagon hexagon-grid__item hexagon-grid__item--hide-lt-four hexagon-grid__item--demo">
+		<div class="hexagon hexagon-grid__item hexagon-grid__item--hide-lt-four
+        hexagon-grid__item--demo">
 			<div class="hexagon__inner1"></div>
 			<div class="hexagon__inner2"></div>
 			<p class="hexagon__content">8</p>
@@ -166,7 +172,7 @@ or less.
     margin: 0;
 }
 
-@media screen 
+@media screen
 and (max-width: hexagon-grid---media-width(2) - 1) {
     // One column
     .hexagon-grid__item {
@@ -187,7 +193,7 @@ and (max-width: hexagon-grid---media-width(2) - 1) {
     }
 }
 
-@media screen 
+@media screen
 and (min-width: hexagon-grid---media-width(2)) {
     // More than one column
     .hexagon-grid {
@@ -200,8 +206,8 @@ and (min-width: hexagon-grid---media-width(2)) {
     }
 }
 
-@media screen 
-and (min-width: hexagon-grid---media-width(2)) 
+@media screen
+and (min-width: hexagon-grid---media-width(2))
 and (max-width: hexagon-grid---media-width(3) - 1) {
     // Two columns
     .hexagon-grid {
@@ -217,8 +223,8 @@ and (max-width: hexagon-grid---media-width(3) - 1) {
     }
 }
 
-@media screen 
-and (min-width: hexagon-grid---media-width(3)) 
+@media screen
+and (min-width: hexagon-grid---media-width(3))
 and (max-width: hexagon-grid---media-width(4) - 1) {
     // Three columns
     .hexagon-grid {
@@ -233,8 +239,8 @@ and (max-width: hexagon-grid---media-width(4) - 1) {
     }
 }
 
-@media screen 
-and (min-width: hexagon-grid---media-width(4)) 
+@media screen
+and (min-width: hexagon-grid---media-width(4))
 and (max-width: hexagon-grid---media-width(5) - 1) {
     // Four columns
     .hexagon-grid {
@@ -248,7 +254,7 @@ and (max-width: hexagon-grid---media-width(5) - 1) {
     }
 }
 
-@media screen 
+@media screen
 and (min-width: hexagon-grid---media-width(5)) {
     // Five columns
     .hexagon-grid {

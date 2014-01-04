@@ -7,7 +7,7 @@ module.exports = {
 	// Tests on Jenkins CI server
 	build: {
 		options: {
-			reporter: 'tap',
+			// reporter: 'tap',
 			require: ['chai']
 		},
 		src: '<%= app.test %>/spec/**/*.js'
