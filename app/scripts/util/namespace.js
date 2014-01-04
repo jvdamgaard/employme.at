@@ -39,7 +39,7 @@ var createNamespace = function (namespace, root) {
     var namespaces = namespace.split('.');
 
     // Define root object for namespace
-    var object = root || window || this;
+    var object = root || window;
 
     // Make sure each element in the namespace exists
     _(namespaces).forEach(function(name) {
