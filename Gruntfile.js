@@ -24,7 +24,7 @@ module.exports = function (grunt) {
     var config = {
         app: {
             source: 'app',
-            dist: 'dist',
+            dist: '.tmp/dist',
             test: 'test',
             docs: 'docs'
         },
@@ -42,14 +42,12 @@ module.exports = function (grunt) {
      * Start node server and livereload on changes
      */
     grunt.registerTask('server', function () {
-        grunt.loadNpmTasks('grunt-shell');
         grunt.loadNpmTasks('grunt-newer');
         grunt.loadNpmTasks('grunt-contrib-copy');
         grunt.loadNpmTasks('grunt-express-server');
         grunt.loadNpmTasks('grunt-open');
         grunt.loadNpmTasks('grunt-contrib-watch');
         grunt.task.run([
-            'shell:bowerInstall',
             'newer:copy:all',
             'express',
             'open',

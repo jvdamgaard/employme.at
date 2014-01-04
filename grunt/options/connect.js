@@ -11,7 +11,6 @@ module.exports = {
     coverage: {
         options: {
             port: 9001,
-            livereload: 35730,
             open: true,
             keepalive: true,
             base: [
@@ -24,7 +23,6 @@ module.exports = {
     test: {
         options: {
             port: 9002,
-            livereload: 35731,
             open: true,
             keepalive: true,
             base: [
@@ -44,7 +42,7 @@ module.exports = {
             base: [
                 '.tmp/styleguide',
                 '<%= app.docs %>/lib',
-                '<%= app.source %>/bower_components'
+                '.tmp/bower_components'
             ]
         }
     },
@@ -57,7 +55,7 @@ module.exports = {
             base: [
                 '.tmp/js',
                 '<%= app.docs %>/lib',
-                '<%= app.source %>/bower_components'
+                '.tmp/bower_components'
             ]
         }
     },
@@ -70,7 +68,7 @@ module.exports = {
             base: [
                 '.tmp/docs/design-process',
                 '<%= app.docs %>/design-process',
-                '<%= app.source %>/bower_components'
+                '.tmp/bower_components'
             ]
         }
     }

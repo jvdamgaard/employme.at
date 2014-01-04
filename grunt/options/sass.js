@@ -2,11 +2,10 @@
  * Compile scss files
  */
 
-// TODO: Fix source maps
-
 module.exports = {
     options: {
-        loadPath: '<%= app.source %>/bower_components'
+        loadPath: '.tmp/bower_components',
+        cacheLocation: '.tmp/sass'
     },
     local: {
         options: {

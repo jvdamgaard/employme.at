@@ -9,12 +9,12 @@ app.set('view engine', 'hbs');
 app.set('views', __dirname + '/views');
 
 app.use(h5bp({
-    root: __dirname + '/dist',
+    root: __dirname + '/.tmp/dist',
     www: false,
     cors: true
 }));
 app.use(express.compress());
-app.use(express.static(__dirname + '/dist'));
+app.use(express.static(__dirname + '/.tmp/dist'));
 
 // Include source maps in development
 if (isDevelopment) {

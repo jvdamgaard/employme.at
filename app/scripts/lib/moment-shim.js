@@ -3,9 +3,9 @@
  */
 
 // Dependencies
-var moment = require('../../bower_components/momentjs/moment');
+var moment = require('../../../.tmp/bower_components/momentjs/moment');
 
 // Use danish language
-moment.lang(require('../../bower_components/momentjs/lang/da'));
+moment.lang(require('../../../.tmp/bower_components/momentjs/lang/da'));
 
 module.exports = moment;
