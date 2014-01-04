@@ -15,7 +15,7 @@ module.exports = {
             open: true,
             keepalive: true,
             base: [
-                '<%= app.test %>/coverage'
+                '.tmp/coverage'
             ]
         }
     },
@@ -29,7 +29,8 @@ module.exports = {
             keepalive: true,
             base: [
                 '<%= app.test %>',
-                '<%= app.source %>'
+                '<%= app.source %>',
+                '.tmp/tests'
             ]
         }
     },
@@ -41,7 +42,7 @@ module.exports = {
             open: true,
             keepalive: true,
             base: [
-                '<%= app.docs %>/styleguide',
+                '.tmp/styleguide',
                 '<%= app.docs %>/lib',
                 '<%= app.source %>/bower_components'
             ]
@@ -54,7 +55,7 @@ module.exports = {
             port: 9004,
             open: true,
             base: [
-                '<%= app.docs %>/js',
+                '.tmp/js',
                 '<%= app.docs %>/lib',
                 '<%= app.source %>/bower_components'
             ]
