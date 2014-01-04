@@ -3,36 +3,39 @@
 
 Override inuit.css’ default variables.
 
-# Debug
+
+## Debug
 
 Debug mode will visually highlight any potential markup/accessibility quirks
 in the browser. Set to `true` or `false`.
 
 `$debug-mode: false`
 
-# Border-box
+## Border-box
 Do you want all elements to adopt `box-sizing:border-box;` as per
 [paulirish.com/2012/box-sizing-border-box-ftw](paulirish.com/2012/box-sizing-border-box-ftw)
 
 `$global-border-box: true;`
 
-# Base
+## Base
 
-## Base stuff
+### Base stuff
 
 `$base-font-size: 16px;`
 
 `$base-line-height: 24px;`
 
-## Base font-family.
+### Base font-family.
 
 `$base-font-family: sans-serif;`
 
-## Default colour for objects’ borders etc.
+
+### Default colour for objects’ borders etc.
 
 `$base-ui-color: #ccc;`
 
-# Responsive
+
+## Responsive
 
 Responsiveness?
 
@@ -82,7 +85,8 @@ Tell inuit.css when breakpoints start.
 
 `$desk-wide-start:   1200px;`
 
-# Font-sizes
+
+## Font-sizes
 
 Font-sizes (in pixels). Refer to relevant sections for their implementations.
 
@@ -108,7 +112,8 @@ Font-sizes (in pixels). Refer to relevant sections for their implementations.
 
 `$micro-size:        10px;`
 
-# Quotes
+
+## Quotes
 
 English quote marks?
 
@@ -128,7 +133,8 @@ If you need non-English quotes, please alter the following values accordingly:
     $close-quote:   »;
 }`
 
-# Brand
+
+## Brand
 
 Brand stuff
 
@@ -140,7 +146,8 @@ How big would you like round corners to be by default?
 
 `$brand-round:        4px;`
 
-# Objects and abstractions
+
+## Objects and abstractions
 
 Which objects and abstractions would you like to use?
 
@@ -195,7 +202,8 @@ $use-grids: true; // default: false;
 
 `$use-greybox:       false;`
 
-# Framework
+
+## Framework
 
 inuit.css will work these next ones out for use within the framework.
 

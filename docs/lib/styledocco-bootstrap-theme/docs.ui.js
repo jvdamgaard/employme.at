@@ -30,7 +30,10 @@
         }).map(function(h) {
             var el = document.createElement('li');
             var a = document.createElement('a');
-            var lv = h.tagName.toLowerCase()[1];
+            var lv = h.tagName.toLowerCase()[1] - 1;
+            if (lv < 1) {
+                lv = 1;
+            }
             a.classList.add('lv' + lv);
             el.appendChild(a);
             a.href = '#' + h.id;

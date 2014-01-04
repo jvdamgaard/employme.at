@@ -1,21 +1,15 @@
 /*
 # employme.at/designit
 
-This is the main entry for `scss` that ties all styles together.
+Main entry for `scss` that ties all styles together.
 
-Style is based on OOCSS and BEM.
+Style is based on [OOCSS](https://github.com/stubbornella/oocss/wiki) and [BEM](http://bem.info/method/).
  */
 
-/*
-## Base
-*/
 @import "scut/dist/scut";
 @import "base/vars";
 @import "inuit.css/inuit";
 
-/*
-## Objects
- */
 @import "objects/hexagon";
 
 body {
