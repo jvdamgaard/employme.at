@@ -4,12 +4,8 @@
 
 module.exports = {
 
-    // Tests on Jenkins CI server
+    // Run all spec tests
     build: {
-        options: {
-            // reporter: 'tap',
-            require: ['chai']
-        },
         src: '<%= app.test %>/spec/**/*.js'
     },
 
@@ -19,7 +15,7 @@ module.exports = {
             reporter: 'html-cov',
             quiet: true,
             captureFile: '.tmp/coverage/index.html',
-            require: ['chai', '<%= app.test %>/coverage/blanket']
+            require: ['<%= app.test %>/coverage/blanket']
         },
         src: '<%= app.test %>/spec/**/*.js'
     }

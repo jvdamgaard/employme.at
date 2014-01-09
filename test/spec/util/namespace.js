@@ -2,7 +2,7 @@
 var expect = require('chai').expect;
 
 // Source file
-var namespace = require('../../app/scripts/util/namespace');
+var namespace = require('../../../app/scripts/util/namespace');
 
 describe('util/namespace', function() {
 

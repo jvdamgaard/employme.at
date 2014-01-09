@@ -23,12 +23,11 @@ module.exports = {
     test: {
         options: {
             port: 9002,
-            open: true,
             keepalive: true,
             base: [
                 '<%= app.test %>',
                 '<%= app.source %>',
-                '.tmp/tests'
+                '.tmp'
             ]
         }
     },

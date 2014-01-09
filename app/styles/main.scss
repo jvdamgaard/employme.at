@@ -16,6 +16,7 @@ body {
     margin: 0 auto;
     padding: $base-spacing-unit;
     max-width: 1200px;
+    -webkit-font-smoothing: antialiased;
 }
 
 .highlight {

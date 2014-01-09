@@ -182,6 +182,21 @@ module.exports = function (grunt) {
     });
 
     /**
+     * Open webpages for bahaviour driven development and watch for changes
+     */
+    grunt.registerTask('test-full', function () {
+        grunt.loadNpmTasks('grunt-browserify');
+        grunt.loadNpmTasks('grunt-mocha');
+        grunt.loadNpmTasks('grunt-contrib-connect');
+        grunt.task.run([
+            'browserify:specTests',
+            'browserify:integrationTests',
+            'connect:test',
+            'mocha'
+        ]);
+    });
+
+    /**
      * Build task use for building assets fro production
      */
     grunt.registerTask('build', function () {
@@ -196,7 +211,7 @@ module.exports = function (grunt) {
         grunt.loadNpmTasks('grunt-autoprefixer');
         grunt.loadNpmTasks('grunt-combine-media-queries');
         grunt.loadNpmTasks('grunt-contrib-uglify');
-        grunt.loadNpmTasks('grunt-contrib-cssmin');
+        grunt.loadNpmTasks('grunt-csso');
 
         // Run grunt tasks
         grunt.task.run([
@@ -215,7 +230,7 @@ module.exports = function (grunt) {
             'removelogging',
             'cmq',
             'uglify:build',
-            'cssmin'
+            'csso'
         ]);
     });
 

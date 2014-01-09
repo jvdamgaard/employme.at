@@ -9,21 +9,21 @@
 </head>
 
 <body>
-    <div style="font-size:12px;padding:10px;"><a href="/integration">Include integration tests</a>
-    </div>
     <div id="mocha"></div>
 
     <!-- test framework -->
     <script src="/bower_components/mocha/mocha.js"></script>
+    <script src="/bower_components/sinon/lib/sinon.js"></script>
     <script>
-    mocha.setup('bdd')
+    mocha.setup('bdd');
     </script>
 
     <!-- tests -->
-    <script src="/specs.js"></script>
+    <script src="/tests/specs.js"></script>
+    <script src="/tests/integrations.js"></script>
 
     <script>
-    mocha.run()
+    mocha.run();
     </script>
 </body>
 
