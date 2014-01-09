@@ -100,6 +100,7 @@ body(data-spy='scroll', data-target='#sub-nav')
           - var cacheFolder = ''
           - var subs = []
           each path in files
+            - path.name = path.name.replace(/\\/g, '/');
             - var folder = path.name.substring(0,path.name.indexOf('/'))
             - var file = path.name.substring(path.name.indexOf('/')+1).replace('.js', '')
 
@@ -109,7 +110,7 @@ body(data-spy='scroll', data-target='#sub-nav')
               - subs = []
 
             if folder == ''
-              li: a(href="#{path.relName}") #{file}
+              li: a(href="/#{path.relName}") #{file}
             else
               - subs.push({'file': file, 'rel': path.relName})
 
