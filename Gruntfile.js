@@ -55,19 +55,6 @@ module.exports = function (grunt) {
     });
 
     /**
-     * Open webpages for bahaviour driven development and watch for changes
-     */
-    grunt.registerTask('test-server', function () {
-        grunt.loadNpmTasks('grunt-browserify');
-        grunt.loadNpmTasks('grunt-contrib-connect');
-        grunt.task.run([
-            'browserify:specTests',
-            'browserify:integrationTests',
-            'connect:test'
-        ]);
-    });
-
-    /**
      * Build and open documentation for styles and javascript
      */
     grunt.registerTask('docs', function () {
@@ -102,7 +89,7 @@ module.exports = function (grunt) {
     /**
      * Build source javascript files
      */
-    grunt.registerTask('js-source-build', function () {
+    grunt.registerTask('js-build', function () {
         grunt.loadNpmTasks('grunt-browserify');
         grunt.task.run([
             'browserify:sources'
@@ -117,7 +104,7 @@ module.exports = function (grunt) {
         grunt.loadNpmTasks('grunt-contrib-uglify');
         grunt.loadNpmTasks('grunt-contrib-watch');
         grunt.task.run([
-            'js-source-build',
+            'js-build',
             'modernizr',
             'uglify:local',
             'watch:js'
@@ -168,15 +155,12 @@ module.exports = function (grunt) {
 
         // Load required grunt tasks
         grunt.loadNpmTasks('grunt-continue');
-        grunt.loadNpmTasks('grunt-todos');
-        grunt.loadNpmTasks('grunt-contrib-jshint');
-        grunt.loadNpmTasks('grunt-mocha-test');
         grunt.loadNpmTasks('grunt-contrib-watch');
 
         // Run grunt tasks
         grunt.task.run([
             'continueOn',
-            'build-test',
+            'test-build',
             'watch:test'
         ]);
     });
@@ -184,15 +168,30 @@ module.exports = function (grunt) {
     /**
      * Open webpages for bahaviour driven development and watch for changes
      */
-    grunt.registerTask('test-full', function () {
+    grunt.registerTask('test-build', function () {
+        grunt.loadNpmTasks('grunt-todos');
+        grunt.loadNpmTasks('grunt-contrib-jshint');
         grunt.loadNpmTasks('grunt-browserify');
         grunt.loadNpmTasks('grunt-mocha');
         grunt.loadNpmTasks('grunt-contrib-connect');
         grunt.task.run([
+            'todos:all',
+            'jshint:all',
             'browserify:specTests',
-            'browserify:integrationTests',
             'connect:test',
             'mocha'
+        ]);
+    });
+
+    /**
+     * Open webpages for bahaviour driven development and watch for changes
+     */
+    grunt.registerTask('test-server', function () {
+        grunt.loadNpmTasks('grunt-browserify');
+        grunt.loadNpmTasks('grunt-contrib-connect');
+        grunt.task.run([
+            'browserify:integrationTests',
+            'connect:testServer'
         ]);
     });
 
@@ -231,24 +230,6 @@ module.exports = function (grunt) {
             'cmq',
             'uglify:build',
             'csso'
-        ]);
-    });
-
-    /**
-     * Test task used for testing on CI server
-     */
-    grunt.registerTask('build-test', function () {
-
-        // Load required grunt tasks
-        grunt.loadNpmTasks('grunt-todos');
-        grunt.loadNpmTasks('grunt-contrib-jshint');
-        grunt.loadNpmTasks('grunt-mocha-test');
-
-        // Run grunt tasks
-        grunt.task.run([
-            'todos:all',
-            'jshint:all',
-            'mochaTest:build'
         ]);
     });
 };

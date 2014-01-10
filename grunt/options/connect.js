@@ -23,7 +23,19 @@ module.exports = {
     test: {
         options: {
             port: 9002,
-            keepalive: true,
+            base: [
+                '<%= app.test %>',
+                '<%= app.source %>',
+                '.tmp'
+            ]
+        }
+    },
+
+    // Local server for displaying javascript tests
+    testServer: {
+        options: {
+            port: 9006,
+            open: true,
             base: [
                 '<%= app.test %>',
                 '<%= app.source %>',
