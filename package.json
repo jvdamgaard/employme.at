@@ -7,7 +7,7 @@
     },
     "config": {
         "blanket": {
-            "pattern": "app/scripts/"
+            "pattern": "node_modules/lib"
         },
         "travis-cov": {
             "threshold": 80
@@ -69,7 +69,8 @@
         "grunt-csso": "0.5.3",
         "grunt-mocha-test": "0.8.1",
         "grunt-string-replace": "0.2.7",
-        "sinon": "1.7.3"
+        "sinon": "1.7.3",
+        "grunt-touch": "0.1.0"
     },
     "engines": {
         "node": "0.10.x"
