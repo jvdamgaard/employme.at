@@ -155,9 +155,11 @@ module.exports = function (grunt) {
      */
     grunt.registerTask('serve-coverage', function () {
         grunt.loadNpmTasks('grunt-mocha-test');
+        grunt.loadNpmTasks('grunt-string-replace');
         grunt.loadNpmTasks('grunt-contrib-connect');
         grunt.task.run([
             'mochaTest:coverage',
+            'string-replace:coverage',
             'connect:coverage'
         ]);
     });

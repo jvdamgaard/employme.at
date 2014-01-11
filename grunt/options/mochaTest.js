@@ -3,8 +3,6 @@
  */
 
 // FIXME: Exclude tests, that require browser specific objects like `window`
-// FIXME: Correct threshold and fail on build if below
-// TODO: Better name for files output in server mode
 
 module.exports = {
 
