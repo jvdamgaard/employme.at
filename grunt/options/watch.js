@@ -11,7 +11,7 @@ module.exports = {
             '<%= app.source %>/scripts/**/*.js'
         ],
         tasks: [
-            'build-test'
+            'test-build'
         ]
     },
 
@@ -21,7 +21,7 @@ module.exports = {
             '<%= app.source %>/scripts/**/*.js'
         ],
         tasks: [
-            'js-source-build'
+            'js-build'
         ]
     },
 

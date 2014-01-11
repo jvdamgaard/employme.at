@@ -1,3 +1,30 @@
+/**
+ * ## Grunt tasks to use for local development
+ *
+ * - `grunt serve-site`         : Start server and livereload on changes
+ * - `grunt serve-docs`         : Build and open all documentation
+ * - `grunt serve-docs-style`   : Build and open style documentation
+ * - `grunt serve-docs-js`      : Build and open javascript documentation
+ * - `grunt serve-docs-process` : Build and open design process documentation
+ * - `grunt serve-coverage`     : Run and open test coverage
+ * - `grunt serve-test`         : Run and open tests
+ * - `grunt js`                 : Build and watch javascript
+ * - `grunt style`              : Build and watch styles
+ * - `grunt img`                : Copy and minify all images
+ * - `grunt test`               : Lint and test js. Reruns tests on changes to js
+ *
+ * ## Grunt taks used på the CI server
+ *
+ * - `grunt build`              : Build, concat and minify all assets
+ * - `grunt build-test`         : Tests for js problems
+ *
+ * ## Settings for grunt plugins
+ *
+ * All settings for grunt plugins a located in `./grunt/options`.
+ *
+ * All custom plugins are located in `./grunt`
+ */
+
 // Dependencies
 var _ = require('lodash');
 
@@ -6,7 +33,7 @@ var _ = require('lodash');
  * @param  {string} path  path for grunt configs
  * @return {object}      concat of all config files
  */
-var loadConfig = function (path) {
+var loadConfig = function (path, grunt) {
     var glob = require('glob');
     var object = {};
     var key;
@@ -16,6 +43,10 @@ var loadConfig = function (path) {
     }).forEach(function (option) {
         key = option.replace(/\.js$/, '');
         object[key] = require(path + option);
+
+        if (_.isFunction(object[key])) {
+            object[key] = object[key](grunt);
+        }
     });
 
     return object;
@@ -34,20 +65,27 @@ module.exports = function (grunt) {
     };
 
     // Load all config file in options folder
-    config = _.assign(config, loadConfig('./grunt/options/'));
+    config = _.assign(config, loadConfig('./grunt/options/', grunt));
     grunt.initConfig(config);
 
     /**
      * Start node server and livereload on changes
      */
-    grunt.registerTask('server', function () {
-        grunt.loadNpmTasks('grunt-newer');
+    grunt.registerTask('serve-site', function () {
+        grunt.loadNpmTasks('grunt-modernizr');
+        grunt.loadNpmTasks('grunt-contrib-uglify');
         grunt.loadNpmTasks('grunt-contrib-copy');
+        grunt.loadNpmTasks('grunt-contrib-imagemin');
         grunt.loadNpmTasks('grunt-express-server');
         grunt.loadNpmTasks('grunt-open');
         grunt.loadNpmTasks('grunt-contrib-watch');
         grunt.task.run([
-            'newer:copy:all',
+            'js-build',
+            'modernizr',
+            'uglify:local',
+            'style-build',
+            'copy:all',
+            'imagemin',
             'express',
             'open',
             'watch:server'
@@ -55,22 +93,9 @@ module.exports = function (grunt) {
     });
 
     /**
-     * Open webpages for bahaviour driven development and watch for changes
+     * Build and open documentation for design process, styles and javascript
      */
-    grunt.registerTask('test-server', function () {
-        grunt.loadNpmTasks('grunt-browserify');
-        grunt.loadNpmTasks('grunt-contrib-connect');
-        grunt.task.run([
-            'browserify:specTests',
-            'browserify:integrationTests',
-            'connect:test'
-        ]);
-    });
-
-    /**
-     * Build and open documentation for styles and javascript
-     */
-    grunt.registerTask('docs', function () {
+    grunt.registerTask('serve-docs', function () {
         grunt.loadNpmTasks('grunt-contrib-copy');
         grunt.loadNpmTasks('grunt-styleguide');
         grunt.loadNpmTasks('grunt-shell');
@@ -83,26 +108,89 @@ module.exports = function (grunt) {
             'markdown:docs',
             'connect:jsdoc',
             'connect:designProcess',
-            'connect:styleguide'
+            'connect:styleguide:keepalive'
         ]);
     });
 
     /**
-     * Build and open test coverage webpage
+     * Build and open documentation for styles
      */
-    grunt.registerTask('coverage', function () {
+    grunt.registerTask('serve-docs-style', function () {
+        grunt.loadNpmTasks('grunt-contrib-copy');
+        grunt.loadNpmTasks('grunt-styleguide');
+        grunt.loadNpmTasks('grunt-contrib-connect');
+        grunt.task.run([
+            'copy:styledocco',
+            'styleguide',
+            'connect:styleguide:keepalive'
+        ]);
+    });
+
+    /**
+     * Build and open documentation for javascript
+     */
+    grunt.registerTask('serve-docs-js', function () {
+        grunt.loadNpmTasks('grunt-shell');
+        grunt.loadNpmTasks('grunt-contrib-connect');
+        grunt.task.run([
+            'shell:doxx',
+            'connect:jsdoc:keepalive'
+        ]);
+    });
+
+    /**
+     * Build and open documentation for design process
+     */
+    grunt.registerTask('serve-docs-process', function () {
+        grunt.loadNpmTasks('grunt-markdown');
+        grunt.loadNpmTasks('grunt-contrib-connect');
+        grunt.task.run([
+            'markdown:docs',
+            'connect:designProcess:keepalive'
+        ]);
+    });
+
+    /**
+     * Run and open test coverage webpage
+     */
+    grunt.registerTask('serve-coverage', function () {
         grunt.loadNpmTasks('grunt-mocha-test');
+        grunt.loadNpmTasks('grunt-string-replace');
         grunt.loadNpmTasks('grunt-contrib-connect');
         grunt.task.run([
             'mochaTest:coverage',
+            'string-replace:coverage',
             'connect:coverage'
+        ]);
+    });
+
+    /**
+     * Run and open tests
+     */
+    grunt.registerTask('serve-test', function () {
+        grunt.loadNpmTasks('grunt-browserify');
+        grunt.loadNpmTasks('grunt-contrib-connect');
+
+        grunt.task.run([
+            'browserify:specTests',
+            'connect:testServer:keepalive'
+        ]);
+    });
+
+    /**
+     * Run coverage report
+     */
+    grunt.registerTask('coverage', function () {
+        grunt.loadNpmTasks('grunt-mocha-test');
+        grunt.task.run([
+            'mochaTest:buildCoverage',
         ]);
     });
 
     /**
      * Build source javascript files
      */
-    grunt.registerTask('js-source-build', function () {
+    grunt.registerTask('js-build', function () {
         grunt.loadNpmTasks('grunt-browserify');
         grunt.task.run([
             'browserify:sources'
@@ -117,7 +205,7 @@ module.exports = function (grunt) {
         grunt.loadNpmTasks('grunt-contrib-uglify');
         grunt.loadNpmTasks('grunt-contrib-watch');
         grunt.task.run([
-            'js-source-build',
+            'js-build',
             'modernizr',
             'uglify:local',
             'watch:js'
@@ -127,7 +215,7 @@ module.exports = function (grunt) {
     /**
      * Build styles
      */
-    grunt.registerTask('css-build', function () {
+    grunt.registerTask('style-build', function () {
         grunt.loadNpmTasks('grunt-contrib-sass');
         grunt.loadNpmTasks('grunt-autoprefixer');
         grunt.task.run([
@@ -139,19 +227,16 @@ module.exports = function (grunt) {
     /**
      * Build and watch styles
      */
-    grunt.registerTask('css', function () {
-        grunt.loadNpmTasks('grunt-contrib-sass');
-        grunt.loadNpmTasks('grunt-autoprefixer');
+    grunt.registerTask('style', function () {
         grunt.loadNpmTasks('grunt-contrib-watch');
         grunt.task.run([
-            'sass:local',
-            'autoprefixer',
+            'style-build',
             'watch:sass'
         ]);
     });
 
     /**
-     * Build and watch images
+     * Copy and minify images
      */
     grunt.registerTask('img', function () {
         grunt.loadNpmTasks('grunt-newer');
@@ -162,31 +247,41 @@ module.exports = function (grunt) {
     });
 
     /**
-     * Test task used for testing on CI server
+     * Run tests and watch for changes to js files
      */
     grunt.registerTask('test', function () {
-
-        // Load required grunt tasks
         grunt.loadNpmTasks('grunt-continue');
-        grunt.loadNpmTasks('grunt-todos');
-        grunt.loadNpmTasks('grunt-contrib-jshint');
-        grunt.loadNpmTasks('grunt-mocha-test');
+        grunt.loadNpmTasks('grunt-contrib-connect');
         grunt.loadNpmTasks('grunt-contrib-watch');
-
-        // Run grunt tasks
         grunt.task.run([
             'continueOn',
-            'build-test',
+            'connect:test',
+            'test-build',
             'watch:test'
         ]);
     });
 
     /**
-     * Build task use for building assets fro production
+     * Test javascript files against unit tests, lint, todos and coverage
+     */
+    grunt.registerTask('test-build', function () {
+        grunt.loadNpmTasks('grunt-todos');
+        grunt.loadNpmTasks('grunt-contrib-jshint');
+        grunt.loadNpmTasks('grunt-browserify');
+        grunt.loadNpmTasks('grunt-mocha');
+        grunt.task.run([
+            'todos:all',
+            'jshint:all',
+            'browserify:specTests',
+            'coverage',
+            'mocha'
+        ]);
+    });
+
+    /**
+     * Build task use for building assets for production
      */
     grunt.registerTask('build', function () {
-
-        // Load required grunt tasks
         grunt.loadNpmTasks('grunt-browserify');
         grunt.loadNpmTasks('grunt-contrib-sass');
         grunt.loadNpmTasks('grunt-contrib-copy');
@@ -196,9 +291,8 @@ module.exports = function (grunt) {
         grunt.loadNpmTasks('grunt-autoprefixer');
         grunt.loadNpmTasks('grunt-combine-media-queries');
         grunt.loadNpmTasks('grunt-contrib-uglify');
-        grunt.loadNpmTasks('grunt-contrib-cssmin');
+        grunt.loadNpmTasks('grunt-csso');
 
-        // Run grunt tasks
         grunt.task.run([
 
             // Build files
@@ -215,7 +309,7 @@ module.exports = function (grunt) {
             'removelogging',
             'cmq',
             'uglify:build',
-            'cssmin'
+            'csso'
         ]);
     });
 
@@ -223,17 +317,10 @@ module.exports = function (grunt) {
      * Test task used for testing on CI server
      */
     grunt.registerTask('build-test', function () {
-
-        // Load required grunt tasks
-        grunt.loadNpmTasks('grunt-todos');
-        grunt.loadNpmTasks('grunt-contrib-jshint');
-        grunt.loadNpmTasks('grunt-mocha-test');
-
-        // Run grunt tasks
+        grunt.loadNpmTasks('grunt-contrib-connect');
         grunt.task.run([
-            'todos:all',
-            'jshint:all',
-            'mochaTest:build'
+            'connect:test',
+            'test-build'
         ]);
     });
 };

@@ -27,10 +27,11 @@ var _ = require('lodash');
  */
 var createNamespace = function(namespace, root) {
 
-    // Split namespace by dot
+    // Guard for strings
     if (!_.isString(namespace)) {
         return;
     }
+
     var namespaces = namespace.split('.');
 
     // Define root object for namespace
