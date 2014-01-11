@@ -68,7 +68,8 @@
         "grunt-mocha": "0.4.8",
         "grunt-csso": "0.5.3",
         "grunt-mocha-test": "0.8.1",
-        "grunt-string-replace": "0.2.7"
+        "grunt-string-replace": "0.2.7",
+        "sinon": "1.7.3"
     },
     "engines": {
         "node": "0.10.x"

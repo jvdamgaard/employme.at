@@ -2,8 +2,6 @@
  * Runn test with Mocha in Node.js environment (not for integration and browser tests - only spec)
  */
 
-// FIXME: Exclude tests, that require browser specific objects like `window`
-
 module.exports = {
 
     // Run all spec tests
@@ -19,7 +17,10 @@ module.exports = {
             captureFile: '.tmp/coverage/index.html',
             require: ['<%= app.test %>/coverage/blanket']
         },
-        src: '<%= app.test %>/spec/**/*.js'
+        src: [
+            '<%= app.test %>/spec/**/*.js',
+            '!<%= app.test %>/spec/**/_*.js'
+        ]
     },
 
     // Test on local environment + generate coverage repport
@@ -28,6 +29,9 @@ module.exports = {
             reporter: 'travis-cov',
             require: ['<%= app.test %>/coverage/blanket']
         },
-        src: '<%= app.test %>/spec/**/*.js'
+        src: [
+            '<%= app.test %>/spec/**/*.js',
+            '!<%= app.test %>/spec/**/_*.js'
+        ]
     }
 };
