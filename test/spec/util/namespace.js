@@ -2,8 +2,7 @@
 var expect = require('chai').expect;
 
 // Source file
-// TODO: Fix strange path
-var namespace = require('../../../app/scripts/util/namespace');
+var namespace = require('lib/util/namespace');
 
 describe('util/namespace', function() {
 
