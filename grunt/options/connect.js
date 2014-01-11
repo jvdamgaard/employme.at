@@ -34,7 +34,7 @@ module.exports = {
     // Local server for displaying javascript tests
     testServer: {
         options: {
-            port: 9006,
+            port: 9003,
             open: true,
             base: [
                 '<%= app.test %>',
@@ -47,9 +47,8 @@ module.exports = {
     // Local server for displaying styleguide
     styleguide: {
         options: {
-            port: 9003,
+            port: 9004,
             open: true,
-            keepalive: true,
             base: [
                 '.tmp/styleguide',
                 '<%= app.docs %>/lib',
@@ -61,7 +60,7 @@ module.exports = {
     // Local server for displaying styleguide
     jsdoc: {
         options: {
-            port: 9004,
+            port: 9005,
             open: true,
             base: [
                 '.tmp/js',
@@ -74,7 +73,7 @@ module.exports = {
     // Local server for displaying styleguide
     designProcess: {
         options: {
-            port: 9005,
+            port: 9006,
             open: true,
             base: [
                 '.tmp/docs/design-process',

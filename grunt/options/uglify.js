@@ -2,8 +2,6 @@
  * Minify javascript
  */
 
-// TODO: Check cource maps
-
 module.exports = {
     build: {
         files: {

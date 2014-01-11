@@ -1,9 +1,17 @@
 {
     "name": "employme-at",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "author": {
         "name": "Jakob Viskum Damgaard",
         "email": "jakob.viskum.damgaard@gmail.com"
+    },
+    "config": {
+        "blanket": {
+            "pattern": "app/scripts/"
+        },
+        "travis-cov": {
+            "threshold": 80
+        }
     },
     "description": "A website for branding Jakob Viskum Damgaard",
     "main": "app.js",
@@ -58,7 +66,8 @@
         "es6-promise": "0.1.1",
         "grunt-markdown": "0.5.0",
         "grunt-mocha": "0.4.8",
-        "grunt-csso": "0.5.3"
+        "grunt-csso": "0.5.3",
+        "grunt-mocha-test": "0.8.1"
     },
     "engines": {
         "node": "0.10.x"
