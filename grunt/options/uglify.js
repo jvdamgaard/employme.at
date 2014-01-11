@@ -7,7 +7,7 @@ module.exports = {
         files: {
             '<%= app.dist %>/scripts/app.js': ['<%= app.dist %>/scripts/app.js'],
             '<%= app.dist %>/scripts/head.js': [
-                '.tmp/scripts/modernizr.js'
+                '<%= app.dist %>/scripts/modernizr.js'
             ]
         }
     },
