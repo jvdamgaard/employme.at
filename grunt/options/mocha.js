@@ -2,7 +2,7 @@ module.exports = {
     all: {
         options: {
             run: true,
-            urls: ['http://<%= connect.test.options.hostname %>:<%= connect.test.options.port %>/index.html']
+            urls: ['http://localhost:9002/index.html']
         }
     }
 };

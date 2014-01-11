@@ -1,3 +1,20 @@
+/**
+ * ## Grunt tasks to use for local development
+ *
+ * - `grunt server`: Start server and livereload on changes
+ * - `grunt docs`: Build and open documentation
+ * - `grunt coverage`: Build and open test coverage
+ * - `grunt js`: Build and watch javascript
+ * - `grunt css`: Build and watch styles
+ * - `grunt img`: Copy nad minify all images
+ * - `grunt test`: Lint and test js. Reruns tests on changes to js
+ *
+ * ## Grunt taks used på the CI server
+ *
+ * - `grunt build`: Build, concat and minify all assets
+ * - `grunt build-test`: Tests for js problems
+ */
+
 // Dependencies
 var _ = require('lodash');
 
@@ -55,7 +72,7 @@ module.exports = function (grunt) {
     });
 
     /**
-     * Build and open documentation for styles and javascript
+     * Build and open documentation for design process, styles and javascript
      */
     grunt.registerTask('docs', function () {
         grunt.loadNpmTasks('grunt-contrib-copy');
@@ -127,12 +144,9 @@ module.exports = function (grunt) {
      * Build and watch styles
      */
     grunt.registerTask('css', function () {
-        grunt.loadNpmTasks('grunt-contrib-sass');
-        grunt.loadNpmTasks('grunt-autoprefixer');
         grunt.loadNpmTasks('grunt-contrib-watch');
         grunt.task.run([
-            'sass:local',
-            'autoprefixer',
+            'css-build',
             'watch:sass'
         ]);
     });
@@ -155,11 +169,13 @@ module.exports = function (grunt) {
 
         // Load required grunt tasks
         grunt.loadNpmTasks('grunt-continue');
+        grunt.loadNpmTasks('grunt-contrib-connect');
         grunt.loadNpmTasks('grunt-contrib-watch');
 
         // Run grunt tasks
         grunt.task.run([
             'continueOn',
+            'connect:test',
             'test-build',
             'watch:test'
         ]);
@@ -173,25 +189,11 @@ module.exports = function (grunt) {
         grunt.loadNpmTasks('grunt-contrib-jshint');
         grunt.loadNpmTasks('grunt-browserify');
         grunt.loadNpmTasks('grunt-mocha');
-        grunt.loadNpmTasks('grunt-contrib-connect');
         grunt.task.run([
             'todos:all',
             'jshint:all',
             'browserify:specTests',
-            'connect:test',
             'mocha'
-        ]);
-    });
-
-    /**
-     * Open webpages for bahaviour driven development and watch for changes
-     */
-    grunt.registerTask('test-server', function () {
-        grunt.loadNpmTasks('grunt-browserify');
-        grunt.loadNpmTasks('grunt-contrib-connect');
-        grunt.task.run([
-            'browserify:integrationTests',
-            'connect:testServer'
         ]);
     });
 
@@ -230,6 +232,21 @@ module.exports = function (grunt) {
             'cmq',
             'uglify:build',
             'csso'
+        ]);
+    });
+
+    /**
+     * Test task used for testing on CI server
+     */
+    grunt.registerTask('build-test', function () {
+
+        // Load required grunt tasks
+        grunt.loadNpmTasks('grunt-contrib-connect');
+
+        // Run grunt tasks
+        grunt.task.run([
+            'connect:test',
+            'test-build',
         ]);
     });
 };
