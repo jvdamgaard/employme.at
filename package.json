@@ -70,7 +70,8 @@
         "grunt-mocha-test": "0.8.1",
         "grunt-string-replace": "0.2.7",
         "sinon": "1.7.3",
-        "grunt-touch": "0.1.0"
+        "grunt-touch": "0.1.0",
+        "grunt-contrib-clean": "0.5.0"
     },
     "engines": {
         "node": "0.10.x"

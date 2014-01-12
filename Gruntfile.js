@@ -321,7 +321,7 @@ module.exports = function (grunt) {
             'removelogging',
             'cmq',
             'uglify:build',
-            'csso'
+            'csso',
         ]);
     });
 
@@ -333,6 +333,16 @@ module.exports = function (grunt) {
         grunt.task.run([
             'connect:test',
             'test-build'
+        ]);
+    });
+
+    /**
+     * Test task used for testing on CI server
+     */
+    grunt.registerTask('build-clean', function () {
+        grunt.loadNpmTasks('grunt-contrib-clean');
+        grunt.task.run([
+            'clean:build',
         ]);
     });
 
