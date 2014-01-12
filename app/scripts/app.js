@@ -15,13 +15,16 @@ var app = require('app');
  *
  * Example:
  *
- *     logVersion('Lo-Dash', _.VERSION);
+ * ```
+ * logVersion('Lo-Dash', _.VERSION);
+ * ```
  *
- * @param  {string} name    Name og librariry/dependency
- * @param  {string} version Version number in format {major}.{minor}.{patch}
- * @return {void}
+ * @param     {string}     name        Name og librariry/dependency
+ * @param     {string}     version     Version number in format {major}.{minor}.{patch}
+ *
+ * @return    {void}
  */
-var logVersion = function (name, version) {
+var logVersion = function(name, version) {
     var charsBeforeSeperator = 25;
     var content = ' - ' + name;
     content += new Array(charsBeforeSeperator - content.length).join(' ');
@@ -31,10 +34,10 @@ var logVersion = function (name, version) {
 
 /**
  * Log a seperator with lines
- * @return {void}
+ * @return     {void}
  */
-var logSeperator = function () {
-    console.log('------------------------------------------');
+var logSeperator = function() {
+    console.log(new Array(40).join('-'));
 };
 
 // Log versions of dependencies

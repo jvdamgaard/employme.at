@@ -337,7 +337,7 @@ module.exports = function (grunt) {
     });
 
     /**
-     * Test task used for testing on CI server
+     * Task used on CI for cleaning the project
      */
     grunt.registerTask('build-clean', function () {
         grunt.loadNpmTasks('grunt-contrib-clean');
@@ -345,7 +345,4 @@ module.exports = function (grunt) {
             'clean:build',
         ]);
     });
-
-    // TODO: Create a cleanup job that deletes all source and tmp files before
-    // production
 };
