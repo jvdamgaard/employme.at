@@ -2,8 +2,8 @@
  * Replace long path to js files i coverage report
  */
 
-var pathMac = __dirname.replace('grunt/options', 'app/scripts/');
-var pathWin = __dirname.replace('grunt\\options', 'app\\scripts\\');
+var pathMac = __dirname.replace('grunt/options', 'node_modules/');
+var pathWin = __dirname.replace('grunt\\options', 'node_moduels\\');
 
 module.exports = {
 

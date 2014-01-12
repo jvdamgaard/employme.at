@@ -33,7 +33,7 @@ module.exports = {
             expand: true,
             dot: true,
             cwd: '<%= app.source %>/scripts',
-            dest: 'node_modules/lib',
+            dest: 'node_modules/app',
             src: ['**/*.js']
         }]
     },

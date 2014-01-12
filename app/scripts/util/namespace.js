@@ -12,13 +12,13 @@ var _ = require('lodash');
  *
  * ```
  * // Create namespace with direct require
- * require('./util/namespace')('App.my.module'); App.my.module = { name:
+ * require('app/util/namespace')('App.my.module'); App.my.module = { name:
  * 'Jakob', birthYear: 1983 };
  * ```
  *
  * ```
  * // Create namespace with App as root var namespace =
- * require('./util/namespace'); var moduleAttachedToApp =
+ * require('app/util/namespace'); var moduleAttachedToApp =
  * namespace('another.module', App);
  * ```
  *

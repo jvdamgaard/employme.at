@@ -75,7 +75,6 @@ module.exports = function (grunt) {
         grunt.loadNpmTasks('grunt-modernizr');
         grunt.loadNpmTasks('grunt-contrib-uglify');
         grunt.loadNpmTasks('grunt-contrib-copy');
-        grunt.loadNpmTasks('grunt-contrib-imagemin');
         grunt.loadNpmTasks('grunt-express-server');
         grunt.loadNpmTasks('grunt-open');
         grunt.loadNpmTasks('grunt-contrib-watch');
@@ -85,7 +84,7 @@ module.exports = function (grunt) {
             'uglify:local',
             'style-build',
             'copy:all',
-            'imagemin',
+            'img',
             'express',
             'open',
             'watch:server'
@@ -155,7 +154,7 @@ module.exports = function (grunt) {
      */
     grunt.registerTask('serve-coverage', function () {
         grunt.loadNpmTasks('grunt-touch');
-        grunt.loadNpmTasks('grunt-copy');
+        grunt.loadNpmTasks('grunt-contrib-copy');
         grunt.loadNpmTasks('grunt-mocha-test');
         grunt.loadNpmTasks('grunt-string-replace');
         grunt.loadNpmTasks('grunt-contrib-connect');

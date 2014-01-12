@@ -31,7 +31,7 @@ module.exports = {
             '<%= app.source %>/styles/**/*.scss'
         ],
         tasks: [
-            'css-build'
+            'style-build'
         ]
     },
     server: {

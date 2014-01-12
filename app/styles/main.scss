@@ -10,6 +10,8 @@ Style is based on [OOCSS](https://github.com/stubbornella/oocss/wiki) and [BEM](
 @import "base/vars";
 @import "inuit.css/inuit";
 
+@import "lib/no-hover-on-scroll";
+
 @import "objects/hexagon";
 
 body {

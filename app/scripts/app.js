@@ -10,6 +10,9 @@ var $ = require('jquery');
 var moment = require('moment');
 var app = require('app');
 
+// Load modules
+require('app/lib/no-hover-on-scroll');
+
 /**
  * Log version of dependencies with beautified formatting
  *

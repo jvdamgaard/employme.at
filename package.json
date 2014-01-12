@@ -7,7 +7,7 @@
     },
     "config": {
         "blanket": {
-            "pattern": "node_modules/lib"
+            "pattern": "node_modules/app"
         },
         "travis-cov": {
             "threshold": 80

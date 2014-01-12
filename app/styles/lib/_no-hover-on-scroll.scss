@@ -1,0 +1,13 @@
+/*
+# No hover effects when scrolling
+
+In conjunction with javascript this disables hover effect when scrolling
+resulting in higher framerates.
+
+`.disable-hover` is added to `html` when scrolling is active.
+
+ */
+
+.disable-hover {
+    pointer-events: none;
+}
