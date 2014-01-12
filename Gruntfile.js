@@ -154,10 +154,14 @@ module.exports = function (grunt) {
      * Run and open test coverage webpage
      */
     grunt.registerTask('serve-coverage', function () {
+        grunt.loadNpmTasks('grunt-touch');
+        grunt.loadNpmTasks('grunt-copy');
         grunt.loadNpmTasks('grunt-mocha-test');
         grunt.loadNpmTasks('grunt-string-replace');
         grunt.loadNpmTasks('grunt-contrib-connect');
         grunt.task.run([
+            'touch:coverage',
+            'copy:jsToNode',
             'mochaTest:coverage',
             'string-replace:coverage',
             'connect:coverage'
@@ -168,10 +172,12 @@ module.exports = function (grunt) {
      * Run and open tests
      */
     grunt.registerTask('serve-test', function () {
+        grunt.loadNpmTasks('grunt-contrib-copy');
         grunt.loadNpmTasks('grunt-browserify');
         grunt.loadNpmTasks('grunt-contrib-connect');
 
         grunt.task.run([
+            'copy:jsToNode',
             'browserify:specTests',
             'connect:testServer:keepalive'
         ]);
@@ -183,6 +189,7 @@ module.exports = function (grunt) {
     grunt.registerTask('coverage', function () {
         grunt.loadNpmTasks('grunt-mocha-test');
         grunt.task.run([
+            'copy:jsToNode',
             'mochaTest:buildCoverage',
         ]);
     });
@@ -191,8 +198,10 @@ module.exports = function (grunt) {
      * Build source javascript files
      */
     grunt.registerTask('js-build', function () {
+        grunt.loadNpmTasks('grunt-contrib-copy');
         grunt.loadNpmTasks('grunt-browserify');
         grunt.task.run([
+            'copy:jsToNode',
             'browserify:sources'
         ]);
     });
@@ -267,11 +276,13 @@ module.exports = function (grunt) {
     grunt.registerTask('test-build', function () {
         grunt.loadNpmTasks('grunt-todos');
         grunt.loadNpmTasks('grunt-contrib-jshint');
+        grunt.loadNpmTasks('grunt-contrib-copy');
         grunt.loadNpmTasks('grunt-browserify');
         grunt.loadNpmTasks('grunt-mocha');
         grunt.task.run([
             'todos:all',
             'jshint:all',
+            'copy:jsToNode',
             'browserify:specTests',
             'coverage',
             'mocha'
@@ -296,6 +307,7 @@ module.exports = function (grunt) {
         grunt.task.run([
 
             // Build files
+            'copy:jsToNode',
             'browserify:sources',
             'sass:build',
             'copy:all',
@@ -323,4 +335,7 @@ module.exports = function (grunt) {
             'test-build'
         ]);
     });
+
+    // TODO: Create a cleanup job that deletes all source and tmp files before
+    // production
 };

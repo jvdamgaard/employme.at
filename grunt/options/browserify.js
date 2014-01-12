@@ -11,29 +11,17 @@ module.exports = {
             './.tmp/bower_components/lodash/dist/lodash.js:lodash',
             './<%= app.source %>/scripts/lib/moment-shim.js:moment',
             './package.json:app'
-        ]
+        ],
     },
 
     // Compile spec tests
     specTests: {
         options: {
-            debug: true
+            debug: true,
         },
         files: {
             '.tmp/tests/specs.js': [
                 '<%= app.test %>/spec/**/*.js'
-            ]
-        }
-    },
-
-    // Compile integration tests
-    integrationTests: {
-        options: {
-            debug: true
-        },
-        files: {
-            '.tmp/tests/integrations.js': [
-                '<%= app.test %>/integration/**/*.js'
             ]
         }
     },
@@ -58,9 +46,6 @@ module.exports = {
         files: {
             '<%= app.dist %>/scripts/app.js': [
                 '<%= app.source %>/scripts/app.js'
-            ],
-            '.tmp/tests/integrations.js': [
-                '<%= app.test %>/integration/**/*.js'
             ],
             '.tmp/tests/specs.js': [
                 '<%= app.test %>/spec/**/*.js'

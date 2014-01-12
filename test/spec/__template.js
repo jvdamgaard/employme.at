@@ -16,7 +16,7 @@
 // var sinon = require('sinon');
 
 // // Source file
-// var namespace = require('../../app/scripts/util/namespace');
+// var namespace = require('lib/util/namespace');
 
 // describe('module/name', function() {
 
