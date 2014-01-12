@@ -18,9 +18,7 @@ require('app/lib/no-hover-on-scroll');
  *
  * Example:
  *
- * ```
- * logVersion('Lo-Dash', _.VERSION);
- * ```
+ *     logVersion('Lo-Dash', _.VERSION);
  *
  * @param     {string}     name        Name og librariry/dependency
  * @param     {string}     version     Version number in format {major}.{minor}.{patch}

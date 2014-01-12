@@ -130,8 +130,11 @@ body(data-spy='scroll', data-target='#sub-nav')
           if locals.readme
             section(id=name) !{readme}
           else
-            - var header = locals.name.replace('.js', '')
+            - var require = 'app/' + locals.name.replace('.js', '')
+            - var header = locals.name.replace(/^.*[\\\/]/, '').replace('.js', '')
             h1 #{header}
+            pre.language-javascript
+                code.language-javascript var #{header} = require('#{require}')
           each symbol in dox
             if symbol.ctx.name
               section(id=symbol.ctx.name)
