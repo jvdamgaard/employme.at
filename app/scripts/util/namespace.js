@@ -21,10 +21,11 @@ var _ = require('lodash');
  *     var namespace = require('app/util/namespace');
  *     var moduleAttachedToApp = namespace('another.module', App);
  *
- * @param     {string}     name     dot seperated string with the namespace
- * @param     {object}     root     object to attach namespace to. Defaults to ´window´
+ * @param     {string}     namespace   dot seperated string with the namespace
+ * @param     {object}     root        object to attach namespace to. Defaults
+ * to ´window´
  *
- * @return    {object}              Object for namespace
+ * @return    {object}                 Object for namespace
  */
 var createNamespace = function(namespace, root) {
 
