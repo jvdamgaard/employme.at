@@ -1,3 +1,13 @@
+mixin parseObject(obj)
+  ul
+    each val, key in obj
+      li
+        span #{key}:
+          if typeof val === 'string'
+            span #{val}
+          else if typeof val === 'object'
+            mixin parseObject(val)
+
 mixin dropDown(subFolder, subFiles)
   if subFolder != '' && subFiles.length > 0
     li.dropdown
@@ -11,7 +21,28 @@ mixin iForSymbolType(symbol)
   i(class=["alert", "alert-"+(symbol.type === "function" || symbol.type === "method" ? "info":"success")])
 
 mixin labelForSymbolType(symbol)
-  div(class=["label", "label-"+(symbol.gtype === "function" || symbol.gtype === "method" ? "info":"success"), "radius", "ctx-type"])= symbol.ctx.type
+  span(class=["label", "label-info", "radius", "ctx-type"])= symbol.ctx.type
+  span= ' '
+
+mixin labelForTag(tag)
+  span(class=["label", "label-success", "radius", "ctx-type"])= tag.type
+  span= ' '
+
+mixin header(symbol, varName)
+  - var header = symbol.ctx.name
+  if header === 'exports'
+    - header = varName
+  if symbol.ctx.type === 'method' || symbol.ctx.type === 'function'
+    - header += '('
+    each tag in symbol.tags
+      if tag.type === 'param'
+        - header += tag.name + ', '
+      if tag.type === 'exports' && symbol.ctx.name !== 'exports'
+        - header = varName + '.' + header
+    - header = header.replace(/,\s*$/, '')
+    - header += ')'
+
+  h3(id='#{symbol.ctx.name}')= header
 
 !!!5
 //if IE 8
@@ -130,44 +161,53 @@ body(data-spy='scroll', data-target='#sub-nav')
           if locals.readme
             section(id=name) !{readme}
           else
+            - var path = locals.name.replace('.js', '')
             - var require = 'app/' + locals.name.replace('.js', '')
-            - var header = locals.name.replace(/^.*[\\\/]/, '').replace('.js', '')
+            - var filename = locals.name.replace(/^.*[\\\/]/, '').replace('.js', '')
+            - var header = filename.replace(/-/g, ' ');
+            - var header = header.charAt(0).toUpperCase() + header.slice(1);
+            - var varName = filename.replace(/-([a-z])/g, function (g) { return g[1].toUpperCase(); });
+
             h1 #{header}
             pre.language-javascript
-                code.language-javascript var #{header} = require('#{require}')
+                code.language-javascript var #{varName} = require('#{require}');
           each symbol in dox
             if symbol.ctx.name
               section(id=symbol.ctx.name)
-                h2(id='#{symbol.ctx.name}')= symbol.ctx.name
-                h5.subheader
+                //- mixin parseObject(symbol)
+                mixin header(symbol, varName)
                 if !symbol.gtype && symbol.type
                   p
-                    div(class=["label", "label-inverse", "radius", "ctx-type"])= symbol.type
+                    span(class=["label", "label-inverse", "radius", "ctx-type"])= symbol.type
                 else
                   p
                     mixin labelForSymbolType(symbol)
-                    if symbol.ctx.string
-                      span= symbol.ctx.string
-                    if symbol.return
-                      |  ->
-                      span= symbol.return
+                    each tag in symbol.tags
+                      if tag.type !== 'param' && tag.type !== 'return'
+                        mixin labelForTag(tag)
 
+                .description !{symbol.description.summary}
             if symbol.hasParams
-              table.table.table-bordered.table-striped
-                thead
-                  tr
-                    th(style="width:20%") Option name
-                    th(style="width:20%") Type
-                    th Description
-                tbody
-                  each tag in symbol.tags
-                    if tag.type == 'param'
-                      tr
-                        td= tag.name
-                        td= tag.types
-                        td= tag.description
+              h5 Arguments
+              ol
+                each tag in symbol.tags
+                  if tag.type == 'param'
+                    - var tagText = '(' + tag.types + ')'
+                    if tag.description
+                      - tagText += ': ' + tag.description
+                    li= tagText
 
-            .description.language-javascript !{symbol.description.full} !{symbol.description.extra}
+            if symbol.return
+              h5 Returns
+              each tag in symbol.tags
+                if tag.type === 'return'
+                  - var returnText = '(' + tag.types + ')'
+                  if tag.description
+                    - returnText += ': ' + tag.description
+                  p= returnText
+
+            - body = symbol.description.body.replace('<p>Example</p>', '<h5>Example</h5>')
+            .language-javascript !{body}
 
   script(src='/jquery/jquery.js')
   script(src='/bootstrap/dist/js/bootstrap.js')
