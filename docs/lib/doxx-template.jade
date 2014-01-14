@@ -213,45 +213,50 @@ body(data-spy='scroll', data-target='#sub-nav', data-offset='200')
 
             h1 #{header}
             pre.language-javascript
-                code.language-javascript var #{varName} = require('#{require}');
-          each symbol in dox
-            if symbol.ctx.name
-              section(id=symbol.ctx.name)
-                //- mixin parseObject(symbol)
-                mixin header(symbol, varName)
-                if !symbol.gtype && symbol.type
-                  p
-                    span(class=["label", "label-inverse", "radius", "ctx-type"])= symbol.type
-                else
-                  p
-                    mixin labelForSymbolType(symbol)
+              code.language-javascript var #{varName} = require('#{require}');
+
+            each symbol in dox
+              //- mixin parseObject(symbol)
+              if !symbol.ctx.name
+                .description !{symbol.description.full}
+              else
+                section(id=symbol.ctx.name)
+                  mixin header(symbol, varName)
+                  if !symbol.gtype && symbol.type
+                    p
+                      span(class=["label", "label-inverse", "radius", "ctx-type"])= symbol.type
+                  else
+                    p
+                      mixin labelForSymbolType(symbol)
+                      each tag in symbol.tags
+                        if tag.type !== 'param' && tag.type !== 'return'
+                          mixin labelForTag(tag)
+
+                  - var summary = symbol.description.summary.split('<br />').join(' ')
+                  .description !{summary}
+                  if symbol.hasParams
+                    h4 Arguments
+                    ol
+                      each tag in symbol.tags
+                        if tag.type == 'param'
+                          - var tagText = tag.name + ' (' + tag.types + ')'
+                          if tag.description
+                            - tagText += ': ' + tag.description
+                          li= tagText
+
+                  if symbol.return
+                    h4 Returns
                     each tag in symbol.tags
-                      if tag.type !== 'param' && tag.type !== 'return'
-                        mixin labelForTag(tag)
-
-                .description !{symbol.description.summary}
-            if symbol.hasParams
-              h4 Arguments
-              ol
-                each tag in symbol.tags
-                  if tag.type == 'param'
-                    //- TODO: handle params with default value
-                    - var tagText = tag.name + ' (' + tag.types + ')'
-                    if tag.description
-                      - tagText += ': ' + tag.description
-                    li= tagText
-
-            if symbol.return
-              h4 Returns
-              each tag in symbol.tags
-                if tag.type === 'return'
-                  - var returnText = '(' + tag.types + ')'
-                  if tag.description
-                    - returnText += ': ' + tag.description
-                  p= returnText
-
-            - body = symbol.description.body.replace('<p>Example</p>', '<h4>Example</h4>')
-            .language-javascript !{body}
+                      if tag.type === 'return'
+                        - var returnText = '(' + tag.types + ')'
+                        if tag.description
+                          - returnText += ': ' + tag.description
+                        p= returnText
+                  - var body = symbol.description.body
+                  if body.indexOf('<p>Example</p>') !== 0
+                    - body = '<h4>Description</h4>' + body
+                  - body = body.replace('<p>Example</p>', '<h4>Example</h4>').split('<br />').join(' ')
+                  .language-javascript !{body}
 
   script(src='/jquery/jquery.js')
   script(src='/bootstrap/dist/js/bootstrap.js')
