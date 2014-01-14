@@ -165,7 +165,7 @@ body(data-spy='scroll', data-target='#sub-nav', data-offset='200')
           span.icon-bar
           span.icon-bar
           span.icon-bar
-        a.navbar-brand(href='index.html') Javascript documentation
+        a.navbar-brand(href='index.html') JS Docs
       nav.collapse.navbar-collapse.bs-navbar-collapse(role='navigation')
         ul.nav.navbar-nav
           - var cacheFolder = ''
@@ -206,14 +206,14 @@ body(data-spy='scroll', data-target='#sub-nav', data-offset='200')
                   li
                     a(href='##{symbol.ctx.name}')= navHeader
       .col-md-9(role='main')
-        .bs-docs-section
-          if locals.readme
-            section(id=name) !{readme}
-          else
-
+        if locals.readme
+          - var readme = locals.readme.split('<br>').join(' ')
+          .bs-docs-section !{readme}
+        else
+          .bs-docs-section
             h1 #{header}
             pre.language-javascript
-              code.language-javascript var #{varName} = require('#{require}');
+              code var #{varName} = require('#{require}');
 
             each symbol in dox
               //- mixin parseObject(symbol)

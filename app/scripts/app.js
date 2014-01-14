@@ -16,9 +16,10 @@ require('app/lib/no-hover-on-scroll');
 /**
  * Log version of dependencies with beautified formatting
  *
- * Example:
+ * Example
  *
  *     logVersion('Lo-Dash', _.VERSION);
+ *     // => ' - Lo-Dash              : 2.4.1'
  *
  * @param     {string}     name        Name og librariry/dependency
  * @param     {string}     version     Version number in format {major}.{minor}.{patch}
@@ -35,6 +36,12 @@ var logVersion = function(name, version) {
 
 /**
  * Log a seperator with lines
+ *
+ * Example
+ *
+ *     logSeperator();
+ *     // => '---------------------------------------'
+ *
  * @return     {void}
  */
 var logSeperator = function() {
