@@ -36,13 +36,14 @@ mixin header(symbol, varName)
     - header += '('
     each tag in symbol.tags
       if tag.type === 'param'
+        //- handle params with default value
         - header += tag.name + ', '
       if tag.type === 'exports' && symbol.ctx.name !== 'exports'
         - header = varName + '.' + header
     - header = header.replace(/,\s*$/, '')
     - header += ')'
 
-  h3(id='#{symbol.ctx.name}')= header
+  h2(id='#{symbol.ctx.name}')= header
 
 !!!5
 //if IE 8
@@ -188,17 +189,18 @@ body(data-spy='scroll', data-target='#sub-nav')
 
                 .description !{symbol.description.summary}
             if symbol.hasParams
-              h5 Arguments
+              h4 Arguments
               ol
                 each tag in symbol.tags
                   if tag.type == 'param'
-                    - var tagText = '(' + tag.types + ')'
+                    //- TODO: handle params with default value
+                    - var tagText = tag.name + ' (' + tag.types + ')'
                     if tag.description
                       - tagText += ': ' + tag.description
                     li= tagText
 
             if symbol.return
-              h5 Returns
+              h4 Returns
               each tag in symbol.tags
                 if tag.type === 'return'
                   - var returnText = '(' + tag.types + ')'
@@ -206,7 +208,7 @@ body(data-spy='scroll', data-target='#sub-nav')
                     - returnText += ': ' + tag.description
                   p= returnText
 
-            - body = symbol.description.body.replace('<p>Example</p>', '<h5>Example</h5>')
+            - body = symbol.description.body.replace('<p>Example</p>', '<h4>Example</h4>')
             .language-javascript !{body}
 
   script(src='/jquery/jquery.js')

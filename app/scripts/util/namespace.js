@@ -12,20 +12,18 @@ var _ = require('lodash');
  *
  *     // Create namespace with direct require
  *     namespace('App.my.module');
- *     App.my.module = {
- *         name:
- *         'Jakob', birthYear: 1983
- *     };
+ *     // => window.App.my.module
  *
  *     // Create namespace with App as root
  *     var moduleAttachedToApp = namespace('another.module', App);
+ *     // => window.App.another.module
  *
  * @exports
  *
- * @param     {String}     namespace   Dot seperated string with the namespace
- * @param     {Object}     root        Object to attach namespace to. Defaults to ´window´
+ * @param     {String}     namespace      Dot seperated string with the namespace
+ * @param     {Object}     [root=window]  Object to attach namespace to.
  *
- * @return    {Object}                 Object for namespace
+ * @return    {Object}                    Object for namespace
  */
 module.exports = function(namespace, root) {
 
