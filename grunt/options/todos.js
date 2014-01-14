@@ -2,10 +2,13 @@
  * Check javascript files for TODO and FIXME statements. Abort build if any of these is found
  */
 
+// Dependencies
+var grunt = require('grunt');
+
 var todosMemo = '';
 var todosFail = false;
 
-module.exports = function(grunt) {
+module.exports = function() {
     return {
         options: {
             verbose: false,

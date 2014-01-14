@@ -33,7 +33,7 @@ var _ = require('lodash');
  * @param  {string} path  path for grunt configs
  * @return {object}      concat of all config files
  */
-var loadConfig = function (path, grunt) {
+var loadConfig = function (path) {
     var glob = require('glob');
     var object = {};
     var key;
@@ -43,10 +43,6 @@ var loadConfig = function (path, grunt) {
     }).forEach(function (option) {
         key = option.replace(/\.js$/, '');
         object[key] = require(path + option);
-
-        if (_.isFunction(object[key])) {
-            object[key] = object[key](grunt);
-        }
     });
 
     return object;
@@ -65,7 +61,7 @@ module.exports = function (grunt) {
     };
 
     // Load all config file in options folder
-    config = _.assign(config, loadConfig('./grunt/options/', grunt));
+    config = _.assign(config, loadConfig('./grunt/options/'));
     grunt.initConfig(config);
 
     /**
