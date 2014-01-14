@@ -1,5 +1,9 @@
 /**
  * Using the danish lang settings for moment.js
+ *
+ * Shims to:
+ *
+ *     var moment = require('moment');
  */
 
 // Dependencies

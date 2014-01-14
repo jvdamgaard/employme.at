@@ -58,8 +58,24 @@ head
   meta(name='viewport', content='width=device-width,initial-scale=1')
   link(rel='stylesheet', href='/bootstrap/dist/css/bootstrap.min.css')
   link(rel='stylesheet', href='/css/bootstrap-docs.css')
-  link(rel='stylesheet', href='/prismjs/prism.css')
+  link(rel='stylesheet', href='/prismjs/prism-okaidia.css')
   style(type='text/css')
+    h2 {
+      font-family: Consolas, Monaco, 'Andale Mono', monospace;
+      padding-top: 80px;
+    }
+    h4 {
+      margin-top: 24px;
+    }
+    .bs-docs-nav .navbar-nav > li > a {
+      color: #fff;
+    }
+    .bs-docs-nav .navbar-nav > li > a:hover {
+      color: #fff;
+    }
+    .bs-docs-nav {
+      background-color: #272822;
+    }
     .bs-docs-nav .navbar-nav > .dropdown > a:hover .caret {
       border-top-color: #fff;
       border-bottom-color: #fff;
@@ -72,7 +88,24 @@ head
       text-shadow: none;
     }
     .bs-docs-nav .navbar-nav > .open > a, .bs-docs-nav .navbar-nav > .open > a:hover, .bs-docs-nav .navbar-nav > .open > a:focus {
-      background-color: #463265;
+      background-color: #373832;
+    }
+    .bs-sidebar .nav > .active > a, .bs-sidebar .nav > .active:hover > a, .bs-sidebar .nav > .active:focus > a {
+      color: #272822;
+      border-right: 1px solid #272822;
+    }
+    .bs-sidebar .nav > .active > a, .bs-sidebar .nav > .active:hover > a, .bs-sidebar .nav > .active:focus > a {
+      border-left: 1px solid #272822;
+      border-right: none;
+      padding-left: 29px !important;
+    }
+    .bs-sidebar .nav > li > a:hover, .bs-sidebar .nav > li > a:focus {
+      font-weight: bold;
+      background-color: transparent;
+      border-right: none;
+    }
+    .bs-sidenav {
+      background-color: transparent;
     }
     .row {
       margin-bottom: 20px;
@@ -84,6 +117,9 @@ head
       padding: 5px 15px 5px 0;
       resize: vertical;
       overflow: auto;
+    }
+    .bs-docs-section {
+      padding-bottom: 500px;
     }
     .bs-docs-section > h1 {
       padding-bottom: 9px;
@@ -117,7 +153,10 @@ head
       padding-left: 30px;
       font-size: 90%;
     }
-body(data-spy='scroll', data-target='#sub-nav')
+    pre {
+      font-size: 14px;
+    }
+body(data-spy='scroll', data-target='#sub-nav', data-offset='200')
   header.navbar.navbar-inverse.navbar-fixed-top.bs-docs-nav(role='banner')
     .container
       .navbar-header
@@ -149,25 +188,28 @@ body(data-spy='scroll', data-target='#sub-nav')
           mixin dropDown(cacheFolder, subs)
 
   .container.bs-docs-container
+    - var path = locals.name.replace('.js', '')
+    - var require = 'app/' + locals.name.replace('.js', '')
+    - var filename = locals.name.replace(/^.*[\\\/]/, '').replace('.js', '')
+    - var header = filename.replace(/-/g, ' ');
+    - var header = header.charAt(0).toUpperCase() + header.slice(1);
+    - var varName = filename.replace(/-([a-z])/g, function (g) { return g[1].toUpperCase(); });
     .row
       .col-md-3
         .bs-sidebar.hidden-print.affix(role='complementary', id='sub-nav')
           ul.nav.bs-sidenav
             each symbol in dox
               if symbol.ctx.name
-                li
-                  a(href='##{symbol.ctx.name}')= symbol.ctx.name
+                  - var navHeader = symbol.ctx.name
+                  if navHeader === 'exports'
+                    - navHeader = varName
+                  li
+                    a(href='##{symbol.ctx.name}')= navHeader
       .col-md-9(role='main')
         .bs-docs-section
           if locals.readme
             section(id=name) !{readme}
           else
-            - var path = locals.name.replace('.js', '')
-            - var require = 'app/' + locals.name.replace('.js', '')
-            - var filename = locals.name.replace(/^.*[\\\/]/, '').replace('.js', '')
-            - var header = filename.replace(/-/g, ' ');
-            - var header = header.charAt(0).toUpperCase() + header.slice(1);
-            - var varName = filename.replace(/-([a-z])/g, function (g) { return g[1].toUpperCase(); });
 
             h1 #{header}
             pre.language-javascript

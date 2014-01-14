@@ -22,9 +22,4 @@ describe('app/util/namespace', function() {
         var module = namespace('yet.another.test.module', modules);
         expect(module).to.eql(modules.yet.another.test.module);
     });
-
-    it('should fail if the given namespace is not a string', function() {
-        var module = namespace({}, modules);
-        expect(module).to.not.exist;
-    });
 });

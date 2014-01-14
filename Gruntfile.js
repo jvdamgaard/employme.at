@@ -279,8 +279,8 @@ module.exports = function (grunt) {
             'jshint:all',
             'copy:jsToNode',
             'browserify:specTests',
-            'coverage',
-            'mocha'
+            'mocha',
+            'coverage'
         ]);
     });
 
