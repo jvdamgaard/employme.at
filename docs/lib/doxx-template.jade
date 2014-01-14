@@ -165,7 +165,7 @@ body(data-spy='scroll', data-target='#sub-nav', data-offset='200')
           span.icon-bar
           span.icon-bar
           span.icon-bar
-        a.navbar-brand(href='index.html') JS Docs
+        a.navbar-brand(href='/') JS Docs
       nav.collapse.navbar-collapse.bs-navbar-collapse(role='navigation')
         ul.nav.navbar-nav
           - var cacheFolder = ''
@@ -218,7 +218,9 @@ body(data-spy='scroll', data-target='#sub-nav', data-offset='200')
             each symbol in dox
               //- mixin parseObject(symbol)
               if !symbol.ctx.name
-                .description !{symbol.description.full}
+                - var full = symbol.description.full
+                - full = full.split('<pre>').join('<pre class="language-javascript">')
+                .description !{full}
               else
                 section(id=symbol.ctx.name)
                   mixin header(symbol, varName)
@@ -233,6 +235,7 @@ body(data-spy='scroll', data-target='#sub-nav', data-offset='200')
                           mixin labelForTag(tag)
 
                   - var summary = symbol.description.summary.split('<br />').join(' ')
+                  - summary = summary.split('<pre>').join('<pre class="language-javascript">')
                   .description !{summary}
                   if symbol.hasParams
                     h4 Arguments
@@ -255,8 +258,10 @@ body(data-spy='scroll', data-target='#sub-nav', data-offset='200')
                   - var body = symbol.description.body
                   if body.indexOf('<p>Example</p>') !== 0
                     - body = '<h4>Description</h4>' + body
-                  - body = body.replace('<p>Example</p>', '<h4>Example</h4>').split('<br />').join(' ')
-                  .language-javascript !{body}
+                  - body = body.replace('<p>Example</p>', '<h4>Example</h4>')
+                  - body = body.split('<br />').join(' ')
+                  - body = body.split('<pre>').join('<pre class="language-javascript">')
+                  div !{body}
 
   script(src='/jquery/jquery.js')
   script(src='/bootstrap/dist/js/bootstrap.js')

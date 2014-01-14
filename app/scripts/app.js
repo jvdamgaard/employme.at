@@ -1,7 +1,6 @@
 /**
- * Main entry for the javascripts
- *
- * - logs version of dependencies
+ * Main entry for the javascripts.
+ * Logs dependencies version
  */
 
 // Dependencies
@@ -14,17 +13,17 @@ var app = require('app');
 require('app/lib/no-hover-on-scroll');
 
 /**
- * Log version of dependencies with beautified formatting
+ * Log version of dependencies with beautified formatting.
  *
  * Example
  *
  *     logVersion('Lo-Dash', _.VERSION);
  *     // => ' - Lo-Dash              : 2.4.1'
  *
- * @param     {string}     name        Name og librariry/dependency
- * @param     {string}     version     Version number in format {major}.{minor}.{patch}
+ * @param     {String}     name        Name of library/dependency
+ * @param     {String}     version     Version number in format {major}.{minor}.{patch}
  *
- * @return    {void}
+ * @return    {Void}
  */
 var logVersion = function(name, version) {
     var charsBeforeSeperator = 25;
@@ -35,14 +34,14 @@ var logVersion = function(name, version) {
 };
 
 /**
- * Log a seperator with lines
+ * Log a seperator with lines.
  *
  * Example
  *
  *     logSeperator();
  *     // => '---------------------------------------'
  *
- * @return     {void}
+ * @return     {Void}
  */
 var logSeperator = function() {
     console.log(new Array(40).join('-'));

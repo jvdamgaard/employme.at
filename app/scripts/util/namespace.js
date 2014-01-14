@@ -18,10 +18,10 @@ var _ = require('lodash');
  *
  * @exports
  *
- * @param     {String}     namespace      Dot seperated string with the namespace
+ * @param     {String}     namespace      Dot seperated string with the namespace.
  * @param     {Object}     [root]         Object to attach namespace to.
  *
- * @return    {Object}                    Object for namespace
+ * @return    {Object}                    Object for namespace.
  */
 module.exports = function(namespace, root) {
 

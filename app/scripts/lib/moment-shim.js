@@ -1,5 +1,5 @@
 /**
- * Using the danish lang settings for moment.js
+ * Using the danish lang settings for moment.js.
  *
  * Shims to:
  *
