@@ -11,7 +11,9 @@ var app = require('app');
 
 // Load modules
 require('app/lib/no-hover-on-scroll');
-require('app/util/lazy-img')();
+require('app/util/lazy-img')({
+    threshold: 200
+});
 
 /**
  * Log version of dependencies with beautified formatting.

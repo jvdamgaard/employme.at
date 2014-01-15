@@ -24,9 +24,6 @@
  *     lazyImg.showImages();
  */
 
-// TODO: Test
-// TODO: Preload images and set source, when loaded
-
 // Dependencies
 var $ = require('jquery');
 var _ = require('lodash');
@@ -64,8 +61,7 @@ var getSource = function($this, callback) {
     // Find highest (largest window width) matching source
     while (!source && i >= -1) {
 
-        // 'Special' sources found
-        if (i >= 0) {
+        if (i >= 0) { // 'Special' sources found
             mqSize = mqSizes[i];
             if (windowWidth < mqSizes[i]) {
                 i--;
@@ -73,8 +69,7 @@ var getSource = function($this, callback) {
             }
             sizeLabel = 'src-' + _.findKey(sizes, mqSize);
 
-            // Non 'special' sources found. Use default source
-        } else {
+        } else { // Non 'special' sources found. Use default source
             sizeLabel = 'src';
         }
 
@@ -88,10 +83,16 @@ var getSource = function($this, callback) {
         i--;
     }
 
-    if (source) {
+    if (source !== $this.data('source')) {
+        $this.data('source', source);
 
-        // TODO: preload images
-        callback(source);
+        $this.removeClass(selector.replace('.', '') + '--loaded');
+
+        // Cache image
+        $('<img/>').attr('src', source).load(function() {
+            $(this).remove(); // prevent memory leaks as @benweet suggested
+            callback(source);
+        });
     }
 };
 /**

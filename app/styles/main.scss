@@ -13,6 +13,7 @@ Style is based on [OOCSS](https://github.com/stubbornella/oocss/wiki) and [BEM](
 @import "lib/no-hover-on-scroll";
 
 @import "objects/hexagon";
+@import "objects/lazy-img";
 
 body {
     margin: 0 auto;
