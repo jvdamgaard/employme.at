@@ -47,6 +47,7 @@
         "grunt-continue": "0.0.1",
         "grunt-contrib-connect": "0.6.0",
         "grunt-contrib-copy": "0.5.0",
+        "jpegtran-bin": "0.2.0",
         "grunt-contrib-imagemin": "0.4.1",
         "grunt-contrib-jshint": "0.8.0",
         "grunt-contrib-sass": "0.6.0",

@@ -3,12 +3,15 @@
  */
 
 module.exports = {
-	all: {
-		files: [{
-			expand: true,
-			cwd: '<%= app.source %>/images',
-			src: '**/*.{png,jpg,jpeg}',
-			dest: '<%= app.dist %>/images'
-		}]
-	}
+    all: {
+        options: {
+            pngquant: true
+        },
+        files: [{
+            expand: true,
+            cwd: '<%= app.source %>/images',
+            src: '**/*.{png,jpg,jpeg}',
+            dest: '<%= app.dist %>/images'
+        }]
+    }
 };
