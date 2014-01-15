@@ -295,7 +295,6 @@ module.exports = function (grunt) {
         grunt.loadNpmTasks('grunt-remove-logging');
         grunt.loadNpmTasks('grunt-modernizr');
         grunt.loadNpmTasks('grunt-autoprefixer');
-        grunt.loadNpmTasks('grunt-combine-media-queries');
         grunt.loadNpmTasks('grunt-contrib-uglify');
         grunt.loadNpmTasks('grunt-csso');
 
@@ -314,7 +313,6 @@ module.exports = function (grunt) {
 
             // Minify
             'removelogging',
-            'cmq',
             'uglify:build',
             'csso',
         ]);
