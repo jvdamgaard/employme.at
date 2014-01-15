@@ -36,8 +36,12 @@ mixin header(symbol, varName)
     - header += '('
     each tag in symbol.tags
       if tag.type === 'param'
-        //- handle params with default value
-        - header += tag.name + ', '
+        - var tagName = tag.name
+        if tagName.indexOf('.') === -1
+          if tagName.indexOf('=') > -1
+            - tagName = tagName.split('=')[0]
+            - tagName += ']'
+          - header += tagName + ', '
       if tag.type === 'exports' && symbol.ctx.name !== 'exports'
         - header = varName + '.' + header
     - header = header.replace(/,\s*$/, '')
@@ -66,6 +70,9 @@ head
     }
     h4 {
       margin-top: 24px;
+    }
+    .code {
+      font-family: Consolas, Monaco, 'Andale Mono', monospace;
     }
     .bs-docs-nav .navbar-nav > li > a {
       color: #fff;
@@ -218,9 +225,27 @@ body(data-spy='scroll', data-target='#sub-nav', data-offset='200')
             each symbol in dox
               //- mixin parseObject(symbol)
               if !symbol.ctx.name
-                - var full = symbol.description.full
-                - full = full.split('<pre>').join('<pre class="language-javascript">')
-                .description !{full}
+                if symbol.tags.length > 0 && symbol.tags[0].type == 'callback'
+                  - var callbackHeader = symbol.tags[0].string + ': function('
+                  each tag in symbol.tags
+                    if tag.type == 'param'
+                      - callbackHeader += tag.name + ', '
+                  - callbackHeader = callbackHeader.replace(/,\s*$/, '')
+                  - callbackHeader += ')'
+                  h4= callbackHeader
+                  em !{symbol.description.full}
+                  ol
+                    each tag in symbol.tags
+                      if tag.type == 'param'
+                        - var tagText = '<span class="code">' + tag.name + '</span> <em>(' + tag.types + ')</em>'
+                        if tag.description
+                          - tagText += ': ' + tag.description
+                        li !{tagText}
+                else
+                  - var full = symbol.description.full
+                  - full = full.split('<pre>').join('<pre class="language-javascript">')
+                  - full = full.replace('<p>Example</p>', '<h4>Example</h4>')
+                  .description !{full}
               else
                 section(id=symbol.ctx.name)
                   mixin header(symbol, varName)
@@ -242,26 +267,28 @@ body(data-spy='scroll', data-target='#sub-nav', data-offset='200')
                     ol
                       each tag in symbol.tags
                         if tag.type == 'param'
-                          - var tagText = tag.name + ' (' + tag.types + ')'
+                          - var tagText = '<span class="code">' + tag.name + '</span> <em>(' + tag.types + ')</em>'
                           if tag.description
                             - tagText += ': ' + tag.description
-                          li= tagText
+                          li !{tagText}
 
                   if symbol.return
-                    h4 Returns
                     each tag in symbol.tags
                       if tag.type === 'return'
-                        - var returnText = '(' + tag.types + ')'
-                        if tag.description
-                          - returnText += ': ' + tag.description
-                        p= returnText
+                        if tag.types[0] !== 'void'
+                          - var returnText = '<em>(' + tag.types + ')</em>'
+                          if tag.description
+                            - returnText += ': ' + tag.description
+                          h4 Returns
+                          p !{returnText}
                   - var body = symbol.description.body
-                  if body.indexOf('<p>Example</p>') !== 0
-                    - body = '<h4>Description</h4>' + body
-                  - body = body.replace('<p>Example</p>', '<h4>Example</h4>')
-                  - body = body.split('<br />').join(' ')
-                  - body = body.split('<pre>').join('<pre class="language-javascript">')
-                  div !{body}
+                  if body
+                    if body.indexOf('<p>Example</p>') !== 0
+                      - body = '<h4>Description</h4>' + body
+                    - body = body.replace('<p>Example</p>', '<h4>Example</h4>')
+                    - body = body.split('<br />').join(' ')
+                    - body = body.split('<pre>').join('<pre class="language-javascript">')
+                    div !{body}
 
   script(src='/jquery/jquery.js')
   script(src='/bootstrap/dist/js/bootstrap.js')

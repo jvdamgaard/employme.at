@@ -24,7 +24,7 @@ require('app/util/lazy-img')();
  * @param     {String}     name        Name of library/dependency
  * @param     {String}     version     Version number in format {major}.{minor}.{patch}
  *
- * @return    {Void}
+ * @return    {void}
  */
 var logVersion = function(name, version) {
     var charsBeforeSeperator = 25;
@@ -42,7 +42,7 @@ var logVersion = function(name, version) {
  *     logSeperator();
  *     // => '---------------------------------------'
  *
- * @return     {Void}
+ * @return     {void}
  */
 var logSeperator = function() {
     console.log(new Array(40).join('-'));
