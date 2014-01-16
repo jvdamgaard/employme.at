@@ -4,7 +4,7 @@
 
 module.exports = {
     options: {
-        report: 'min'
+        report: 'gzip'
     },
     build: {
         files: {
