@@ -31,13 +31,13 @@
         "email": "jakob.viskum.damgaard@gmail.com"
     }],
     "dependencies": {
-        "express": "3.4.7",
+        "express": "3.4.8",
         "h5bp": "0.0.9",
         "hbs": "2.4.0"
     },
     "devDependencies": {
         "blanket": "1.1.6",
-        "browserify": "3.19.1",
+        "browserify": "3.20.0",
         "chai": "1.8.1",
         "css-parse": "1.5.x",
         "glob": "3.2.8",
@@ -55,7 +55,7 @@
         "grunt-contrib-watch": "0.5.3",
         "grunt-express-server": "0.4.11",
         "grunt-modernizr": "0.4.1",
-        "grunt-newer": "0.6.0",
+        "grunt-newer": "0.6.1",
         "grunt-open": "0.2.2",
         "grunt-remove-logging": "0.2.0",
         "grunt-shell": "0.6.1",
@@ -65,13 +65,14 @@
         "jshint-stylish": "0.1.5",
         "es6-promise": "0.1.1",
         "grunt-markdown": "0.5.0",
-        "grunt-mocha": "0.4.8",
+        "grunt-mocha": "0.4.9",
         "grunt-csso": "0.5.3",
         "grunt-mocha-test": "0.8.1",
         "grunt-string-replace": "0.2.7",
         "sinon": "1.7.3",
         "grunt-touch": "0.1.0",
-        "grunt-contrib-clean": "0.5.0"
+        "grunt-contrib-clean": "0.5.0",
+        "require-grunt-configs": "0.4.0"
     },
     "engines": {
         "node": "0.10.x"
