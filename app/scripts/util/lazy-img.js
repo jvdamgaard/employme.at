@@ -20,7 +20,7 @@
  *         'data-src-desk-wide-retina="img-desk-wide@2x.jpg"' +
  *         '/>').appendTo('html');
  *
- *     lazyImg.showImages();
+ *     lazyImg.load();
  */
 
 // Dependencies
@@ -88,8 +88,8 @@ var getSource = function($this, callback) {
         $this.removeClass(selector.replace('.', '') + '--loaded');
 
         // Cache image
-        $('<img/>').attr('src', source).load(function() {
-            $(this).remove(); // prevent memory leaks as @benweet suggested
+        $('<img/>').attr('src', source).on('load', function() {
+            $(this).remove(); // prevent memory leaks
             callback(source);
         });
     }
@@ -107,6 +107,7 @@ var getSource = function($this, callback) {
  */
 var attachSource = function() {
     var $this = $(this);
+    console.log('attaching');
     getSource($this, function(source) {
         if ($this.is('img')) {
             // Set source on img tags
@@ -171,7 +172,6 @@ var showImages = function() {
 
         return offsetBottom >= windowScrollTop - threshold && offsetTop <= windowBottom + threshold;
     });
-
     $loaded.trigger('show-image');
 
     // Remove loaded images from list to avoid multiple setting og source
@@ -179,9 +179,33 @@ var showImages = function() {
 };
 
 /**
- * Initialize the lazy image loader.
+ * Initialize load of images and attaches load events.
  *
  * @exports
+ *
+ * @return    {void}
+ */
+var load = function() {
+    getDimensions();
+
+    $images.each(function() {
+        $(this).on('show-image', attachSource);
+    });
+
+    // Start listening for scroll and resize events
+    $window.on('scroll', showImages);
+
+    $window.on('resize', function() {
+        getDimensions();
+        showImages();
+    });
+
+    // Init
+    showImages();
+};
+
+/**
+ * Initialize the lazy image loader.
  *
  * @param    {Object}    [options]                          Contains options for the image loader
  * @param    {String}    [options.selector='.lazy-img']     Selector to match against images to load.
@@ -217,23 +241,8 @@ module.exports = function(options) {
         return a - b;
     });
 
-    getDimensions();
-
-    $images.each(function() {
-        $(this).on('show-image', attachSource);
-    });
-
-    // Start listening for scroll and resize events
-    $window.on('scroll', showImages);
-
-    $window.on('resize', function() {
-        getDimensions();
-        showImages();
-    });
-
-    // Init
-    showImages();
+    load();
 
 };
 
-module.exports.showImages = showImages;
+module.exports.load = load;
