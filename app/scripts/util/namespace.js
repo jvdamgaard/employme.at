@@ -8,7 +8,7 @@ var _ = require('lodash');
 /**
  * Make a namespace safely for modules.
  *
- * Example
+ * # Example
  *
  *     namespace('App.my.module');
  *     // => window.App.my.module

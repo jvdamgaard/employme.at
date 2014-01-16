@@ -1,7 +1,107 @@
-//- TODO: A lot of mixins
-//- TODO: Replace h1, h2, h3 with h4
-//- TODO: Use split + join instead of replace
-//- TODO: Css external
+- // Javascript vars
+- var path = locals.name.replace('.js', '');
+- var require = 'app/' + path;
+- var filename = path.replace(/^.*[\\\/]/, ''); // After last /
+- var header = filename.replace(/-/g, ' '); // Replace - with spaces
+- var header = header.charAt(0).toUpperCase() + header.slice(1); // Uppercase for char
+- var varName = filename.replace(/-([a-z])/g, function (g) { return g[1].toUpperCase(); }); // hyphen to camelCase
+
+- // Convert params to comma seperated string
+- var getParams = function(symbol) {
+-   var paramsString = '';
+-   var i, max, tag, tagName;
+-   for (i=0, max=symbol.tags.length; i<max; i++) {
+-     tag = symbol.tags[i];
+-     if (tag.type === 'param') {
+-       tagName = tag.name;
+-       // Only include first level params
+-       if (tagName.indexOf('.') === -1) {
+-         // Remove default value from paramsString
+-         if (tagName.indexOf('=') > -1) {
+-           tagName = tagName.split('=')[0];
+-           tagName += ']';
+-         }
+-         paramsString += tagName + ', ';
+-       }
+-     }
+-   }
+-   paramsString = paramsString.replace(/,\s*$/, '');
+-   return paramsString;
+- };
+
+- // Convert param tag to html
+- var getParamOutput = function(tag) {
+-   var paramOutput = '<span class="code">' + tag.name + '</span> <em>(' + tag.types + ')</em>'
+-   if (tag.description) {
+-     paramOutput += ': ' + tag.description;
+-   }
+-   return paramOutput;
+- }
+
+- var getReturnOutput = function(tag) {
+-   var returnText = '<em>(' + tag.types + ')</em>'
+-   if (tag.description) {
+-     returnText += ': ' + tag.description
+-   }
+-   return returnText;
+- };
+
+- // Checks if symbol is exported/global
+- var isExport = function(symbol) {
+-   for (i=0, max=symbol.tags.length; i<max; i++) {
+-     tag = symbol.tags[i];
+-     if (tag.type === 'exports' && symbol.ctx.name !== 'exports') {
+-       return true;
+-     }
+-   }
+-   return false;
+- };
+
+- var beginsWithHeader = function(text) {
+-   return (text.indexOf('<h4>') === 0);
+- };
+
+- // Create header for symbol
+- var getHeader = function(symbol, showParams) {
+-   var symbolHeader = symbol.ctx.name;
+-   if (symbolHeader === 'exports') {
+-     symbolHeader = varName;
+-   } else if (isExport(symbol)) {
+-     symbolHeader = varName + '.' + symbolHeader;
+-   }
+-   // Include params in header is function
+-   if (symbol.ctx.type === 'method' || symbol.ctx.type === 'function') {
+-     symbolHeader += '(';
+-     if (showParams) {
+-       symbolHeader += getParams(symbol);
+-     }
+-     symbolHeader += ')';
+-   }
+-   return symbolHeader;
+- };
+
+- var removeLineBreaks = function(text) {
+-   return text.split('<br />').join(' ');
+- };
+
+- var addJsCode = function(text) {
+-   return text.split('<pre>').join('<pre class="language-javascript">');
+- }
+
+- var transformHeaders = function(text) {
+-   var headers = 'h1 h2 h3'.split(' ');
+-   var i, max, header;
+-   for (i=0, max=headers.length; i<max; i++) {
+-     header = headers[i];
+-     text = text.split('<' + header).join('<h4').split('</' + header).join('</h4');
+-   }
+-   return text;
+- };
+
+- var convertDescription = function(text) {
+-   return removeLineBreaks(addJsCode(transformHeaders(text)));
+- }
+
 mixin parseObject(obj)
   ul
     each val, key in obj
@@ -29,32 +129,7 @@ mixin labelForTag(tag)
   span(class=["label", "label-success", "radius", "ctx-type"])= tag.type
   span= ' '
 
-mixin header(symbol, varName)
-  - var header = symbol.ctx.name
-  if header === 'exports'
-    - header = varName
-  if symbol.ctx.type === 'method' || symbol.ctx.type === 'function'
-    - header += '('
-    each tag in symbol.tags
-      if tag.type === 'param'
-        - var tagName = tag.name
-        if tagName.indexOf('.') === -1
-          if tagName.indexOf('=') > -1
-            - tagName = tagName.split('=')[0]
-            - tagName += ']'
-          - header += tagName + ', '
-      if tag.type === 'exports' && symbol.ctx.name !== 'exports'
-        - header = varName + '.' + header
-    - header = header.replace(/,\s*$/, '')
-    - header += ')'
-
-  h2.code(id='#{symbol.ctx.name}')= header
-
 !!!5
-//if IE 8
-  |<html class="no-js lt-ie9">
-//if gt IE 8
-  |<!--> <html class="no-js"> <!--
 head
   meta(charset='utf-8')
   meta(http-equiv='X-UA-Compatible', content='IE=edge')
@@ -64,105 +139,8 @@ head
   link(rel='stylesheet', href='/bootstrap/dist/css/bootstrap.min.css')
   link(rel='stylesheet', href='/css/bootstrap-docs.css')
   link(rel='stylesheet', href='/prismjs/prism-okaidia.css')
-  style(type='text/css')
-    h2 {
-      padding-top: 80px;
-    }
-    h4 {
-      margin-top: 24px;
-    }
-    .code {
-      font-family: Consolas, Monaco, 'Andale Mono', monospace;
-    }
-    .bs-docs-nav .navbar-nav > li > a {
-      color: #fff;
-    }
-    .bs-docs-nav .navbar-nav > li > a:hover {
-      color: #fff;
-    }
-    .bs-docs-nav {
-      background-color: #272822;
-    }
-    .bs-docs-nav .navbar-nav > .dropdown > a:hover .caret {
-      border-top-color: #fff;
-      border-bottom-color: #fff;
-    }
-    .bs-docs-nav .navbar-nav > .dropdown > a .caret {
-      border-top-color: #999;
-      border-bottom-color: #999;
-    }
-    .bs-docs-nav .navbar-nav > li > .dropdown-menu {
-      text-shadow: none;
-    }
-    .bs-docs-nav .navbar-nav > .open > a, .bs-docs-nav .navbar-nav > .open > a:hover, .bs-docs-nav .navbar-nav > .open > a:focus {
-      background-color: #373832;
-    }
-    .bs-sidebar .nav > .active > a, .bs-sidebar .nav > .active:hover > a, .bs-sidebar .nav > .active:focus > a {
-      color: #272822;
-      border-right: 1px solid #272822;
-    }
-    .bs-sidebar .nav > .active > a, .bs-sidebar .nav > .active:hover > a, .bs-sidebar .nav > .active:focus > a {
-      border-left: 1px solid #272822;
-      border-right: none;
-      padding-left: 29px !important;
-    }
-    .bs-sidebar .nav > li > a:hover, .bs-sidebar .nav > li > a:focus {
-      font-weight: bold;
-      background-color: transparent;
-      border-right: none;
-    }
-    .bs-sidenav {
-      background-color: transparent;
-    }
-    .row {
-      margin-bottom: 20px;
-    }
-    .row h1:first-of-type {
-      padding-top: 0;
-    }
-    .resizeable {
-      padding: 5px 15px 5px 0;
-      resize: vertical;
-      overflow: auto;
-    }
-    .bs-docs-section {
-      padding-bottom: 500px;
-    }
-    .bs-docs-section > h1 {
-      padding-bottom: 9px;
-      margin: 40px 0 20px;
-      border-bottom: 1px solid #eee;
-    }
-    .bs-example {
-      padding-right: 0;
-      background: #FFF;
-    }
-    .bs-example iframe {
-      display: block;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      border: 0;
-    }
-    .preview-code {
-      width: 100%;
-      line-height: 1.428571429;
-      color: #333;
-      font-size: 13px;
-      font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
-      resize: none;
-      white-space: pre-wrap;
-      word-wrap: break-word;
-    }
-    .bs-sidebar .nav > li > a:not(.lv1) {
-      padding-top: 3px;
-      padding-bottom: 3px;
-      padding-left: 30px;
-      font-size: 90%;
-    }
-    pre {
-      font-size: 14px;
-    }
+  link(rel='stylesheet', href='/css/jvdamgaard-theme.css')
+
 body(data-spy='scroll', data-target='#sub-nav', data-offset='200')
   header.navbar.navbar-inverse.navbar-fixed-top.bs-docs-nav(role='banner')
     .container
@@ -195,27 +173,18 @@ body(data-spy='scroll', data-target='#sub-nav', data-offset='200')
           mixin dropDown(cacheFolder, subs)
 
   .container.bs-docs-container
-    - var path = locals.name.replace('.js', '')
-    - var require = 'app/' + path
-    - var filename = path.replace(/^.*[\\\/]/, '') // After last /
-    - var header = filename.replace(/-/g, ' '); // Replace - with spaces
-    - var header = header.charAt(0).toUpperCase() + header.slice(1); // Uppercase for char
-    - var varName = filename.replace(/-([a-z])/g, function (g) { return g[1].toUpperCase(); }); // hyphen to camelCase
+
     .row
       .col-md-3
         .bs-sidebar.hidden-print.affix(role='complementary', id='sub-nav')
           ul.nav.bs-sidenav
             each symbol in dox
               if symbol.ctx.name
-                  - var navHeader = symbol.ctx.name
-                  if navHeader === 'exports'
-                    - navHeader = varName
-                  li
-                    a(href='##{symbol.ctx.name}')= navHeader
+                li
+                  a(href='##{symbol.ctx.name}')= getHeader(symbol)
       .col-md-9(role='main')
         if locals.readme
-          - var readme = locals.readme.split('<br>').join(' ')
-          .bs-docs-section !{readme}
+          .bs-docs-section!= removeLineBreaks(readme)
         else
           .bs-docs-section
             h1 #{header}
@@ -224,31 +193,26 @@ body(data-spy='scroll', data-target='#sub-nav', data-offset='200')
 
             each symbol in dox
               //- mixin parseObject(symbol)
+
+              //- Symbols not attached to a var of function: Descriptions and
+              //- callback functions
               if !symbol.ctx.name
+
+                //- Callback methods used after functions
                 if symbol.tags.length > 0 && symbol.tags[0].type == 'callback'
-                  - var callbackHeader = symbol.tags[0].string + ': function('
-                  each tag in symbol.tags
-                    if tag.type == 'param'
-                      - callbackHeader += tag.name + ', '
-                  - callbackHeader = callbackHeader.replace(/,\s*$/, '')
-                  - callbackHeader += ')'
-                  h4= callbackHeader
-                  em !{symbol.description.full.split('<br>').join(' ')}
+                  h4.code= symbol.tags[0].string + ' = function(' + getParams(symbol) + ')'
+                  em!= convertDescription(symbol.description.full)
                   ol
                     each tag in symbol.tags
                       if tag.type == 'param'
-                        - var tagText = '<span class="code">' + tag.name + '</span> <em>(' + tag.types + ')</em>'
-                        if tag.description
-                          - tagText += ': ' + tag.description
-                        li !{tagText}
-                else
-                  - var full = symbol.description.full.split('<br>').join(' ')
-                  - full = full.split('<pre>').join('<pre class="language-javascript">')
-                  - full = full.replace('<p>Example</p>', '<h4>Example</h4>')
-                  .description !{full}
-              else
+                        li!= getParamOutput(tag)
+
+                else //- Description
+                  .description!= convertDescription(symbol.description.full)
+
+              else //- Symbols attached to a method or var
                 section(id=symbol.ctx.name)
-                  mixin header(symbol, varName)
+                  h2.code(id='#{symbol.ctx.name}')= getHeader(symbol, true)
                   if !symbol.gtype && symbol.type
                     p
                       span(class=["label", "label-inverse", "radius", "ctx-type"])= symbol.type
@@ -258,37 +222,26 @@ body(data-spy='scroll', data-target='#sub-nav', data-offset='200')
                       each tag in symbol.tags
                         if tag.type !== 'param' && tag.type !== 'return'
                           mixin labelForTag(tag)
-
-                  - var summary = symbol.description.summary.split('<br />').join(' ')
-                  - summary = summary.split('<pre>').join('<pre class="language-javascript">')
-                  .description !{summary}
+                  .description!= convertDescription(symbol.description.summary)
                   if symbol.hasParams
                     h4 Arguments
                     ol
                       each tag in symbol.tags
                         if tag.type == 'param'
-                          - var tagText = '<span class="code">' + tag.name + '</span> <em>(' + tag.types + ')</em>'
-                          if tag.description
-                            - tagText += ': ' + tag.description
-                          li !{tagText}
+                          li!= getParamOutput(tag)
 
                   if symbol.return
                     each tag in symbol.tags
                       if tag.type === 'return'
                         if tag.types[0] !== 'void'
-                          - var returnText = '<em>(' + tag.types + ')</em>'
-                          if tag.description
-                            - returnText += ': ' + tag.description
                           h4 Returns
-                          p !{returnText}
-                  - var body = symbol.description.body
+                          p!= getReturnOutput(tag)
+                  - body = symbol.description.body
                   if body
-                    if body.indexOf('<p>Example</p>') !== 0
+                    - body = convertDescription(body);
+                    if !beginsWithHeader(body)
                       - body = '<h4>Description</h4>' + body
-                    - body = body.replace('<p>Example</p>', '<h4>Example</h4>')
-                    - body = body.split('<br />').join(' ')
-                    - body = body.split('<pre>').join('<pre class="language-javascript">')
-                    div !{body}
+                    div!= body
 
   script(src='/jquery/jquery.js')
   script(src='/bootstrap/dist/js/bootstrap.js')

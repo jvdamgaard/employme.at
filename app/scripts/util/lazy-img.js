@@ -1,7 +1,7 @@
 /**
  * Lazy load of `<img>` and `background-image` based on window width and device pixel ratio.
  *
- * Example
+ * # Example
  *
  *     // Init lazy img
  *     lazyImg({

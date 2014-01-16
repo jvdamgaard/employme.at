@@ -2,7 +2,7 @@
  * Main entry for the javascripts.
  * Logs dependencies version
  *
- * #### External dependencies to be used
+ * # External dependencies to be used
  *
  *     var _ = require('lodash');
  *     var $ = require('jquery');
@@ -24,7 +24,7 @@ require('app/util/lazy-img')({
 /**
  * Log version of dependencies with beautified formatting.
  *
- * Example
+ * # Example
  *
  *     logVersion('Lo-Dash', _.VERSION);
  *     // => ' - Lo-Dash              : 2.4.1'
@@ -45,7 +45,7 @@ var logVersion = function(name, version) {
 /**
  * Log a seperator with lines.
  *
- * Example
+ * # Example
  *
  *     logSeperator();
  *     // => '---------------------------------------'
