@@ -1,6 +1,12 @@
 /**
  * Main entry for the javascripts.
  * Logs dependencies version
+ *
+ * #### External dependencies to be used
+ *
+ *     var _ = require('lodash');
+ *     var $ = require('jquery');
+ *     var moment = require('moment');
  */
 
 // Dependencies

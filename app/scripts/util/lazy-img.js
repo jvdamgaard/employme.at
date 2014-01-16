@@ -5,20 +5,19 @@
  *
  *     // Init lazy img
  *     lazyImg({
- *         threshold: 200,
- *         selector: 'lazy-img'
+ *         threshold: 200
  *     });
  *
  *     // Rerun image loader after element has been appended
  *     $('<img class="lazy-img" width="200" height="100"' +
  *         'data-src="img-mobile.jpg"' +
  *         'data-src-retina="img-mobile@2x.jpg"' +
- *         'data-src-small="img-tablet.jpg"' +
- *         'data-src-small-retina="img-tablet@2x.jpg"' +
- *         'data-src-medium="img-desktop.jpg"' +
- *         'data-src-medium-retina="img-desktop@2x.jpg"' +
- *         'data-src-large="img-large-desktop.jpg"' +
- *         'data-src-large-retina="img-large-desktop@2x.jpg"' +
+ *         'data-src-lap="img-lap.jpg"' +
+ *         'data-src-lap-retina="img-lap@2x.jpg"' +
+ *         'data-src-desk="img-desk.jpg"' +
+ *         'data-src-desk-retina="img-desk@2x.jpg"' +
+ *         'data-src-desk-wide="img-desk-wide.jpg"' +
+ *         'data-src-desk-wide-retina="img-desk-wide@2x.jpg"' +
  *         '/>').appendTo('html');
  *
  *     lazyImg.showImages();
@@ -188,9 +187,9 @@ var showImages = function() {
  * @param    {String}    [options.selector='.lazy-img']     Selector to match against images to load.
  * @param    {Int}       [options.threshold=0]              Load images behover they're in the scrolling area. E.g. a value og `200` will load the images when they're 200 pixel above the window area.
  * @param    {Object}    [options.sizes]                    `key`: name, `value`: min-width.
- * @param    {Int}       [options.sizes.small=640]
- * @param    {Int}       [options.sizes.medium=900]
- * @param    {Int}       [options.sizes.large=1200]
+ * @param    {Int}       [options.sizes.lap=481]
+ * @param    {Int}       [options.sizes.desk=1024]
+ * @param    {Int}       [options.sizes.desk-wide=1200]
  * @param    {String}    [options.retinaPrefix='retina']    Used for identifying retina sources. E.g. `data-src-retina="img@2x.jpg"`.
  * @param    {boolean}   [options.isLazy=true]              If `true` images will first load when in scroll area.
  *
@@ -203,9 +202,9 @@ module.exports = function(options) {
     selector = options.selector || '.lazy-img';
     threshold = options.threshold || 0;
     sizes = options.sizes || {
-        small: 640,
-        medium: 900,
-        large: 1200
+        lap: 481,
+        desk: 1024,
+        'desk-wide': 1200
     };
     retinaPrefix = options.retinaPrefix || 'retina';
     isLazy = options.isLazy;

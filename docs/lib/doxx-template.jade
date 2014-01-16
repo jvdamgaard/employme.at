@@ -1,3 +1,7 @@
+//- TODO: A lot of mixins
+//- TODO: Replace h1, h2, h3 with h4
+//- TODO: Use split + join instead of replace
+//- TODO: Css external
 mixin parseObject(obj)
   ul
     each val, key in obj
@@ -16,9 +20,6 @@ mixin dropDown(subFolder, subFiles)
       ul.dropdown-menu
         each subFile in subFiles
           li: a(href="#{subFile.rel}") #{subFile.file}
-
-mixin iForSymbolType(symbol)
-  i(class=["alert", "alert-"+(symbol.type === "function" || symbol.type === "method" ? "info":"success")])
 
 mixin labelForSymbolType(symbol)
   span(class=["label", "label-info", "radius", "ctx-type"])= symbol.ctx.type
@@ -47,7 +48,7 @@ mixin header(symbol, varName)
     - header = header.replace(/,\s*$/, '')
     - header += ')'
 
-  h2(id='#{symbol.ctx.name}')= header
+  h2.code(id='#{symbol.ctx.name}')= header
 
 !!!5
 //if IE 8
@@ -65,7 +66,6 @@ head
   link(rel='stylesheet', href='/prismjs/prism-okaidia.css')
   style(type='text/css')
     h2 {
-      font-family: Consolas, Monaco, 'Andale Mono', monospace;
       padding-top: 80px;
     }
     h4 {
@@ -196,11 +196,11 @@ body(data-spy='scroll', data-target='#sub-nav', data-offset='200')
 
   .container.bs-docs-container
     - var path = locals.name.replace('.js', '')
-    - var require = 'app/' + locals.name.replace('.js', '')
-    - var filename = locals.name.replace(/^.*[\\\/]/, '').replace('.js', '')
-    - var header = filename.replace(/-/g, ' ');
-    - var header = header.charAt(0).toUpperCase() + header.slice(1);
-    - var varName = filename.replace(/-([a-z])/g, function (g) { return g[1].toUpperCase(); });
+    - var require = 'app/' + path
+    - var filename = path.replace(/^.*[\\\/]/, '') // After last /
+    - var header = filename.replace(/-/g, ' '); // Replace - with spaces
+    - var header = header.charAt(0).toUpperCase() + header.slice(1); // Uppercase for char
+    - var varName = filename.replace(/-([a-z])/g, function (g) { return g[1].toUpperCase(); }); // hyphen to camelCase
     .row
       .col-md-3
         .bs-sidebar.hidden-print.affix(role='complementary', id='sub-nav')
@@ -233,7 +233,7 @@ body(data-spy='scroll', data-target='#sub-nav', data-offset='200')
                   - callbackHeader = callbackHeader.replace(/,\s*$/, '')
                   - callbackHeader += ')'
                   h4= callbackHeader
-                  em !{symbol.description.full}
+                  em !{symbol.description.full.split('<br>').join(' ')}
                   ol
                     each tag in symbol.tags
                       if tag.type == 'param'
@@ -242,7 +242,7 @@ body(data-spy='scroll', data-target='#sub-nav', data-offset='200')
                           - tagText += ': ' + tag.description
                         li !{tagText}
                 else
-                  - var full = symbol.description.full
+                  - var full = symbol.description.full.split('<br>').join(' ')
                   - full = full.split('<pre>').join('<pre class="language-javascript">')
                   - full = full.replace('<p>Example</p>', '<h4>Example</h4>')
                   .description !{full}
