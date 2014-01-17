@@ -1,6 +1,6 @@
 // Dependencies
 var expect = require('chai').expect;
-var Promise = require('es6-promise').Promise;
+var Promise = require('bluebird');
 
 describe('Promise', function() {
 

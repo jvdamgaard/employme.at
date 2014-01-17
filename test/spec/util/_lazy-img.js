@@ -15,10 +15,29 @@ describe('app/util/lazy-img', function() {
         var $image = $('<img class="lazy-img" data-src="' + imgSrc + '" />')
             .prependTo('body');
         $image.on('load', function() {
-            expect($image.attr('src')).to.not.eql(imgSrc);
-            $image.remove();
+            expect($image.attr('src')).to.contain(imgSrc);
+            $image.remove(); // Clean up
             done();
         });
+        lazyImg.load();
+    });
+
+    it('should set the background-image attribute of an div tag', function(done) {
+        var $image = $('<div class="lazy-img" data-src="' + imgSrc + '" />')
+            .prependTo('body');
+        var checkBgImage = setInterval(function() {
+            var bgImage = $image.css('background-image');
+            if (bgImage && bgImage !== 'none') {
+                expect(bgImage).to.contain(imgSrc);
+
+                // Clean up
+                $image.remove();
+                clearInterval(checkBgImage);
+
+                done();
+            }
+
+        }, 10);
         lazyImg.load();
     });
 
