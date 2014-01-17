@@ -11,6 +11,7 @@ Style is based on [OOCSS](https://github.com/stubbornella/oocss/wiki) and [BEM](
 @import "inuit.css/inuit";
 
 @import "objects/hexagon";
+@import "objects/lazy-img";
 
 body {
     margin: 0 auto;

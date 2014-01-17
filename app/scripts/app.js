@@ -1,7 +1,12 @@
 /**
- * Main entry for the javascripts
+ * Main entry for the javascripts.
+ * Logs dependencies version
  *
- * - logs version of dependencies
+ * # External dependencies to be used
+ *
+ *     var _ = require('lodash');
+ *     var $ = require('jquery');
+ *     var moment = require('moment');
  */
 
 // Dependencies
@@ -10,17 +15,22 @@ var $ = require('jquery');
 var moment = require('moment');
 var app = require('app');
 
+// Load modules
+require('app/lib/no-hover-on-scroll');
+require('app/util/lazy-img')({
+    threshold: 200
+});
+
 /**
- * Log version of dependencies with beautified formatting
+ * Log version of dependencies with beautified formatting.
  *
- * Example:
+ * # Example
  *
- * ```
- * logVersion('Lo-Dash', _.VERSION);
- * ```
+ *     logVersion('Lo-Dash', _.VERSION);
+ *     // => ' - Lo-Dash              : 2.4.1'
  *
- * @param     {string}     name        Name og librariry/dependency
- * @param     {string}     version     Version number in format {major}.{minor}.{patch}
+ * @param     {String}     name        Name of library/dependency
+ * @param     {String}     version     Version number in format {major}.{minor}.{patch}
  *
  * @return    {void}
  */
@@ -33,7 +43,13 @@ var logVersion = function(name, version) {
 };
 
 /**
- * Log a seperator with lines
+ * Log a seperator with lines.
+ *
+ * # Example
+ *
+ *     logSeperator();
+ *     // => '---------------------------------------'
+ *
  * @return     {void}
  */
 var logSeperator = function() {

@@ -1,3 +1,4 @@
 node_modules/*
 !node_modules/travis-cov
 .tmp
+npm-debug.log

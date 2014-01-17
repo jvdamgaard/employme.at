@@ -2,8 +2,11 @@
  * Replace long path to js files i coverage report
  */
 
-var pathMac = __dirname.replace('grunt/options', 'app/scripts/');
-var pathWin = __dirname.replace('grunt\\options', 'app\\scripts\\');
+var path = require('path');
+
+var modulesDir = path
+    .resolve(__dirname, '../../node_modules')
+    .replace(/\\/g, '/') + '/';
 
 module.exports = {
 
@@ -14,10 +17,10 @@ module.exports = {
         },
         options: {
             replacements: [{
-                pattern: new RegExp(pathMac, 'g'),
+                pattern: new RegExp(modulesDir, 'g'),
                 replacement: ''
             }, {
-                pattern: new RegExp(pathWin, 'g'),
+                pattern: /\.js/g,
                 replacement: ''
             }]
         }

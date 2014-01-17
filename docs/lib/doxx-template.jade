@@ -1,3 +1,117 @@
+- // Javascript vars
+- var path = locals.name.replace('.js', '');
+- var require = 'app/' + path;
+- var filename = path.replace(/^.*[\\\/]/, ''); // After last /
+- var header = filename.replace(/-/g, ' '); // Replace - with spaces
+- var header = header.charAt(0).toUpperCase() + header.slice(1); // Uppercase for char
+- var varName = filename.replace(/-([a-z])/g, function (g) { return g[1].toUpperCase(); }); // hyphen to camelCase
+
+- // Convert params to comma seperated string
+- var getParams = function(symbol) {
+-   var paramsString = '';
+-   var i, max, tag, tagName;
+-   for (i=0, max=symbol.tags.length; i<max; i++) {
+-     tag = symbol.tags[i];
+-     if (tag.type === 'param') {
+-       tagName = tag.name;
+-       // Only include first level params
+-       if (tagName.indexOf('.') === -1) {
+-         // Remove default value from paramsString
+-         if (tagName.indexOf('=') > -1) {
+-           tagName = tagName.split('=')[0];
+-           tagName += ']';
+-         }
+-         paramsString += tagName + ', ';
+-       }
+-     }
+-   }
+-   paramsString = paramsString.replace(/,\s*$/, '');
+-   return paramsString;
+- };
+
+- // Convert param tag to html
+- var getParamOutput = function(tag) {
+-   var paramOutput = '<span class="code">' + tag.name + '</span> <em>(' + tag.types + ')</em>'
+-   if (tag.description) {
+-     paramOutput += ': ' + tag.description;
+-   }
+-   return paramOutput;
+- }
+
+- var getReturnOutput = function(tag) {
+-   var returnText = '<em>(' + tag.types + ')</em>'
+-   if (tag.description) {
+-     returnText += ': ' + tag.description
+-   }
+-   return returnText;
+- };
+
+- // Checks if symbol is exported/global
+- var isExport = function(symbol) {
+-   for (i=0, max=symbol.tags.length; i<max; i++) {
+-     tag = symbol.tags[i];
+-     if (tag.type === 'exports' && symbol.ctx.name !== 'exports') {
+-       return true;
+-     }
+-   }
+-   return false;
+- };
+
+- var beginsWithHeader = function(text) {
+-   return (text.indexOf('<h4>') === 0);
+- };
+
+- // Create header for symbol
+- var getHeader = function(symbol, showParams) {
+-   var symbolHeader = symbol.ctx.name;
+-   if (symbolHeader === 'exports') {
+-     symbolHeader = varName;
+-   } else if (isExport(symbol)) {
+-     symbolHeader = varName + '.' + symbolHeader;
+-   }
+-   // Include params in header is function
+-   if (symbol.ctx.type === 'method' || symbol.ctx.type === 'function') {
+-     symbolHeader += '(';
+-     if (showParams) {
+-       symbolHeader += getParams(symbol);
+-     }
+-     symbolHeader += ')';
+-   }
+-   return symbolHeader;
+- };
+
+- var removeLineBreaks = function(text) {
+-   return text.split('<br />').join(' ');
+- };
+
+- var addJsCode = function(text) {
+-   return text.split('<pre>').join('<pre class="language-javascript">');
+- }
+
+- var transformHeaders = function(text) {
+-   var headers = 'h1 h2 h3'.split(' ');
+-   var i, max, header;
+-   for (i=0, max=headers.length; i<max; i++) {
+-     header = headers[i];
+-     text = text.split('<' + header).join('<h4').split('</' + header).join('</h4');
+-   }
+-   return text;
+- };
+
+- var convertDescription = function(text) {
+-   return removeLineBreaks(addJsCode(transformHeaders(text)));
+- }
+
+mixin parseObject(obj)
+  ul
+    each val, key in obj
+      li
+        span #{key}:
+          if typeof val === 'string'
+            span #{val}
+          else if typeof val === 'object'
+            mixin parseObject(val)
+
 mixin dropDown(subFolder, subFiles)
   if subFolder != '' && subFiles.length > 0
     li.dropdown
@@ -7,17 +121,15 @@ mixin dropDown(subFolder, subFiles)
         each subFile in subFiles
           li: a(href="#{subFile.rel}") #{subFile.file}
 
-mixin iForSymbolType(symbol)
-  i(class=["alert", "alert-"+(symbol.type === "function" || symbol.type === "method" ? "info":"success")])
-
 mixin labelForSymbolType(symbol)
-  div(class=["label", "label-"+(symbol.gtype === "function" || symbol.gtype === "method" ? "info":"success"), "radius", "ctx-type"])= symbol.ctx.type
+  span(class=["label", "label-info", "radius", "ctx-type"])= symbol.ctx.type
+  span= ' '
+
+mixin labelForTag(tag)
+  span(class=["label", "label-success", "radius", "ctx-type"])= tag.type
+  span= ' '
 
 !!!5
-//if IE 8
-  |<html class="no-js lt-ie9">
-//if gt IE 8
-  |<!--> <html class="no-js"> <!--
 head
   meta(charset='utf-8')
   meta(http-equiv='X-UA-Compatible', content='IE=edge')
@@ -26,66 +138,10 @@ head
   meta(name='viewport', content='width=device-width,initial-scale=1')
   link(rel='stylesheet', href='/bootstrap/dist/css/bootstrap.min.css')
   link(rel='stylesheet', href='/css/bootstrap-docs.css')
-  link(rel='stylesheet', href='/prismjs/prism.css')
-  style(type='text/css')
-    .bs-docs-nav .navbar-nav > .dropdown > a:hover .caret {
-      border-top-color: #fff;
-      border-bottom-color: #fff;
-    }
-    .bs-docs-nav .navbar-nav > .dropdown > a .caret {
-      border-top-color: #999;
-      border-bottom-color: #999;
-    }
-    .bs-docs-nav .navbar-nav > li > .dropdown-menu {
-      text-shadow: none;
-    }
-    .bs-docs-nav .navbar-nav > .open > a, .bs-docs-nav .navbar-nav > .open > a:hover, .bs-docs-nav .navbar-nav > .open > a:focus {
-      background-color: #463265;
-    }
-    .row {
-      margin-bottom: 20px;
-    }
-    .row h1:first-of-type {
-      padding-top: 0;
-    }
-    .resizeable {
-      padding: 5px 15px 5px 0;
-      resize: vertical;
-      overflow: auto;
-    }
-    .bs-docs-section > h1 {
-      padding-bottom: 9px;
-      margin: 40px 0 20px;
-      border-bottom: 1px solid #eee;
-    }
-    .bs-example {
-      padding-right: 0;
-      background: #FFF;
-    }
-    .bs-example iframe {
-      display: block;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      border: 0;
-    }
-    .preview-code {
-      width: 100%;
-      line-height: 1.428571429;
-      color: #333;
-      font-size: 13px;
-      font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
-      resize: none;
-      white-space: pre-wrap;
-      word-wrap: break-word;
-    }
-    .bs-sidebar .nav > li > a:not(.lv1) {
-      padding-top: 3px;
-      padding-bottom: 3px;
-      padding-left: 30px;
-      font-size: 90%;
-    }
-body(data-spy='scroll', data-target='#sub-nav')
+  link(rel='stylesheet', href='/prismjs/prism-okaidia.css')
+  link(rel='stylesheet', href='/css/jvdamgaard-theme.css')
+
+body(data-spy='scroll', data-target='#sub-nav', data-offset='200')
   header.navbar.navbar-inverse.navbar-fixed-top.bs-docs-nav(role='banner')
     .container
       .navbar-header
@@ -94,7 +150,7 @@ body(data-spy='scroll', data-target='#sub-nav')
           span.icon-bar
           span.icon-bar
           span.icon-bar
-        a.navbar-brand(href='index.html') Javascript documentation
+        a.navbar-brand(href='/') JS Docs
       nav.collapse.navbar-collapse.bs-navbar-collapse(role='navigation')
         ul.nav.navbar-nav
           - var cacheFolder = ''
@@ -117,6 +173,7 @@ body(data-spy='scroll', data-target='#sub-nav')
           mixin dropDown(cacheFolder, subs)
 
   .container.bs-docs-container
+
     .row
       .col-md-3
         .bs-sidebar.hidden-print.affix(role='complementary', id='sub-nav')
@@ -124,47 +181,67 @@ body(data-spy='scroll', data-target='#sub-nav')
             each symbol in dox
               if symbol.ctx.name
                 li
-                  a(href='##{symbol.ctx.name}')= symbol.ctx.name
+                  a(href='##{symbol.ctx.name}')= getHeader(symbol)
       .col-md-9(role='main')
-        .bs-docs-section
-          if locals.readme
-            section(id=name) !{readme}
-          else
-            - var header = locals.name.replace('.js', '')
+        if locals.readme
+          .bs-docs-section!= removeLineBreaks(readme)
+        else
+          .bs-docs-section
             h1 #{header}
-          each symbol in dox
-            if symbol.ctx.name
-              section(id=symbol.ctx.name)
-                h2(id='#{symbol.ctx.name}')= symbol.ctx.name
-                h5.subheader
-                if !symbol.gtype && symbol.type
-                  p
-                    div(class=["label", "label-inverse", "radius", "ctx-type"])= symbol.type
-                else
-                  p
-                    mixin labelForSymbolType(symbol)
-                    if symbol.ctx.string
-                      span= symbol.ctx.string
-                    if symbol.return
-                      |  ->
-                      span= symbol.return
+            pre.language-javascript
+              code var #{varName} = require('#{require}');
 
-            if symbol.hasParams
-              table.table.table-bordered.table-striped
-                thead
-                  tr
-                    th(style="width:20%") Option name
-                    th(style="width:20%") Type
-                    th Description
-                tbody
-                  each tag in symbol.tags
-                    if tag.type == 'param'
-                      tr
-                        td= tag.name
-                        td= tag.types
-                        td= tag.description
+            each symbol in dox
+              //- mixin parseObject(symbol)
 
-            .description.language-javascript !{symbol.description.full} !{symbol.description.extra}
+              //- Symbols not attached to a var of function: Descriptions and
+              //- callback functions
+              if !symbol.ctx.name
+
+                //- Callback methods used after functions
+                if symbol.tags.length > 0 && symbol.tags[0].type == 'callback'
+                  h4.code= symbol.tags[0].string + ' = function(' + getParams(symbol) + ')'
+                  em!= convertDescription(symbol.description.full)
+                  ol
+                    each tag in symbol.tags
+                      if tag.type == 'param'
+                        li!= getParamOutput(tag)
+
+                else //- Description
+                  .description!= convertDescription(symbol.description.full)
+
+              else //- Symbols attached to a method or var
+                section(id=symbol.ctx.name)
+                  h2.code(id='#{symbol.ctx.name}')= getHeader(symbol, true)
+                  if !symbol.gtype && symbol.type
+                    p
+                      span(class=["label", "label-inverse", "radius", "ctx-type"])= symbol.type
+                  else
+                    p
+                      mixin labelForSymbolType(symbol)
+                      each tag in symbol.tags
+                        if tag.type !== 'param' && tag.type !== 'return'
+                          mixin labelForTag(tag)
+                  .description!= convertDescription(symbol.description.summary)
+                  if symbol.hasParams
+                    h4 Arguments
+                    ol
+                      each tag in symbol.tags
+                        if tag.type == 'param'
+                          li!= getParamOutput(tag)
+
+                  if symbol.return
+                    each tag in symbol.tags
+                      if tag.type === 'return'
+                        if tag.types[0] !== 'void'
+                          h4 Returns
+                          p!= getReturnOutput(tag)
+                  - body = symbol.description.body
+                  if body
+                    - body = convertDescription(body);
+                    if !beginsWithHeader(body)
+                      - body = '<h4>Description</h4>' + body
+                    div!= body
 
   script(src='/jquery/jquery.js')
   script(src='/bootstrap/dist/js/bootstrap.js')

@@ -2,9 +2,9 @@
 var expect = require('chai').expect;
 
 // Source file
-var namespace = require('lib/util/namespace');
+var namespace = require('app/util/namespace');
 
-describe('util/namespace', function() {
+describe('app/util/namespace', function() {
 
     var modules = {};
 
@@ -21,10 +21,5 @@ describe('util/namespace', function() {
     it('should use the given root object as the starting point for the namespace', function() {
         var module = namespace('yet.another.test.module', modules);
         expect(module).to.eql(modules.yet.another.test.module);
-    });
-
-    it('should fail if the given namespace is not a string', function() {
-        var module = namespace({}, modules);
-        expect(module).to.not.exist;
     });
 });
