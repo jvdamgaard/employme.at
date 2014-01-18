@@ -118,6 +118,7 @@ module.exports = function(grunt) {
         grunt.task.run([
             'touch:coverage',
             'copy:jsToNode',
+            'copy:travisCov',
             'mochaTest:coverage',
             'string-replace:coverage',
             'connect:coverage'
@@ -146,6 +147,7 @@ module.exports = function(grunt) {
         grunt.loadNpmTasks('grunt-mocha-test');
         grunt.task.run([
             'copy:jsToNode',
+            'copy:travisCov',
             'mochaTest:buildCoverage',
         ]);
     });

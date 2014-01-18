@@ -37,4 +37,13 @@ module.exports = {
             src: ['**/*.js']
         }]
     },
+    travisCov: {
+        files: [{
+            expand: true,
+            dot: true,
+            cwd: '<%= app.test %>/lib/travis-cov',
+            dest: 'node_modules/travis-cov',
+            src: ['*']
+        }]
+    },
 };

@@ -15,7 +15,7 @@ module.exports = {
             reporter: 'html-cov',
             quiet: true,
             captureFile: '.tmp/coverage/index.html',
-            require: ['<%= app.test %>/coverage/blanket']
+            require: ['<%= app.test %>/lib/coverage/blanket']
         },
         src: [
             '<%= app.test %>/spec/**/*.js',
@@ -27,7 +27,7 @@ module.exports = {
     buildCoverage: {
         options: {
             reporter: 'travis-cov',
-            require: ['<%= app.test %>/coverage/blanket']
+            require: ['<%= app.test %>/lib/coverage/blanket']
         },
         src: [
             '<%= app.test %>/spec/**/*.js',
