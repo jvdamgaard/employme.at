@@ -41,6 +41,8 @@ var threshold;
 var sizes;
 var retinaPrefix;
 var isLazy;
+var isScrolling = false;
+var resizeTimer;
 
 /**
  * Determine the source for this element based on the windows width.
@@ -57,6 +59,10 @@ var getSource = function($this, callback) {
     var sizeLabel;
     var mqSize;
 
+    var isSize = function(size) {
+        return size === mqSize;
+    };
+
     // Find highest (largest window width) matching source
     while (!source && i >= -1) {
 
@@ -66,7 +72,7 @@ var getSource = function($this, callback) {
                 i--;
                 continue;
             }
-            sizeLabel = 'src-' + _.findKey(sizes, mqSize);
+            sizeLabel = 'src-' + _.findKey(sizes, isSize);
 
         } else { // Non 'special' sources found. Use default source
             sizeLabel = 'src';
@@ -84,8 +90,6 @@ var getSource = function($this, callback) {
 
     if (source !== $this.data('source')) {
         $this.data('source', source);
-
-        $this.removeClass(selector.replace('.', '') + '--loaded');
 
         // Cache image
         $('<img/>').attr('src', source).on('load', function() {
@@ -107,7 +111,6 @@ var getSource = function($this, callback) {
  */
 var attachSource = function() {
     var $this = $(this);
-    console.log('attaching');
     getSource($this, function(source) {
         if ($this.is('img')) {
             // Set source on img tags
@@ -118,6 +121,8 @@ var attachSource = function() {
                 'background-image': 'url(' + source + ')'
             });
         }
+
+        console.log('lazy-img', 'image attached', source);
 
         // Loaded class for use with stylesheet
         $this.addClass(selector.replace('.', '') + '--loaded');
@@ -193,11 +198,27 @@ var load = function() {
     });
 
     // Start listening for scroll and resize events
-    $window.on('scroll', showImages);
+    $window.on('scroll', function() {
 
+        // Only fire showImags every 200ms when scrolling
+        if (!isScrolling) {
+            isScrolling = true;
+            setTimeout(function() {
+                showImages();
+                isScrolling = false;
+            }, 200);
+        }
+    });
+
+    // Recalc images on scroll
     $window.on('resize', function() {
-        getDimensions();
-        showImages();
+        clearTimeout(resizeTimer);
+
+        // Only fore event when scroll is finished
+        resizeTimer = setTimeout(function() {
+            getDimensions();
+            showImages();
+        }, 200);
     });
 
     // Init
@@ -235,6 +256,14 @@ module.exports = function(options) {
     if (!_.isBoolean(isLazy)) {
         isLazy = true;
     }
+
+    console.log('lazy-img', 'activated', {
+        selector: selector,
+        threshold: threshold,
+        sizes: sizes,
+        retinaPrefix: retinaPrefix,
+        isLazy: isLazy
+    });
 
     // Filter out and sort media queries width numbers
     mqSizes = _.values(sizes).sort(function(a, b) {
