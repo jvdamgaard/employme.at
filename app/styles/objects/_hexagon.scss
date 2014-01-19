@@ -156,12 +156,12 @@ consists of three rows or less.
 	</div>
 */
 
-@function hexagon-grid---grid-width($rows) {
+@function hexagon-grid_grid-width($rows) {
     @return $rows * 190 + $rows * $half-spacing-unit;
 }
 
-@function hexagon-grid---media-width($rows) {
-    @return hexagon-grid---grid-width($rows) + 2 * $base-spacing-unit;
+@function hexagon-grid_media-width($rows) {
+    @return hexagon-grid_grid-width($rows) + 2 * $base-spacing-unit;
 }
 
 .hexagon-grid {
@@ -173,7 +173,7 @@ consists of three rows or less.
 }
 
 @media screen
-and (max-width: hexagon-grid---media-width(2) - 1) {
+and (max-width: hexagon-grid_media-width(2) - 1) {
     // One column
     .hexagon-grid__item {
         margin: 0;
@@ -194,7 +194,7 @@ and (max-width: hexagon-grid---media-width(2) - 1) {
 }
 
 @media screen
-and (min-width: hexagon-grid---media-width(2)) {
+and (min-width: hexagon-grid_media-width(2)) {
     // More than one column
     .hexagon-grid {
         margin-bottom: 57px;
@@ -207,11 +207,11 @@ and (min-width: hexagon-grid---media-width(2)) {
 }
 
 @media screen
-and (min-width: hexagon-grid---media-width(2))
-and (max-width: hexagon-grid---media-width(3) - 1) {
+and (min-width: hexagon-grid_media-width(2))
+and (max-width: hexagon-grid_media-width(3) - 1) {
     // Two columns
     .hexagon-grid {
-        width: hexagon-grid---grid-width(2);
+        width: hexagon-grid_grid-width(2);
     }
     .hexagon-grid__item--hide-lt-five,
     .hexagon-grid__item--hide-lt-four,
@@ -224,11 +224,11 @@ and (max-width: hexagon-grid---media-width(3) - 1) {
 }
 
 @media screen
-and (min-width: hexagon-grid---media-width(3))
-and (max-width: hexagon-grid---media-width(4) - 1) {
+and (min-width: hexagon-grid_media-width(3))
+and (max-width: hexagon-grid_media-width(4) - 1) {
     // Three columns
     .hexagon-grid {
-        width: hexagon-grid---grid-width(3);
+        width: hexagon-grid_grid-width(3);
     }
     .hexagon-grid__item--hide-lt-five,
     .hexagon-grid__item--hide-lt-four {
@@ -240,11 +240,11 @@ and (max-width: hexagon-grid---media-width(4) - 1) {
 }
 
 @media screen
-and (min-width: hexagon-grid---media-width(4))
-and (max-width: hexagon-grid---media-width(5) - 1) {
+and (min-width: hexagon-grid_media-width(4))
+and (max-width: hexagon-grid_media-width(5) - 1) {
     // Four columns
     .hexagon-grid {
-        width: hexagon-grid---grid-width(4);
+        width: hexagon-grid_grid-width(4);
     }
     .hexagon-grid__item--hide-lt-five {
         display: none;
@@ -255,10 +255,10 @@ and (max-width: hexagon-grid---media-width(5) - 1) {
 }
 
 @media screen
-and (min-width: hexagon-grid---media-width(5)) {
+and (min-width: hexagon-grid_media-width(5)) {
     // Five columns
     .hexagon-grid {
-        width: hexagon-grid---grid-width(5);
+        width: hexagon-grid_grid-width(5);
     }
     .hexagon-grid__item:nth-child(9n+1) {
         margin-left: $half-spacing-unit + 95;

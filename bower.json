@@ -11,7 +11,7 @@
         "mocha": "1.17.0",
         "modernizr": "2.7.1",
         "momentjs": "2.5.0",
-        "scut": "0.8.0",
-        "prismjs": "*"
+        "prismjs": "*",
+        "scut": "0.8.0"
     }
 }

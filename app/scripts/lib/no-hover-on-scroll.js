@@ -76,16 +76,17 @@ document.addEventListener('DOMContentLoaded', function() {
         'z-index: 9;',
         'pointer-events: none'
     ].join('');
-    body.appendChild(cover);
 
     window.addEventListener('scroll', function scroll() {
         if (!scrollStarted) {
+            body.appendChild(cover);
             coverStyle.pointerEvents = 'auto';
             scrollStarted = true;
         }
         clearTimeout(timer);
 
         timer = setTimeout(function() {
+            body.removeChild(cover);
             coverStyle.pointerEvents = 'none';
             scrollStarted = false;
             if (clicked) {
