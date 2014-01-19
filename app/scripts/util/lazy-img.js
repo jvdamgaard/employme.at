@@ -244,7 +244,7 @@ var showImages = function() {
     var $loaded = $images.filter(function() {
         var $image = $(this);
 
-        if ($image.is(":hidden")) {
+        if ($image.is(':hidden')) {
             return false;
         }
 
