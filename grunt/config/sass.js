@@ -4,23 +4,17 @@
 
 module.exports = {
     options: {
-        loadPath: '.tmp/bower_components',
-        cacheLocation: '.tmp/sass'
+        includePaths: ['.tmp/bower_components']
     },
     local: {
         options: {
-            sourcemap: true,
-            trace: true,
-            style: 'expanded'
+            sourceComments: 'map'
         },
         files: {
             '<%= app.dist %>/styles/main.css': '<%= app.source %>/styles/main.scss'
         }
     },
     build: {
-        options: {
-            style: 'compressed'
-        },
         files: {
             '<%= app.dist %>/styles/main.css': '<%= app.source %>/styles/main.scss'
         }
