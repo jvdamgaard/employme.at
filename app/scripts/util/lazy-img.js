@@ -269,7 +269,7 @@ var showImages = function() {
  *
  * @return    {void}
  */
-var load = function() {
+var initialize = function() {
     getDimensions();
 
     $images.each(function() {
@@ -351,7 +351,7 @@ module.exports = function(options) {
         return a - b;
     });
 
-    load();
+    initialize();
 
 };
 
