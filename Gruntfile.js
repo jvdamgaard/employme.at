@@ -183,7 +183,7 @@ module.exports = function(grunt) {
      * Build styles
      */
     grunt.registerTask('style-build', function() {
-        grunt.loadNpmTasks('grunt-contrib-sass');
+        grunt.loadNpmTasks('grunt-sass');
         grunt.loadNpmTasks('grunt-autoprefixer');
         grunt.task.run([
             'sass:local',
@@ -252,7 +252,7 @@ module.exports = function(grunt) {
      */
     grunt.registerTask('build', function() {
         grunt.loadNpmTasks('grunt-browserify');
-        grunt.loadNpmTasks('grunt-contrib-sass');
+        grunt.loadNpmTasks('grunt-sass');
         grunt.loadNpmTasks('grunt-contrib-copy');
         grunt.loadNpmTasks('grunt-contrib-imagemin');
         grunt.loadNpmTasks('grunt-remove-logging');
