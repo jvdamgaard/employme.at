@@ -244,10 +244,6 @@ var showImages = function() {
     var $loaded = $images.filter(function() {
         var $image = $(this);
 
-        if ($image.is(':hidden')) {
-            return false;
-        }
-
         if (!isLazy) {
             return true;
         }
@@ -364,5 +360,8 @@ module.exports = function(options) {
  */
 module.exports.load = function() {
     getDimensions();
+    $images.each(function() {
+        $(this).on('show-image', attachSource);
+    });
     showImages();
 };
