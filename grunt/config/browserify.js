@@ -7,8 +7,6 @@ module.exports = {
 
         // Register global modules
         alias: [
-            './.tmp/bower_components/jquery/jquery.js:jquery',
-            './.tmp/bower_components/lodash/dist/lodash.js:lodash',
             './<%= app.source %>/scripts/lib/moment-shim.js:moment',
             './package.json:app'
         ],

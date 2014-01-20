@@ -6,8 +6,6 @@
         "bootstrap": "3.0.3",
         "chai": "1.8.1",
         "inuit.css": "5.0.0",
-        "jquery": "2.0.3",
-        "lodash": "2.4.1",
         "mocha": "1.17.0",
         "modernizr": "2.7.1",
         "momentjs": "2.5.0",

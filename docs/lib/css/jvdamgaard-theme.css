@@ -1,98 +1,98 @@
 h2 {
-    padding-top: 80px;
+    padding-top: 80px !important;
 }
 h4 {
-    margin-top: 24px;
+    margin-top: 24px !important;
 }
 .code {
-    font-family: Consolas, Monaco, 'Andale Mono', monospace;
+    font-family: Consolas, Monaco, 'Andale Mono', monospace !important;
 }
 .bs-docs-nav .navbar-nav > li > a {
-    color: #fff;
+    color: #fff !important;
 }
 .bs-docs-nav .navbar-nav > li > a:hover {
-    color: #fff;
+    color: #fff !important;
 }
 .bs-docs-nav {
-    background-color: #272822;
+    background-color: #272822 !important;
 }
 .bs-docs-nav .navbar-nav > .dropdown > a:hover .caret {
-    border-top-color: #fff;
-    border-bottom-color: #fff;
+    border-top-color: #fff !important;
+    border-bottom-color: #fff !important;
 }
 .bs-docs-nav .navbar-nav > .dropdown > a .caret {
-    border-top-color: #999;
-    border-bottom-color: #999;
+    border-top-color: #999 !important;
+    border-bottom-color: #999 !important;
 }
 .bs-docs-nav .navbar-nav > li > .dropdown-menu {
-    text-shadow: none;
+    text-shadow: none !important;
 }
 .bs-docs-nav .navbar-nav > .open > a, .bs-docs-nav .navbar-nav > .open > a:hover, .bs-docs-nav .navbar-nav > .open > a:focus {
-    background-color: #373832;
+    background-color: #373832 !important;
 }
 .bs-sidebar .nav > .active > a, .bs-sidebar .nav > .active:hover > a, .bs-sidebar .nav > .active:focus > a {
-    color: #272822;
-    border-right: 1px solid #272822;
+    color: #272822 !important;
+    border-right: 1px solid #272822 !important;
 }
 .bs-sidebar .nav > .active > a, .bs-sidebar .nav > .active:hover > a, .bs-sidebar .nav > .active:focus > a {
-    border-left: 1px solid #272822;
-    border-right: none;
+    border-left: 1px solid #272822 !important;
+    border-right: none !important;
     padding-left: 29px !important;
 }
 .bs-sidebar .nav > li > a:hover, .bs-sidebar .nav > li > a:focus {
-    font-weight: bold;
-    background-color: transparent;
-    border-right: none;
+    font-weight: bold !important;
+    background-color: transparent !important;
+    border-right: none !important;
 }
 .bs-sidenav {
-    background-color: transparent;
+    background-color: transparent !important;
 }
 .row {
-    margin-bottom: 20px;
+    margin-bottom: 20px !important;
 }
 .row h1:first-of-type {
-    padding-top: 0;
+    padding-top: 0 !important;
 }
 .resizeable {
-    padding: 5px 15px 5px 0;
-    resize: vertical;
-    overflow: auto;
+    padding: 5px 15px 5px 0 !important;
+    resize: vertical !important;
+    overflow: auto !important;
 }
 .bs-docs-section {
-    padding-bottom: 500px;
+    padding-bottom: 500px !important;
 }
 .bs-docs-section > h1 {
-    padding-bottom: 9px;
-    margin: 40px 0 20px;
-    border-bottom: 1px solid #eee;
+    padding-bottom: 9px !important;
+    margin: 40px 0 20px !important;
+    border-bottom: 1px solid #eee !important;
 }
 .bs-example {
-    padding-right: 0;
-    background: #FFF;
+    padding-right: 0 !important;
+    background: #FFF !important;
 }
 .bs-example iframe {
-    display: block;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    border: 0;
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    overflow: hidden !important;
+    border: 0 !important;
 }
 .preview-code {
-    width: 100%;
-    line-height: 1.428571429;
-    color: #333;
-    font-size: 13px;
-    font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
-    resize: none;
-    white-space: pre-wrap;
-    word-wrap: break-word;
+    width: 100% !important;
+    line-height: 1.428571429 !important;
+    color: #333 !important;
+    font-size: 14px !important;
+    font-family: Monaco, Menlo, Consolas, "Courier New", monospace !important;
+    resize: none !important;
+    white-space: pre-wrap !important;
+    word-wrap: break-word !important;
 }
 .bs-sidebar .nav > li > a:not(.lv1) {
-    padding-top: 3px;
-    padding-bottom: 3px;
-    padding-left: 30px;
-    font-size: 90%;
+    padding-top: 3px !important;
+    padding-bottom: 3px !important;
+    padding-left: 30px !important;
+    font-size: 90% !important;
 }
 pre {
-    font-size: 14px;
+    font-size: 14px !important;
 }
