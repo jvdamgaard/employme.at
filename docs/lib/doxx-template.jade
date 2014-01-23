@@ -50,7 +50,7 @@
 - var isExport = function(symbol) {
 -   for (i=0, max=symbol.tags.length; i<max; i++) {
 -     tag = symbol.tags[i];
--     if (tag.type === 'exports' && symbol.ctx.name !== 'exports') {
+-     if (tag.type === 'exports') {
 -       return true;
 -     }
 -   }
@@ -180,7 +180,9 @@ body(data-spy='scroll', data-target='#sub-nav', data-offset='200')
           ul.nav.bs-sidenav
             each symbol in dox
               if symbol.ctx.name
-                li
+                - var klass = '';
+                - if (!isExport(symbol)) klass = 'is-private hidden';
+                li(class=klass)
                   a(href='##{symbol.ctx.name}')= getHeader(symbol)
       .col-md-9(role='main')
         if locals.readme
@@ -188,10 +190,12 @@ body(data-spy='scroll', data-target='#sub-nav', data-offset='200')
         else
           .bs-docs-section
             h1 #{header}
+              button(type='button', class='btn btn-default', id='show-private') show private
             pre.language-javascript
               code var #{varName} = require('#{require}');
 
             each symbol in dox
+              - var wasExport = false;
               //- mixin parseObject(symbol)
 
               //- Symbols not attached to a var of function: Descriptions and
@@ -200,18 +204,24 @@ body(data-spy='scroll', data-target='#sub-nav', data-offset='200')
 
                 //- Callback methods used after functions
                 if symbol.tags.length > 0 && symbol.tags[0].type == 'callback'
-                  h4.code= symbol.tags[0].string + ' = function(' + getParams(symbol) + ')'
-                  em!= convertDescription(symbol.description.full)
-                  ol
-                    each tag in symbol.tags
-                      if tag.type == 'param'
-                        li!= getParamOutput(tag)
+                  - var klass = '';
+                  - if (!wasExport) klass = 'is-private hidden';
+                  section(class=klass)
+                    h4.code= symbol.tags[0].string + ' = function(' + getParams(symbol) + ')'
+                    em!= convertDescription(symbol.description.full)
+                    ol
+                      each tag in symbol.tags
+                        if tag.type == 'param'
+                          li!= getParamOutput(tag)
 
                 else //- Description
                   .description!= convertDescription(symbol.description.full)
 
               else //- Symbols attached to a method or var
-                section(id=symbol.ctx.name)
+                - var klass = '';
+                - wasExport = isExport(symbol);
+                - if (!wasExport) klass = 'is-private hidden';
+                section(id=symbol.ctx.name, class=klass)
                   h2.code(id='#{symbol.ctx.name}')= getHeader(symbol, true)
                   if !symbol.gtype && symbol.type
                     p
@@ -246,3 +256,4 @@ body(data-spy='scroll', data-target='#sub-nav', data-offset='200')
   script(src='/jquery/jquery.js')
   script(src='/bootstrap/dist/js/bootstrap.js')
   script(src='/prismjs/prism.js')
+  script(src='/js/show-private.js')
