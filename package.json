@@ -1,6 +1,6 @@
 {
     "name": "employme-at",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "author": {
         "name": "Jakob Viskum Damgaard",
         "email": "jakob.viskum.damgaard@gmail.com"
@@ -40,7 +40,6 @@
         "bluebird": "1.0.0",
         "browserify": "3.20.0",
         "chai": "1.8.1",
-        "glob": "3.2.8",
         "grunt": "0.4.2",
         "grunt-autoprefixer": "0.6.4",
         "grunt-browserify": "1.3.0",
@@ -52,7 +51,7 @@
         "grunt-contrib-jshint": "0.8.0",
         "grunt-csso": "0.5.3",
         "grunt-express-server": "0.4.11",
-        "grunt-contrib-uglify": "0.3.0",
+        "grunt-contrib-uglify": "0.3.1",
         "grunt-contrib-watch": "0.5.3",
         "grunt-markdown": "0.5.0",
         "grunt-mocha": "0.4.9",
@@ -70,7 +69,8 @@
         "jshint-stylish": "0.1.5",
         "lodash": "2.4.1",
         "require-grunt-configs": "0.4.0",
-        "sinon": "1.7.3"
+        "sinon": "1.7.3",
+        "jquery": "2.1.0-rc1"
     },
     "engines": {
         "node": "0.10.x"
