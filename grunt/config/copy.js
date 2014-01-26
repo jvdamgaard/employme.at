@@ -19,6 +19,17 @@ module.exports = {
             ]
         }]
     },
+    images: {
+        files: [{
+            expand: true,
+            dot: true,
+            cwd: '<%= app.source %>/images',
+            dest: '<%= app.dist %>/images',
+            src: [
+                '**/*.{jpg,jpeg,png}'
+            ]
+        }]
+    },
     styledocco: {
         files: [{
             expand: true,
