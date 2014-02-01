@@ -160,7 +160,11 @@ var getSource = function($image, callback) {
  *
  * @callback                        callback
  *
+<<<<<<< HEAD
  * @param           {String}        source             URL for source to image
+=======
+ * @param           {String}        source                  URL for source to image
+>>>>>>> 03f35da964073ba0156a252d18464e885b9a72a9
  */
 
 /**
@@ -315,6 +319,7 @@ var initialize = function() {
 /**
  * Initialize the lazy image loader.
  *
+<<<<<<< HEAD
  * @param    {Object}    [options]                          Contains options
  *     for the image loader
  * @param    {String}    [options.selector='.lazy-img']     Selector to match
@@ -332,6 +337,17 @@ var initialize = function() {
  *     retina sources. E.g. `data-src-retina="img@2x.jpg"`.
  * @param    {boolean}   [options.lazy=true]                If `true` images
  *     will first load when in scroll area.
+=======
+ * @param    {Object}    [options]                          Contains options for the image loader
+ * @param    {String}    [options.selector='.lazy-img']     Selector to match against images to load.
+ * @param    {Int}       [options.threshold=0]              Load images behover they're in the scrolling area. E.g. a value og `200` will load the images when they're 200 pixel above the window area.
+ * @param    {Array}     [options.sizes]                    Array of responsive breakpoint. Each item of the array is an `object` consistiong of a `name` and a `breakpoint`. E.g. `[{name: 'lap', breakpoint: 480}]`
+ * @param    {Int}       [options.sizes[0]={name:'lap',breakpoint:481}]
+ * @param    {Int}       [options.sizes[1]={name:'desk',breakpoint:1024}]
+ * @param    {Int}       [options.sizes[2]={name:'deks-wide',breakpoint:1200}]
+ * @param    {String}    [options.retinaPAffix='retina']    Used for identifying retina sources. E.g. `data-src-retina="img@2x.jpg"`.
+ * @param    {boolean}   [options.lazy=true]                If `true` images will first load when in scroll area.
+>>>>>>> 03f35da964073ba0156a252d18464e885b9a72a9
  *
  * @exports
  *
@@ -369,6 +385,9 @@ module.exports = function(options) {
         retinaAffix: retinaAffix,
         lazy: isLazy
     });
+
+    // Filter out and sort media queries width numbers
+    sizes = _.sortBy(sizes, 'breakpoint');
 
     initialize();
 
