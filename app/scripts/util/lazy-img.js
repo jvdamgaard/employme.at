@@ -8,11 +8,18 @@
  *     // Init lazy img
  *     lazyImg({
  *         threshold: 0, // Load images x pixels before they are in the visible area
- *         sizes: { // Key: Name for media query, Val: Breakpoint
- *             lap: 481,
- *             desk: 1024,
- *             desk-wide: 1200
- *         },
+ *         sizes: [ // Prefixes for breakpoints
+ *             {
+ *                 name: 'lap',
+ *                 breakpoint: 481
+ *             },{
+ *                 name: 'desk',
+ *                 breakpoint: 1024
+ *             },{
+ *                 name: 'desk-wide',
+ *                 breakpoint: 1200
+ *             }
+ *         ],
  *         retinaAffix: 'retina', // Affix to indicate retina displays
  *         lazy: true // Whether or not to lazy load images
  *     });
@@ -70,7 +77,6 @@ var $images;
 
 // Other vars
 var isRetina = window.devicePixelRatio > 1;
-var mqSizes = [];
 var windowWidth;
 var windowHeight;
 var selector;
@@ -92,24 +98,20 @@ var resizeTimer;
  */
 var getRespData = function($image, prefix) {
     var data;
-    var i = mqSizes.length - 1;
+    var i = sizes.length - 1;
     var sizeLabel;
-    var mqSize;
-
-    var isSize = function(size) {
-        return size === mqSize;
-    };
+    var size;
 
     // Find highest (largest window width) matching source
     while (!data && i >= -1) {
 
         if (i >= 0) { // 'Special' sources found
-            mqSize = mqSizes[i];
-            if (windowWidth < mqSizes[i]) {
+            size = sizes[i];
+            if (windowWidth < size.breakpoint) {
                 i--;
                 continue;
             }
-            sizeLabel = prefix + '-' + _.findKey(sizes, isSize);
+            sizeLabel = prefix + '-' + size.name;
 
         } else { // Non 'special' sources found. Use default source
             sizeLabel = prefix;
@@ -152,13 +154,14 @@ var getSource = function($image, callback) {
 };
 /**
  * Callback used for getSource
+ *
  * @callback                        callback
+ *
  * @param           {String}        source                  URL for source to image
  */
 
 /**
  * Set `src` for `<img>` and `background-image` for all other elements.
- *
  * @return          {void}
  */
 var attachSource = function() {
@@ -306,10 +309,10 @@ var initialize = function() {
  * @param    {Object}    [options]                          Contains options for the image loader
  * @param    {String}    [options.selector='.lazy-img']     Selector to match against images to load.
  * @param    {Int}       [options.threshold=0]              Load images behover they're in the scrolling area. E.g. a value og `200` will load the images when they're 200 pixel above the window area.
- * @param    {Object}    [options.sizes]                    `key`: name, `value`: min-width.
- * @param    {Int}       [options.sizes.lap=481]
- * @param    {Int}       [options.sizes.desk=1024]
- * @param    {Int}       [options.sizes.desk-wide=1200]
+ * @param    {Array}     [options.sizes]                    Array of responsive breakpoint. Each item of the array is an `object` consistiong of a `name` and a `breakpoint`. E.g. `[{name: 'lap', breakpoint: 480}]`
+ * @param    {Int}       [options.sizes[0]={name:'lap',breakpoint:481}]
+ * @param    {Int}       [options.sizes[1]={name:'desk',breakpoint:1024}]
+ * @param    {Int}       [options.sizes[2]={name:'deks-wide',breakpoint:1200}]
  * @param    {String}    [options.retinaPAffix='retina']    Used for identifying retina sources. E.g. `data-src-retina="img@2x.jpg"`.
  * @param    {boolean}   [options.lazy=true]                If `true` images will first load when in scroll area.
  *
@@ -323,11 +326,16 @@ module.exports = function(options) {
     options = options || {};
     selector = options.selector || '.lazy-img';
     threshold = options.threshold || 0;
-    sizes = options.sizes || {
-        lap: 481,
-        desk: 1024,
-        'desk-wide': 1200
-    };
+    sizes = options.sizes || [{
+        name: 'lap',
+        breakpoint: 481
+    }, {
+        name: 'desk',
+        breakpoint: 1024
+    }, {
+        name: 'desk-wide',
+        breakpoint: 1200
+    }];
     retinaAffix = options.retinaAffix || 'retina';
     isLazy = options.lazy;
     if (!_.isBoolean(isLazy)) {
@@ -343,9 +351,7 @@ module.exports = function(options) {
     });
 
     // Filter out and sort media queries width numbers
-    mqSizes = _.values(sizes).sort(function(a, b) {
-        return a - b;
-    });
+    sizes = _.sortBy(sizes, 'breakpoint');
 
     initialize();
 

@@ -207,9 +207,9 @@ module.exports = function(grunt) {
      */
     grunt.registerTask('img', function() {
         grunt.loadNpmTasks('grunt-newer');
-        grunt.loadNpmTasks('grunt-contrib-imagemin');
+        grunt.loadNpmTasks('grunt-contrib-copy');
         grunt.task.run([
-            'newer:imagemin'
+            'newer:copy:images'
         ]);
     });
 
