@@ -7,7 +7,6 @@ module.exports = {
 
         // Register global modules
         alias: [
-            './<%= app.source %>/scripts/lib/moment-shim.js:moment',
             './package.json:app'
         ],
     },

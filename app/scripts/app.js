@@ -13,6 +13,7 @@
 var _ = require('lodash');
 var $ = require('jquery');
 var moment = require('moment');
+moment.lang(require('moment/lang/da'));
 var app = require('app');
 
 // Load modules
@@ -63,5 +64,5 @@ logSeperator();
 logVersion('jQuery', $.fn.jquery);
 logVersion('Modernizr', Modernizr._version);
 logVersion('Lo-Dash', _.VERSION);
-logVersion('Moment.js', moment.version);
+logVersion('Moment', moment.version);
 logSeperator();

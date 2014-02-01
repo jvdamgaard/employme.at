@@ -3,18 +3,21 @@
  */
 
 module.exports = {
-    devFile: '.tmp/bower_components/modernizr/modernizr.js',
-    outputFile: '<%= app.dist %>/scripts/modernizr.js',
-    extra: {
-        'shiv': true,
-        'printshiv': false,
-        'load': false,
-        'mq': true,
-        'cssclasses': true
-    },
-    files: [
-        '<%= app.dist %>/scripts/app.js',
-        '<%= app.dist %>/styles/main.css'
-    ],
-    uglify: false
+    dist: {
+        devFile: '.tmp/bower_components/modernizr/modernizr.js',
+        outputFile: '<%= app.dist %>/scripts/modernizr.js',
+        extra: {
+            'shiv': true,
+            'printshiv': false,
+            'load': false,
+            'mq': true,
+            'cssclasses': true
+        },
+        src: [
+            '<%= app.dist %>/scripts/app.js',
+            '<%= app.dist %>/styles/main.css'
+        ],
+        uglify: false
+    }
+
 };
