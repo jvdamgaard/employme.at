@@ -1,5 +1,6 @@
 /**
- * Lazy load of `<img>` and `background-image` based on window width and device pixel ratio.
+ * Lazy load of `<img>` and `background-image` based on window width and device
+ * pixel ratio.
  *
  * # Examples
  *
@@ -92,9 +93,11 @@ var resizeTimer;
  * options and matches against the windows with.
  *
  * @param      {Object}     $image     jQuery object for a lazy image
- * @param      {String}     prefix     Data prefix to search for. E.g. with prefix set to `src` it will search for `data-src`, `data-src-lap` etc.
+ * @param      {String}     prefix     Data prefix to search for. E.g. with
+ *     prefix set to `src` it will search for `data-src`, `data-src-lap` etc.
  *
- * @return     {String|undefined}      Value in the matching data. If no data is found it will return `undefined`
+ * @return     {String|undefined}      Value in the matching data. If no data is
+ *     found it will return `undefined`
  */
 var getRespData = function($image, prefix) {
     var data;
@@ -134,7 +137,7 @@ var getRespData = function($image, prefix) {
  * Determine the source for this element based on the windows width.
  * Source is the highest matching src data.
  *
- * @param           {jqObject}          $image             jQuery object for image
+ * @param           {jqObject}          $image        jQuery object for image
  * @param           {Function}          callback
  *
  * @return          {void}
@@ -157,7 +160,7 @@ var getSource = function($image, callback) {
  *
  * @callback                        callback
  *
- * @param           {String}        source                  URL for source to image
+ * @param           {String}        source             URL for source to image
  */
 
 /**
@@ -207,7 +210,8 @@ var getDimensions = function() {
         // Use wrapper around image that immitates the size of the image.
         // This is done to avoid browser reflows then images isn loaded and to
         // be able to store the correct image offset values.
-        // Technique from http://alistapart.com/article/creating-intrinsic-ratios-for-video
+        // Technique from
+        // http://alistapart.com/article/creating-intrinsic-ratios-for-video
         var $innerWrapper = $image.parents(innerClass);
         var $outerWrapper = $image.parents(outerClass);
         var ratio = getRespData($image, 'ratio');
@@ -246,6 +250,11 @@ var showImages = function() {
     // Find images to be loaded
     var $loaded = $images.filter(function() {
         var $image = $(this);
+
+        // Don't load hidden background-images
+        if (!$image.is('img') && $image.is(':hidden')) {
+            return false;
+        }
 
         if (!isLazy) {
             return true;
@@ -306,15 +315,23 @@ var initialize = function() {
 /**
  * Initialize the lazy image loader.
  *
- * @param    {Object}    [options]                          Contains options for the image loader
- * @param    {String}    [options.selector='.lazy-img']     Selector to match against images to load.
- * @param    {Int}       [options.threshold=0]              Load images behover they're in the scrolling area. E.g. a value og `200` will load the images when they're 200 pixel above the window area.
- * @param    {Array}     [options.sizes]                    Array of responsive breakpoint. Each item of the array is an `object` consistiong of a `name` and a `breakpoint`. E.g. `[{name: 'lap', breakpoint: 480}]`
+ * @param    {Object}    [options]                          Contains options
+ *     for the image loader
+ * @param    {String}    [options.selector='.lazy-img']     Selector to match
+ *     against images to load.
+ * @param    {Int}       [options.threshold=0]              Load images behover
+ *     they're in the scrolling area. E.g. a value og `200` will load the images
+ *     when they're 200 pixel above the window area.
+ * @param    {Array}     [options.sizes]                    Array of responsive
+ *     breakpoint. Each item of the array is an `object` consistiong of a `name`
+ *     and a `breakpoint`. E.g. `[{name: 'lap', breakpoint: 480}]`
  * @param    {Int}       [options.sizes[0]={name:'lap',breakpoint:481}]
  * @param    {Int}       [options.sizes[1]={name:'desk',breakpoint:1024}]
  * @param    {Int}       [options.sizes[2]={name:'deks-wide',breakpoint:1200}]
- * @param    {String}    [options.retinaPAffix='retina']    Used for identifying retina sources. E.g. `data-src-retina="img@2x.jpg"`.
- * @param    {boolean}   [options.lazy=true]                If `true` images will first load when in scroll area.
+ * @param    {String}    [options.retinaPAffix='retina']    Used for identifying
+ *     retina sources. E.g. `data-src-retina="img@2x.jpg"`.
+ * @param    {boolean}   [options.lazy=true]                If `true` images
+ *     will first load when in scroll area.
  *
  * @exports
  *
@@ -342,16 +359,16 @@ module.exports = function(options) {
         isLazy = true;
     }
 
-    console.log('lazy-img', 'activated', {
+    // Filter out and sort media queries width numbers
+    sizes = _.sortBy(sizes, 'breakpoint');
+
+    console.log(' - info:', 'lazy-img', 'activated', {
         selector: selector,
         threshold: threshold,
         sizes: sizes,
         retinaAffix: retinaAffix,
         lazy: isLazy
     });
-
-    // Filter out and sort media queries width numbers
-    sizes = _.sortBy(sizes, 'breakpoint');
 
     initialize();
 
