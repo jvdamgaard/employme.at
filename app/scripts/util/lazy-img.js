@@ -2,70 +2,17 @@
  * Lazy load of `<img>` and `background-image` based on window width and device
  * pixel ratio.
  *
- * # Examples
+ * # Example markup
  *
- * Initiate `lazy img` with options.
- *
- *     // Init lazy img
- *     lazyImg({
- *         threshold: 0, // Load images x pixels before they are in the visible area
- *         sizes: [ // Prefixes for breakpoints
- *             {
- *                 name: 'lap',
- *                 breakpoint: 481
- *             },{
- *                 name: 'desk',
- *                 breakpoint: 1024
- *             },{
- *                 name: 'desk-wide',
- *                 breakpoint: 1200
- *             }
- *         ],
- *         retinaAffix: 'retina', // Affix to indicate retina displays
- *         lazy: true // Whether or not to lazy load images
- *     });
- *
- *  All above options are the default, so the same result can be achieved with:
- *
- *     lazyImg();
- *
- *  Attributes for an lazy image. Could be attached to `img`, `div` or any other
- *  element.
- *
- *     // Default class is `lazy-img`
- *     $('<img class="lazy-img" ' +
- *
- *         // Mobile first indication fo sources
- *         'data-src="img-mobile.jpg" ' +
- *
- *         // Default affix for retina is `retina`
- *         'data-src-retina="img-mobile@2x.jpg" ' +
- *
- *         // Images for laps: default above 481px
- *         'data-src-lap="img-lap.jpg" ' +
- *         'data-src-lap-retina="img-lap@2x.jpg" ' +
- *
- *         // Images for dekstop: default above 1024px
- *         'data-src-desk="img-desk.jpg" ' +
- *         'data-src-desk-retina="img-desk@2x.jpg" ' +
- *
- *         // Images for wide dekstop: default above 1200px
- *         'data-src-desk-wide="img-desk-wide.jpg" ' +
- *         'data-src-desk-wide-retina="img-desk-wide@2x.jpg" ' +
- *
- *         // Because images are loaded as the user scrolls there is no way for
- *         // the document to know the height of the image. Image load will
- *         // therefor create reflows which will result in lover fps. By
- *         // providing a ratio the module will take care of this.
- *         'data-ratio="1.5" ' +
- *         'data-ratio-desk="1.2" ' +
- *
- *         '/>').appendTo('html');
- *
- * Lazy img is run on all elements in the dom, when dom is ready. If elements is
- * append like above, the Lazy img can be recalculated with:
- *
- *     lazyImg.load();
+ *     <img class="lazy-img"
+ *         data-src="img-mobile.jpg"
+ *         data-src-retina="img-mobile@2x.jpg"
+ *         data-src-lap="img-lap.jpg"
+ *         data-src-lap-retina="img-lap@2x.jpg"
+ *         data-src-desk="img-desk.jpg"
+ *         data-src-desk-wide="img-desk-wide.jpg"
+ *         data-ratio="1.5"
+ *         data-ratio-desk="1.2"/>
  */
 
 // Dependencies
@@ -315,6 +262,26 @@ var initialize = function() {
 /**
  * Initialize the lazy image loader.
  *
+ * # Example
+ *
+ *     lazyImg({
+ *         threshold: 0, // Load images x pixels before they are in the visible area
+ *         sizes: [ // Prefixes for breakpoints
+ *             {
+ *                 name: 'lap',
+ *                 breakpoint: 481
+ *             },{
+ *                 name: 'desk',
+ *                 breakpoint: 1024
+ *             },{
+ *                 name: 'desk-wide',
+ *                 breakpoint: 1200
+ *             }
+ *         ],
+ *         retinaAffix: 'retina', // Affix to indicate retina displays
+ *         lazy: true // Whether or not to lazy load images
+ *     });
+ *
  * @param    {Object}    [options]                          Contains options
  *     for the image loader
  * @param    {String}    [options.selector='.lazy-img']     Selector to match
@@ -379,6 +346,13 @@ module.exports = function(options) {
 
 /**
  * Recalc images and show.
+ *
+ * # Example
+ *
+ *     $('<img class="lazy-img" data-src="img.jpg" />').appendTo('html');
+ *
+ *     // Recalc all images
+ *     lazyImg.load();
  *
  * @exports
  *

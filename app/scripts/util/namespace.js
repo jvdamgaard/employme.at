@@ -19,7 +19,7 @@ var _ = require('lodash');
  * @exports
  *
  * @param     {String}     namespace      Dot seperated string with the namespace.
- * @param     {Object}     [root]         Object to attach namespace to.
+ * @param     {Object}     [root=window]  Object to attach namespace to.
  *
  * @return    {Object}                    Object for namespace.
  */
