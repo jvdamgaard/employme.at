@@ -100,7 +100,43 @@
 
 - var convertDescription = function(text) {
 -   return removeLineBreaks(addJsCode(transformHeaders(text)));
-- }
+- };
+
+- var wrapCodeHighlighSpan = function(text, finds, modifier) {
+-   for (var i = 0, max = finds.length; i < max; i++) {
+-     text = text.split(finds[i]).join('<span class="highlight--' + modifier + '">' + finds[i] + '</span>');
+-   }
+-   return text;
+- };
+
+- var wrapCodeHighlighSpanForModule = function(text, modifier) {
+-   text = text.split(varName + '(').join('<span class="highlight--' + modifier + '">' + varName + '</span>(');
+-   text = text.split(varName + '.').join('<span class="highlight--' + modifier + '">' + varName + '</span>.');
+-   return text;
+- };
+
+- var wrapCodeHighlighSpanForStrings = function(text, modifier) {
+-   var output = '';
+-   var strings = text.split('\'');
+-   for (var i = 0, max = strings.length; i < max; i++) {
+-     if (i === max - 1) {
+-       output += strings[i]
+-     } else if (i % 2 === 0) {
+-       output += '<span class="highlight--' + modifier + '">\'' + strings[i];
+-     } else {
+-       output += strings[i] + '\'</span>';
+-     }
+-   }
+-   return output;
+- };
+
+- var addCodeHighligtTags = function(text) {
+-   text = wrapCodeHighlighSpanForModule(text, 'module');
+-   text = wrapCodeHighlighSpan(text, ['(', ')', '[', ']'], 'block');
+-   text = wrapCodeHighlighSpan(text, [1,2,3,4,5,6,7,8,9,0], 'number');
+-   text = wrapCodeHighlighSpanForStrings(text, 'string');
+-   return text;
+- };
 
 mixin parseObject(obj)
   ul
@@ -204,8 +240,8 @@ body(data-spy='scroll', data-target='#sub-nav', data-offset='200')
 
                 //- Callback methods used after functions
                 if symbol.tags.length > 0 && symbol.tags[0].type == 'callback'
-                  - var klass = '';
-                  - if (!wasExport) klass = 'is-private hidden';
+                  - var klass = 'code-block';
+                  - if (!wasExport) klass += ' is-private hidden';
                   section(class=klass)
                     h4.code= symbol.tags[0].string + ' = function(' + getParams(symbol) + ')'
                     em!= convertDescription(symbol.description.full)
@@ -218,11 +254,11 @@ body(data-spy='scroll', data-target='#sub-nav', data-offset='200')
                   .description!= convertDescription(symbol.description.full)
 
               else //- Symbols attached to a method or var
-                - var klass = '';
+                - var klass = 'code-block';
                 - wasExport = isExport(symbol);
-                - if (!wasExport) klass = 'is-private hidden';
+                - if (!wasExport) klass += ' is-private hidden';
                 section(id=symbol.ctx.name, class=klass)
-                  h2.code(id='#{symbol.ctx.name}')= getHeader(symbol, true)
+                  h2.code(id='#{symbol.ctx.name}')!= addCodeHighligtTags(getHeader(symbol, true))
                   if !symbol.gtype && symbol.type
                     p
                       span(class=["label", "label-inverse", "radius", "ctx-type"])= symbol.type

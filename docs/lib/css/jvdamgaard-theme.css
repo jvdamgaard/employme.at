@@ -1,12 +1,3 @@
-h2 {
-    padding-top: 80px !important;
-}
-h4 {
-    margin-top: 24px !important;
-}
-.code {
-    font-family: Consolas, Monaco, 'Andale Mono', monospace !important;
-}
 .bs-docs-nav .navbar-nav > li > a {
     color: #fff !important;
 }
@@ -93,6 +84,36 @@ h4 {
     padding-left: 30px !important;
     font-size: 90% !important;
 }
+/* Code blocks */
+ .code-block {
+    border: 1px solid #ccc;
+    padding: 15px;
+    overflow: hidden;
+    margin-top: 75px;
+}
 pre {
     font-size: 14px !important;
+    padding: 0;
+    border-radius: 0;
+    border: 0;
+}
+.code-block pre {
+    margin: 0 -15px -15px -15px;
+}
+.code-block code {
+    padding: 15px;
+}
+h2 {
+    line-height: 1;
+    margin: -15px -15px 15px -15px;
+    padding: 15px;
+    border-bottom: 1px solid #ccc;
+    box-shadow: 0 .25em .5em #ccc;
+    font-size: 22px;
+}
+h4 {
+    margin-top: 24px !important;
+}
+.code {
+    font-family: Consolas, Monaco, 'Andale Mono', monospace !important;
 }
