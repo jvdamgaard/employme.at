@@ -1,4 +1,10 @@
-.bs-docs-nav .navbar-nav > li > a {
+/* Overrides */
+ code {
+    background: #eee;
+    color: inherit;
+}
+/* Navigation */
+ .bs-docs-nav .navbar-nav > li > a {
     color: #fff !important;
 }
 .bs-docs-nav .navbar-nav > li > a:hover {
@@ -91,6 +97,10 @@
     overflow: hidden;
     margin-top: 75px;
 }
+.code-block--callback {
+    margin-top: 0;
+    border-top: 0;
+}
 pre {
     font-size: 14px !important;
     padding: 0;
@@ -100,12 +110,12 @@ pre {
 .code-block pre {
     margin: 0 -15px -15px -15px;
 }
-.code-block code {
+.code-block pre code {
     padding: 15px;
 }
 h2 {
     line-height: 1;
-    margin: -15px -15px 15px -15px;
+    margin: -15px -15px 30px -15px;
     padding: 15px;
     border-bottom: 1px solid #ccc;
     box-shadow: 0 .25em .5em #ccc;
@@ -116,4 +126,25 @@ h4 {
 }
 .code {
     font-family: Consolas, Monaco, 'Andale Mono', monospace !important;
+}
+/* Code block header highlight */
+ .highlight--module {
+    color: #999;
+    /* light grey */
+}
+.highlight--number, .highlight--boolean {
+    color: #89292F;
+    /* dark red */
+}
+.highlight--block {
+    color: #608929;
+    /* dark green */
+}
+.highlight--function {
+    color: #296089;
+    /* dark blue */
+}
+.highlight--string, .highlight--string .highlight--number, .highlight--string .highlight--boolean {
+    color: #B96F37;
+    /* dark yellow */
 }

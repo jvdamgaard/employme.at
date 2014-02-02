@@ -16,11 +16,6 @@
 -       tagName = tag.name;
 -       // Only include first level params
 -       if (tagName.indexOf('.') === -1) {
--         // Remove default value from paramsString
--         if (tagName.indexOf('=') > -1) {
--           tagName = tagName.split('=')[0];
--           tagName += ']';
--         }
 -         paramsString += tagName + ', ';
 -       }
 -     }
@@ -33,7 +28,7 @@
 - var getParamOutput = function(tag) {
 -   var paramOutput = '<span class="code">' + tag.name + '</span> <em>(' + tag.types + ')</em>'
 -   if (tag.description) {
--     paramOutput += ': ' + tag.description;
+-     paramOutput += ': ' + wrapCodeForTicks(tag.description);
 -   }
 -   return paramOutput;
 - }
@@ -41,7 +36,7 @@
 - var getReturnOutput = function(tag) {
 -   var returnText = '<em>(' + tag.types + ')</em>'
 -   if (tag.description) {
--     returnText += ': ' + tag.description
+-     returnText += ': ' + wrapCodeForTicks(tag.description)
 -   }
 -   return returnText;
 - };
@@ -102,6 +97,10 @@
 -   return removeLineBreaks(addJsCode(transformHeaders(text)));
 - };
 
+- var wrapCodeForTicks = function(text) {
+-   return text.replace(/`([^`]*)`/g, '<code>$1</code>');
+- };
+
 - var wrapCodeHighlighSpan = function(text, finds, modifier) {
 -   for (var i = 0, max = finds.length; i < max; i++) {
 -     text = text.split(finds[i]).join('<span class="highlight--' + modifier + '">' + finds[i] + '</span>');
@@ -116,24 +115,30 @@
 - };
 
 - var wrapCodeHighlighSpanForStrings = function(text, modifier) {
--   var output = '';
--   var strings = text.split('\'');
--   for (var i = 0, max = strings.length; i < max; i++) {
--     if (i === max - 1) {
--       output += strings[i]
--     } else if (i % 2 === 0) {
--       output += '<span class="highlight--' + modifier + '">\'' + strings[i];
--     } else {
--       output += strings[i] + '\'</span>';
--     }
+-   return text.replace(/'([^']*)'/g, '<span class="highlight--' + modifier + '">\'$1\'</span>');
+- };
+
+- var wrapCodeHighlighSpanForFunctions = function(text, modifier) {
+-   var paramIndex = text.indexOf('(');
+-   if (paramIndex === -1) {
+-     return text;
 -   }
--   return output;
+-   text = text.replace('(', '</span>(');
+-   var seperatorIndex = text.indexOf('.');
+-   if (seperatorIndex !== -1 && seperatorIndex < paramIndex) {
+-     text = text.replace('.', '.<span class="highlight--' + modifier + '">');
+-   } else {
+-     text = '<span class="highlight--' + modifier + '">' + text;
+-   }
+-   return text
 - };
 
 - var addCodeHighligtTags = function(text) {
+-   text = wrapCodeHighlighSpanForFunctions(text, 'function');
 -   text = wrapCodeHighlighSpanForModule(text, 'module');
 -   text = wrapCodeHighlighSpan(text, ['(', ')', '[', ']'], 'block');
 -   text = wrapCodeHighlighSpan(text, [1,2,3,4,5,6,7,8,9,0], 'number');
+-   text = wrapCodeHighlighSpan(text, ['true', 'false'], 'boolean');
 -   text = wrapCodeHighlighSpanForStrings(text, 'string');
 -   return text;
 - };
@@ -240,7 +245,7 @@ body(data-spy='scroll', data-target='#sub-nav', data-offset='200')
 
                 //- Callback methods used after functions
                 if symbol.tags.length > 0 && symbol.tags[0].type == 'callback'
-                  - var klass = 'code-block';
+                  - var klass = 'code-block code-block--callback';
                   - if (!wasExport) klass += ' is-private hidden';
                   section(class=klass)
                     h4.code= symbol.tags[0].string + ' = function(' + getParams(symbol) + ')'
@@ -259,15 +264,15 @@ body(data-spy='scroll', data-target='#sub-nav', data-offset='200')
                 - if (!wasExport) klass += ' is-private hidden';
                 section(id=symbol.ctx.name, class=klass)
                   h2.code(id='#{symbol.ctx.name}')!= addCodeHighligtTags(getHeader(symbol, true))
-                  if !symbol.gtype && symbol.type
-                    p
-                      span(class=["label", "label-inverse", "radius", "ctx-type"])= symbol.type
-                  else
-                    p
-                      mixin labelForSymbolType(symbol)
-                      each tag in symbol.tags
-                        if tag.type !== 'param' && tag.type !== 'return'
-                          mixin labelForTag(tag)
+                  //- if !symbol.gtype && symbol.type
+                  //-   p
+                  //-     span(class=["label", "label-inverse", "radius", "ctx-type"])= symbol.type
+                  //- else
+                  //-   p
+                  //-     mixin labelForSymbolType(symbol)
+                  //-     each tag in symbol.tags
+                  //-       if tag.type !== 'param' && tag.type !== 'return'
+                  //-         mixin labelForTag(tag)
                   .description!= convertDescription(symbol.description.summary)
                   if symbol.hasParams
                     h4 Arguments

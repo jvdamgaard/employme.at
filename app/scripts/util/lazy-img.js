@@ -33,7 +33,7 @@
  *  element.
  *
  *     // Default class is `lazy-img`
- *     $('<img class="lazy-img" '' +
+ *     $('<img class="lazy-img" ' +
  *
  *         // Mobile first indication fo sources
  *         'data-src="img-mobile.jpg" ' +
