@@ -138,7 +138,7 @@ head
   meta(name='viewport', content='width=device-width,initial-scale=1')
   link(rel='stylesheet', href='/bootstrap/dist/css/bootstrap.min.css')
   link(rel='stylesheet', href='/css/bootstrap-docs.css')
-  link(rel='stylesheet', href='/prismjs/prism-okaidia.css')
+  link(rel='stylesheet', href='/highlightjs/styles/monokai_sublime.css')
   link(rel='stylesheet', href='/css/jvdamgaard-theme.css')
 
 body(data-spy='scroll', data-target='#sub-nav', data-offset='200')
@@ -255,5 +255,7 @@ body(data-spy='scroll', data-target='#sub-nav', data-offset='200')
 
   script(src='/jquery/jquery.js')
   script(src='/bootstrap/dist/js/bootstrap.js')
-  script(src='/prismjs/prism.js')
+  script(src='/highlightjs/highlight.pack.js')
   script(src='/js/show-private.js')
+  script.
+    hljs.initHighlightingOnLoad()
