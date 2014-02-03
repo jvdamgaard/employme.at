@@ -179,52 +179,25 @@ head
   meta(name='viewport', content='width=device-width,initial-scale=1')
   link(rel='stylesheet', href='/bootstrap/dist/css/bootstrap.min.css')
   link(rel='stylesheet', href='/css/bootstrap-docs.css')
-  link(rel='stylesheet', href='/highlightjs/styles/monokai_sublime.css')
+  link(rel='stylesheet', href='/highlightjs/styles/obsidian.css')
   link(rel='stylesheet', href='/css/jvdamgaard-theme.css')
 
-body(data-spy='scroll', data-target='#sub-nav', data-offset='200')
-  header.navbar.navbar-inverse.navbar-fixed-top.bs-docs-nav(role='banner')
-    .container
-      .navbar-header
-        button.navbar-toggle(type='button', data-toggle='collapse', data-target='.bs-navbar-collapse')
-          span.sr-only Toggle navigation
-          span.icon-bar
-          span.icon-bar
-          span.icon-bar
-        a.navbar-brand(href='/') JS Docs
-      nav.collapse.navbar-collapse.bs-navbar-collapse(role='navigation')
-        ul.nav.navbar-nav
-          - var cacheFolder = ''
-          - var subs = []
-          each path in files
-            - path.name = path.name.replace(/\\/g, '/');
-            - var folder = path.name.substring(0,path.name.indexOf('/'))
-            - var file = path.name.substring(path.name.indexOf('/')+1).replace('.js', '')
-
-            if folder != cacheFolder
-              mixin dropDown(cacheFolder, subs)
-              - cacheFolder = folder
-              - subs = []
-
-            if folder == ''
-              li: a(href="/#{path.relName}") #{file}
-            else
-              - subs.push({'file': file, 'rel': path.relName})
-
-          mixin dropDown(cacheFolder, subs)
-
+body
   .container.bs-docs-container
-
     .row
       .col-md-3
         .bs-sidebar.hidden-print.affix(role='complementary', id='sub-nav')
           ul.nav.bs-sidenav
-            each symbol in dox
-              if symbol.ctx.name
-                - var klass = '';
-                - if (!isExport(symbol)) klass = 'is-private hidden';
-                li(class=klass)
-                  a(href='##{symbol.ctx.name}')= getHeader(symbol)
+            each path in files
+              li.file
+                a(href="/#{path.relName}")= path.name.replace('.js', '')
+              - if (locals.name == path.name)
+                each symbol in dox
+                  if symbol.ctx.name
+                    - var klass = '';
+                    - if (!isExport(symbol)) klass = 'is-private hidden';
+                    li(class=klass)
+                      a(href='##{symbol.ctx.name}')= getHeader(symbol)
       .col-md-9(role='main')
         if locals.readme
           .bs-docs-section!= removeLineBreaks(readme)
@@ -264,15 +237,6 @@ body(data-spy='scroll', data-target='#sub-nav', data-offset='200')
                 - if (!wasExport) klass += ' is-private hidden';
                 section(id=symbol.ctx.name, class=klass)
                   h2.code(id='#{symbol.ctx.name}')!= addCodeHighligtTags(getHeader(symbol, true))
-                  //- if !symbol.gtype && symbol.type
-                  //-   p
-                  //-     span(class=["label", "label-inverse", "radius", "ctx-type"])= symbol.type
-                  //- else
-                  //-   p
-                  //-     mixin labelForSymbolType(symbol)
-                  //-     each tag in symbol.tags
-                  //-       if tag.type !== 'param' && tag.type !== 'return'
-                  //-         mixin labelForTag(tag)
                   .description!= convertDescription(symbol.description.summary)
                   if symbol.hasParams
                     h4 Arguments
