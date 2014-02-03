@@ -16,11 +16,6 @@
 -       tagName = tag.name;
 -       // Only include first level params
 -       if (tagName.indexOf('.') === -1) {
--         // Remove default value from paramsString
--         if (tagName.indexOf('=') > -1) {
--           tagName = tagName.split('=')[0];
--           tagName += ']';
--         }
 -         paramsString += tagName + ', ';
 -       }
 -     }
@@ -33,7 +28,7 @@
 - var getParamOutput = function(tag) {
 -   var paramOutput = '<span class="code">' + tag.name + '</span> <em>(' + tag.types + ')</em>'
 -   if (tag.description) {
--     paramOutput += ': ' + tag.description;
+-     paramOutput += ': ' + wrapCodeForTicks(tag.description);
 -   }
 -   return paramOutput;
 - }
@@ -41,7 +36,7 @@
 - var getReturnOutput = function(tag) {
 -   var returnText = '<em>(' + tag.types + ')</em>'
 -   if (tag.description) {
--     returnText += ': ' + tag.description
+-     returnText += ': ' + wrapCodeForTicks(tag.description)
 -   }
 -   return returnText;
 - };
@@ -85,7 +80,7 @@
 - };
 
 - var addJsCode = function(text) {
--   return text.split('<pre>').join('<pre class="language-javascript">');
+-   return text.split('<pre>').join('<pre class="js">');
 - }
 
 - var transformHeaders = function(text) {
@@ -100,7 +95,53 @@
 
 - var convertDescription = function(text) {
 -   return removeLineBreaks(addJsCode(transformHeaders(text)));
-- }
+- };
+
+- var wrapCodeForTicks = function(text) {
+-   return text.replace(/`([^`]*)`/g, '<code>$1</code>');
+- };
+
+- var wrapCodeHighlighSpan = function(text, finds, modifier) {
+-   for (var i = 0, max = finds.length; i < max; i++) {
+-     text = text.split(finds[i]).join('<span class="highlight--' + modifier + '">' + finds[i] + '</span>');
+-   }
+-   return text;
+- };
+
+- var wrapCodeHighlighSpanForModule = function(text, modifier) {
+-   text = text.split(varName + '(').join('<span class="highlight--' + modifier + '">' + varName + '</span>(');
+-   text = text.split(varName + '.').join('<span class="highlight--' + modifier + '">' + varName + '</span>.');
+-   return text;
+- };
+
+- var wrapCodeHighlighSpanForStrings = function(text, modifier) {
+-   return text.replace(/'([^']*)'/g, '<span class="highlight--' + modifier + '">\'$1\'</span>');
+- };
+
+- var wrapCodeHighlighSpanForFunctions = function(text, modifier) {
+-   var paramIndex = text.indexOf('(');
+-   if (paramIndex === -1) {
+-     return text;
+-   }
+-   text = text.replace('(', '</span>(');
+-   var seperatorIndex = text.indexOf('.');
+-   if (seperatorIndex !== -1 && seperatorIndex < paramIndex) {
+-     text = text.replace('.', '.<span class="highlight--' + modifier + '">');
+-   } else {
+-     text = '<span class="highlight--' + modifier + '">' + text;
+-   }
+-   return text
+- };
+
+- var addCodeHighligtTags = function(text) {
+-   text = wrapCodeHighlighSpanForFunctions(text, 'function');
+-   text = wrapCodeHighlighSpanForModule(text, 'module');
+-   text = wrapCodeHighlighSpan(text, ['(', ')', '[', ']'], 'block');
+-   text = wrapCodeHighlighSpan(text, [1,2,3,4,5,6,7,8,9,0], 'number');
+-   text = wrapCodeHighlighSpan(text, ['true', 'false'], 'boolean');
+-   text = wrapCodeHighlighSpanForStrings(text, 'string');
+-   return text;
+- };
 
 mixin parseObject(obj)
   ul
@@ -138,7 +179,7 @@ head
   meta(name='viewport', content='width=device-width,initial-scale=1')
   link(rel='stylesheet', href='/bootstrap/dist/css/bootstrap.min.css')
   link(rel='stylesheet', href='/css/bootstrap-docs.css')
-  link(rel='stylesheet', href='/prismjs/prism-okaidia.css')
+  link(rel='stylesheet', href='/highlightjs/styles/monokai_sublime.css')
   link(rel='stylesheet', href='/css/jvdamgaard-theme.css')
 
 body(data-spy='scroll', data-target='#sub-nav', data-offset='200')
@@ -204,8 +245,8 @@ body(data-spy='scroll', data-target='#sub-nav', data-offset='200')
 
                 //- Callback methods used after functions
                 if symbol.tags.length > 0 && symbol.tags[0].type == 'callback'
-                  - var klass = '';
-                  - if (!wasExport) klass = 'is-private hidden';
+                  - var klass = 'code-block code-block--callback';
+                  - if (!wasExport) klass += ' is-private hidden';
                   section(class=klass)
                     h4.code= symbol.tags[0].string + ' = function(' + getParams(symbol) + ')'
                     em!= convertDescription(symbol.description.full)
@@ -218,20 +259,20 @@ body(data-spy='scroll', data-target='#sub-nav', data-offset='200')
                   .description!= convertDescription(symbol.description.full)
 
               else //- Symbols attached to a method or var
-                - var klass = '';
+                - var klass = 'code-block';
                 - wasExport = isExport(symbol);
-                - if (!wasExport) klass = 'is-private hidden';
+                - if (!wasExport) klass += ' is-private hidden';
                 section(id=symbol.ctx.name, class=klass)
-                  h2.code(id='#{symbol.ctx.name}')= getHeader(symbol, true)
-                  if !symbol.gtype && symbol.type
-                    p
-                      span(class=["label", "label-inverse", "radius", "ctx-type"])= symbol.type
-                  else
-                    p
-                      mixin labelForSymbolType(symbol)
-                      each tag in symbol.tags
-                        if tag.type !== 'param' && tag.type !== 'return'
-                          mixin labelForTag(tag)
+                  h2.code(id='#{symbol.ctx.name}')!= addCodeHighligtTags(getHeader(symbol, true))
+                  //- if !symbol.gtype && symbol.type
+                  //-   p
+                  //-     span(class=["label", "label-inverse", "radius", "ctx-type"])= symbol.type
+                  //- else
+                  //-   p
+                  //-     mixin labelForSymbolType(symbol)
+                  //-     each tag in symbol.tags
+                  //-       if tag.type !== 'param' && tag.type !== 'return'
+                  //-         mixin labelForTag(tag)
                   .description!= convertDescription(symbol.description.summary)
                   if symbol.hasParams
                     h4 Arguments
@@ -255,5 +296,7 @@ body(data-spy='scroll', data-target='#sub-nav', data-offset='200')
 
   script(src='/jquery/jquery.js')
   script(src='/bootstrap/dist/js/bootstrap.js')
-  script(src='/prismjs/prism.js')
+  script(src='/highlightjs/highlight.pack.js')
   script(src='/js/show-private.js')
+  script.
+    hljs.initHighlightingOnLoad()

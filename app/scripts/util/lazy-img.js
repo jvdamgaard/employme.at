@@ -1,63 +1,18 @@
 /**
- * Lazy load of `<img>` and `background-image` based on window width and device pixel ratio.
+ * Lazy load of `<img>` and `background-image` based on window width and device
+ * pixel ratio.
  *
- * # Examples
+ * # Example markup
  *
- * Initiate `lazy img` with options.
- *
- *     // Init lazy img
- *     lazyImg({
- *         threshold: 0, // Load images x pixels before they are in the visible area
- *         sizes: { // Key: Name for media query, Val: Breakpoint
- *             lap: 481,
- *             desk: 1024,
- *             desk-wide: 1200
- *         },
- *         retinaAffix: 'retina', // Affix to indicate retina displays
- *         lazy: true // Whether or not to lazy load images
- *     });
- *
- *  All above options are the default, so the same result can be achieved with:
- *
- *     lazyImg();
- *
- *  Attributes for an lazy image. Could be attached to `img`, `div` or any other
- *  element.
- *
- *     // Default class is `lazy-img`
- *     $('<img class="lazy-img" '' +
- *
- *         // Mobile first indication fo sources
- *         'data-src="img-mobile.jpg" ' +
- *
- *         // Default affix for retina is `retina`
- *         'data-src-retina="img-mobile@2x.jpg" ' +
- *
- *         // Images for laps: default above 481px
- *         'data-src-lap="img-lap.jpg" ' +
- *         'data-src-lap-retina="img-lap@2x.jpg" ' +
- *
- *         // Images for dekstop: default above 1024px
- *         'data-src-desk="img-desk.jpg" ' +
- *         'data-src-desk-retina="img-desk@2x.jpg" ' +
- *
- *         // Images for wide dekstop: default above 1200px
- *         'data-src-desk-wide="img-desk-wide.jpg" ' +
- *         'data-src-desk-wide-retina="img-desk-wide@2x.jpg" ' +
- *
- *         // Because images are loaded as the user scrolls there is no way for
- *         // the document to know the height of the image. Image load will
- *         // therefor create reflows which will result in lover fps. By
- *         // providing a ratio the module will take care of this.
- *         'data-ratio="1.5" ' +
- *         'data-ratio-desk="1.2" ' +
- *
- *         '/>').appendTo('html');
- *
- * Lazy img is run on all elements in the dom, when dom is ready. If elements is
- * append like above, the Lazy img can be recalculated with:
- *
- *     lazyImg.load();
+ *     <img class="lazy-img"
+ *         data-src="img-mobile.jpg"
+ *         data-src-retina="img-mobile@2x.jpg"
+ *         data-src-lap="img-lap.jpg"
+ *         data-src-lap-retina="img-lap@2x.jpg"
+ *         data-src-desk="img-desk.jpg"
+ *         data-src-desk-wide="img-desk-wide.jpg"
+ *         data-ratio="1.5"
+ *         data-ratio-desk="1.2"/>
  */
 
 // Dependencies
@@ -70,7 +25,6 @@ var $images;
 
 // Other vars
 var isRetina = window.devicePixelRatio > 1;
-var mqSizes = [];
 var windowWidth;
 var windowHeight;
 var selector;
@@ -86,30 +40,28 @@ var resizeTimer;
  * options and matches against the windows with.
  *
  * @param      {Object}     $image     jQuery object for a lazy image
- * @param      {String}     prefix     Data prefix to search for. E.g. with prefix set to `src` it will search for `data-src`, `data-src-lap` etc.
+ * @param      {String}     prefix     Data prefix to search for. E.g. with
+ *     prefix set to `src` it will search for `data-src`, `data-src-lap` etc.
  *
- * @return     {String|undefined}      Value in the matching data. If no data is found it will return `undefined`
+ * @return     {String|undefined}      Value in the matching data. If no data is
+ *     found it will return `undefined`
  */
 var getRespData = function($image, prefix) {
     var data;
-    var i = mqSizes.length - 1;
+    var i = sizes.length - 1;
     var sizeLabel;
-    var mqSize;
-
-    var isSize = function(size) {
-        return size === mqSize;
-    };
+    var size;
 
     // Find highest (largest window width) matching source
     while (!data && i >= -1) {
 
         if (i >= 0) { // 'Special' sources found
-            mqSize = mqSizes[i];
-            if (windowWidth < mqSizes[i]) {
+            size = sizes[i];
+            if (windowWidth < size.breakpoint) {
                 i--;
                 continue;
             }
-            sizeLabel = prefix + '-' + _.findKey(sizes, isSize);
+            sizeLabel = prefix + '-' + size.name;
 
         } else { // Non 'special' sources found. Use default source
             sizeLabel = prefix;
@@ -132,7 +84,7 @@ var getRespData = function($image, prefix) {
  * Determine the source for this element based on the windows width.
  * Source is the highest matching src data.
  *
- * @param           {jqObject}          $image             jQuery object for image
+ * @param           {jqObject}          $image        jQuery object for image
  * @param           {Function}          callback
  *
  * @return          {void}
@@ -152,13 +104,14 @@ var getSource = function($image, callback) {
 };
 /**
  * Callback used for getSource
+ *
  * @callback                        callback
- * @param           {String}        source                  URL for source to image
+ *
+ * @param           {String}        source             URL for source to image
  */
 
 /**
  * Set `src` for `<img>` and `background-image` for all other elements.
- *
  * @return          {void}
  */
 var attachSource = function() {
@@ -204,7 +157,8 @@ var getDimensions = function() {
         // Use wrapper around image that immitates the size of the image.
         // This is done to avoid browser reflows then images isn loaded and to
         // be able to store the correct image offset values.
-        // Technique from http://alistapart.com/article/creating-intrinsic-ratios-for-video
+        // Technique from
+        // http://alistapart.com/article/creating-intrinsic-ratios-for-video
         var $innerWrapper = $image.parents(innerClass);
         var $outerWrapper = $image.parents(outerClass);
         var ratio = getRespData($image, 'ratio');
@@ -243,6 +197,11 @@ var showImages = function() {
     // Find images to be loaded
     var $loaded = $images.filter(function() {
         var $image = $(this);
+
+        // Don't load hidden background-images
+        if (!$image.is('img') && $image.is(':hidden')) {
+            return false;
+        }
 
         if (!isLazy) {
             return true;
@@ -303,15 +262,43 @@ var initialize = function() {
 /**
  * Initialize the lazy image loader.
  *
- * @param    {Object}    [options]                          Contains options for the image loader
- * @param    {String}    [options.selector='.lazy-img']     Selector to match against images to load.
- * @param    {Int}       [options.threshold=0]              Load images behover they're in the scrolling area. E.g. a value og `200` will load the images when they're 200 pixel above the window area.
- * @param    {Object}    [options.sizes]                    `key`: name, `value`: min-width.
- * @param    {Int}       [options.sizes.lap=481]
- * @param    {Int}       [options.sizes.desk=1024]
- * @param    {Int}       [options.sizes.desk-wide=1200]
- * @param    {String}    [options.retinaPAffix='retina']    Used for identifying retina sources. E.g. `data-src-retina="img@2x.jpg"`.
- * @param    {boolean}   [options.lazy=true]                If `true` images will first load when in scroll area.
+ * # Example
+ *
+ *     lazyImg({
+ *         threshold: 0, // Load images x pixels before they are in the visible area
+ *         sizes: [ // Prefixes for breakpoints
+ *             {
+ *                 name: 'lap',
+ *                 breakpoint: 481
+ *             },{
+ *                 name: 'desk',
+ *                 breakpoint: 1024
+ *             },{
+ *                 name: 'desk-wide',
+ *                 breakpoint: 1200
+ *             }
+ *         ],
+ *         retinaAffix: 'retina', // Affix to indicate retina displays
+ *         lazy: true // Whether or not to lazy load images
+ *     });
+ *
+ * @param    {Object}    [options]                          Contains options
+ *     for the image loader
+ * @param    {String}    [options.selector='.lazy-img']     Selector to match
+ *     against images to load.
+ * @param    {Int}       [options.threshold=0]              Load images behover
+ *     they're in the scrolling area. E.g. a value og `200` will load the images
+ *     when they're 200 pixel above the window area.
+ * @param    {Array}     [options.sizes]                    Array of responsive
+ *     breakpoint. Each item of the array is an `object` consistiong of a `name`
+ *     and a `breakpoint`. E.g. `[{name: 'lap', breakpoint: 480}]`
+ * @param    {Int}       [options.sizes[0]={name:'lap',breakpoint:481}]
+ * @param    {Int}       [options.sizes[1]={name:'desk',breakpoint:1024}]
+ * @param    {Int}       [options.sizes[2]={name:'deks-wide',breakpoint:1200}]
+ * @param    {String}    [options.retinaPAffix='retina']    Used for identifying
+ *     retina sources. E.g. `data-src-retina="img@2x.jpg"`.
+ * @param    {boolean}   [options.lazy=true]                If `true` images
+ *     will first load when in scroll area.
  *
  * @exports
  *
@@ -323,18 +310,26 @@ module.exports = function(options) {
     options = options || {};
     selector = options.selector || '.lazy-img';
     threshold = options.threshold || 0;
-    sizes = options.sizes || {
-        lap: 481,
-        desk: 1024,
-        'desk-wide': 1200
-    };
+    sizes = options.sizes || [{
+        name: 'lap',
+        breakpoint: 481
+    }, {
+        name: 'desk',
+        breakpoint: 1024
+    }, {
+        name: 'desk-wide',
+        breakpoint: 1200
+    }];
     retinaAffix = options.retinaAffix || 'retina';
     isLazy = options.lazy;
     if (!_.isBoolean(isLazy)) {
         isLazy = true;
     }
 
-    console.log('lazy-img', 'activated', {
+    // Filter out and sort media queries width numbers
+    sizes = _.sortBy(sizes, 'breakpoint');
+
+    console.log(' - info:', 'lazy-img', 'activated', {
         selector: selector,
         threshold: threshold,
         sizes: sizes,
@@ -343,9 +338,7 @@ module.exports = function(options) {
     });
 
     // Filter out and sort media queries width numbers
-    mqSizes = _.values(sizes).sort(function(a, b) {
-        return a - b;
-    });
+    sizes = _.sortBy(sizes, 'breakpoint');
 
     initialize();
 
@@ -353,6 +346,13 @@ module.exports = function(options) {
 
 /**
  * Recalc images and show.
+ *
+ * # Example
+ *
+ *     $('<img class="lazy-img" data-src="img.jpg" />').appendTo('html');
+ *
+ *     // Recalc all images
+ *     lazyImg.load();
  *
  * @exports
  *
